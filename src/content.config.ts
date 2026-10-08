@@ -105,6 +105,7 @@ const contact = page(
       submit: z.string(),
       sending: z.string(),
       errors: z.object({ name: z.string(), email: z.string(), emailInvalid: z.string(), phone: z.string(), phoneInvalid: z.string(), message: z.string() }),
+      failure: z.object({ network: z.string(), generic: z.string(), incomplete: z.string() }),
       success: z.object({ title: z.string(), text: z.string(), confirmation: z.string() }),
       security: z.object({ title: z.string(), text: z.string() }),
     }),

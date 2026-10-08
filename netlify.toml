@@ -54,8 +54,8 @@
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     Cross-Origin-Opener-Policy = "same-origin"
-    # CSP estrita: sem unsafe-eval e sem unsafe-inline. GTM/Meta Pixel/Turnstile entram na T8/T11.
-    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    # CSP estrita: sem unsafe-eval e sem unsafe-inline. Turnstile (formulário) já liberado; GTM/Meta Pixel entram na T11.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
     Cache-Control = "public, max-age=0, must-revalidate"
 
 # Arquivos com hash no nome (gerados pelo Astro) podem ser cacheados para sempre.

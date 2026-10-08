@@ -1,0 +1,306 @@
+---
+import { getEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { MAX_MESSAGE } from '../lib/contact';
+import { site, whatsappUrl } from '../data/site';
+import { ui } from '../data/ui';
+
+const page = (await getEntry('contact', 'contact'))!.data;
+const f = page.form;
+
+// Chave de teste da Cloudflare (sempre aprova) só fora de produção.
+const TEST_SITE_KEY = '1x00000000000000000000AA';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? (process.env.CONTEXT === 'production' ? undefined : TEST_SITE_KEY);
+if (!siteKey) throw new Error('PUBLIC_TURNSTILE_SITE_KEY ausente no deploy de produção');
+
+const channelHref: Record<string, string> = {
+  email: `mailto:${site.email}`,
+  whatsapp: whatsappUrl(ui.contact.whatsappMessage),
+  phone: `tel:${site.phone.tel}`,
+  schedule: ui.contact.scheduleUrl,
+};
+const channelIcon: Record<string, string> = {
+  email: 'lucide:mail',
+  whatsapp: 'simple-icons:whatsapp',
+  phone: 'lucide:phone',
+  schedule: 'lucide:calendar',
+};
+const infoIcon = ['lucide:map-pin', 'lucide:clock', 'lucide:globe'];
+
+const input =
+  'mt-2 w-full rounded-control border border-ink/25 bg-white px-4 py-3 text-base text-ink placeholder:text-muted focus:border-brand-dark aria-[invalid=true]:border-red-700';
+const label = 'block text-sm font-semibold text-ink';
+const error = 'mt-1.5 text-sm font-medium text-red-700';
+---
+
+<Base title={page.seo.title} description={page.seo.description}>
+  <PageHero {...page.hero} />
+
+  <section class="py-12 md:py-16" aria-label="Canais de contato">
+    <div class="container-page">
+      <ul class="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          page.channels.map((c) => (
+            <li class="group relative border-t border-ink/20 py-6">
+              <Icon name={channelIcon[c.id]} class="size-6 text-brand-dark" aria-hidden="true" />
+              <h2 class="mt-3 text-lg">{c.title}</h2>
+              <p class="mt-1 text-sm text-ink-soft">{c.note}</p>
+              <a
+                href={channelHref[c.id]}
+                target={c.id === 'whatsapp' || c.id === 'schedule' ? '_blank' : undefined}
+                rel={c.id === 'whatsapp' || c.id === 'schedule' ? 'noopener noreferrer' : undefined}
+                class="mt-3 inline-block break-all font-semibold text-brand-dark underline decoration-brand/40 decoration-2 underline-offset-4 after:absolute after:inset-0 after:content-[''] group-hover:decoration-brand"
+              >
+                {c.value}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="mt-6 grid gap-x-10 border-t border-line pt-8 md:grid-cols-3">
+        {
+          page.info.map((item, i) => (
+            <li class="flex gap-4 py-4">
+              <Icon name={infoIcon[i]} class="mt-1 size-5 shrink-0 text-brand-dark" aria-hidden="true" />
+              <div>
+                <h2 class="text-base">{item.title}</h2>
+                <p class="mt-1 font-medium">{item.value}</p>
+                <p class="text-sm text-ink-soft">{item.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="formulario" class="bg-surface py-16 md:py-24">
+    <div class="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <h2 class="text-3xl md:text-4xl">{page.intro.title}</h2>
+        <p class="mt-4 text-lg leading-relaxed text-ink-soft">{page.intro.text}</p>
+
+        <h3 class="mt-10 text-xl">{page.guarantees.title}</h3>
+        <ul class="mt-4 space-y-5">
+          {
+            page.guarantees.items.map((g) => (
+              <li class="flex gap-3">
+                <Icon name="lucide:check" class="mt-1 size-5 shrink-0 text-brand-dark" aria-hidden="true" />
+                <div>
+                  <p class="font-semibold">{g.title}</p>
+                  <p class="text-ink-soft">{g.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="rounded-3xl bg-white p-6 shadow-card md:p-10 lg:col-span-7">
+        <h2 class="text-2xl md:text-3xl">{f.title}</h2>
+        <p class="mt-2 text-ink-soft">{f.subtitle}</p>
+
+        <form
+          id="contact-form"
+          class="mt-8 space-y-8"
+          novalidate
+          data-endpoint="/api/contact"
+          data-errors={JSON.stringify(f.errors)}
+          data-failure={JSON.stringify(f.failure)}
+          data-sending={f.sending}
+          data-submit={f.submit}
+          data-max={MAX_MESSAGE}
+          data-counter={f.fields.message.counter}
+        >
+          <fieldset class="space-y-5">
+            <legend class="text-lg font-semibold">{f.groups.personal}</legend>
+            <div>
+              <label for="name" class={label}>{f.fields.name.label}</label>
+              <input id="name" name="name" type="text" autocomplete="name" maxlength="120" placeholder={f.fields.name.placeholder} aria-required="true" aria-describedby="err-name" class={input} />
+              <p id="err-name" class={error} hidden></p>
+            </div>
+            <div>
+              <label for="email" class={label}>{f.fields.email.label}</label>
+              <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder={f.fields.email.placeholder} aria-required="true" aria-describedby="err-email" class={input} />
+              <p id="err-email" class={error} hidden></p>
+            </div>
+            <div>
+              <label for="phone" class={label}>{f.fields.phone.label}</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" placeholder={f.fields.phone.placeholder} aria-describedby="err-phone" class={input} />
+              <p id="err-phone" class={error} hidden></p>
+            </div>
+          </fieldset>
+
+          <fieldset class="space-y-5">
+            <legend class="text-lg font-semibold">{f.groups.preferences}</legend>
+            <div role="radiogroup" aria-labelledby="pref-label">
+              <p id="pref-label" class={label}>{f.fields.preference.label}</p>
+              <div class="mt-2 flex flex-wrap gap-3">
+                {
+                  f.fields.preference.options.map((o, i) => (
+                    <label class="flex min-h-11 cursor-pointer items-center gap-2 rounded-control border border-ink/25 px-4 has-[:checked]:border-brand-dark has-[:checked]:bg-brand-tint has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-brand">
+                      <input type="radio" name="preference" value={o.value} checked={i === 0} class="size-4 accent-brand-dark" />
+                      {o.label}
+                    </label>
+                  ))
+                }
+              </div>
+            </div>
+            <div id="best-time" role="radiogroup" aria-labelledby="time-label" hidden>
+              <p id="time-label" class={label}>{f.fields.bestTime.label}</p>
+              <div class="mt-2 flex flex-wrap gap-3">
+                {
+                  f.fields.bestTime.options.map((o) => (
+                    <label class="flex min-h-11 cursor-pointer items-center gap-2 rounded-control border border-ink/25 px-4 has-[:checked]:border-brand-dark has-[:checked]:bg-brand-tint has-[:focus-visible]:outline has-[:focus-visible]:outline-[3px] has-[:focus-visible]:outline-brand">
+                      <input type="radio" name="bestTime" value={o.value} class="size-4 accent-brand-dark" />
+                      {o.label}
+                    </label>
+                  ))
+                }
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="space-y-3">
+            <legend class="text-lg font-semibold">{f.groups.project}</legend>
+            <div>
+              <label for="message" class={label}>{f.fields.message.label}</label>
+              <textarea id="message" name="message" rows="6" maxlength={MAX_MESSAGE} placeholder={f.fields.message.placeholder} aria-required="true" aria-describedby="err-message message-hint" class={`${input} resize-y`}></textarea>
+              <p id="err-message" class={error} hidden></p>
+              <div class="mt-1.5 flex flex-wrap justify-between gap-x-4 text-sm text-ink-soft" id="message-hint">
+                <p>{f.fields.message.hint}</p>
+                <p id="char-count">0/{MAX_MESSAGE} {f.fields.message.counter}</p>
+              </div>
+            </div>
+            <div class="rounded-control bg-surface p-4">
+              <p class="text-sm font-semibold">{f.fields.message.suggestionsTitle}</p>
+              <ul class="mt-2 space-y-1 text-sm text-ink-soft">
+                {f.fields.message.suggestions.map((s) => <li><span aria-hidden="true">•</span> {s}</li>)}
+              </ul>
+            </div>
+          </fieldset>
+
+          <!-- Honeypot: invisível para pessoas; robôs costumam preencher. -->
+          <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="cf-turnstile" data-sitekey={siteKey} data-language="pt-br"></div>
+
+          <p id="form-error" class="rounded-control border border-red-700/40 bg-red-50 p-4 font-medium text-red-800" role="alert" hidden></p>
+
+          <button type="submit" id="submit" class="btn btn-primary min-h-12 w-full text-base sm:w-auto sm:px-10">{f.submit}</button>
+
+          <div class="border-t border-line pt-6 text-sm text-ink-soft">
+            <p class="font-semibold text-ink">{f.security.title}</p>
+            <p class="mt-1">{f.security.text}</p>
+          </div>
+        </form>
+
+        <div id="form-success" class="mt-8 text-center" role="status" tabindex="-1" hidden>
+          <span class="mx-auto flex size-16 items-center justify-center rounded-full bg-brand-tint text-brand-dark">
+            <Icon name="lucide:check" class="size-8" aria-hidden="true" />
+          </span>
+          <h3 class="mt-5 text-2xl">{f.success.title}</h3>
+          <p class="mx-auto mt-3 max-w-md text-ink-soft">{f.success.text}</p>
+          <p class="mt-5 text-sm">{f.success.confirmation} <strong id="success-email"></strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</Base>
+
+<script>
+  import { formatPhone, validateContact, type ContactInput, type Preference, type BestTime } from '../lib/contact';
+
+  const form = document.querySelector<HTMLFormElement>('#contact-form')!;
+  const errorsText = JSON.parse(form.dataset.errors!) as Record<string, string>;
+  const failure = JSON.parse(form.dataset.failure!) as { network: string; generic: string; incomplete: string };
+  const max = Number(form.dataset.max);
+  const counterLabel = form.dataset.counter!;
+  const $ = <T extends HTMLElement>(sel: string) => form.querySelector<T>(sel)!;
+
+  const phone = $<HTMLInputElement>('#phone');
+  const message = $<HTMLTextAreaElement>('#message');
+  const count = $<HTMLElement>('#char-count');
+  const bestTime = $<HTMLElement>('#best-time');
+  const formError = document.querySelector<HTMLElement>('#form-error')!;
+  const submit = $<HTMLButtonElement>('#submit');
+
+  const preference = () => (form.querySelector<HTMLInputElement>('input[name="preference"]:checked')?.value ?? 'email') as Preference;
+
+  phone.addEventListener('input', () => (phone.value = formatPhone(phone.value)));
+  message.addEventListener('input', () => (count.textContent = `${message.value.length}/${max} ${counterLabel}`));
+  form.addEventListener('change', () => (bestTime.hidden = preference() === 'email'));
+
+  const show = (field: string, code?: string) => {
+    const el = form.querySelector<HTMLElement>(`#err-${field}`)!;
+    const input = form.querySelector<HTMLElement>(`#${field}`)!;
+    el.hidden = !code;
+    el.textContent = code ? errorsText[code] : '';
+    input.setAttribute('aria-invalid', code ? 'true' : 'false');
+  };
+
+  const read = (): ContactInput => {
+    const data = new FormData(form);
+    return {
+      name: String(data.get('name') ?? ''),
+      email: String(data.get('email') ?? ''),
+      phone: String(data.get('phone') ?? ''),
+      preference: preference(),
+      bestTime: (data.get('bestTime') as BestTime | null) ?? undefined,
+      message: String(data.get('message') ?? ''),
+    };
+  };
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    formError.hidden = true;
+    const input = read();
+    const { valid, errors } = validateContact(input);
+    for (const field of ['name', 'email', 'phone', 'message']) show(field, errors[field as keyof typeof errors]);
+    if (!valid) {
+      formError.textContent = failure.incomplete;
+      formError.hidden = false;
+      form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      return;
+    }
+
+    const original = submit.textContent;
+    submit.disabled = true;
+    submit.textContent = form.dataset.sending!;
+    try {
+      const data = new FormData(form);
+      const response = await fetch(form.dataset.endpoint!, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ ...input, website: data.get('website'), turnstileToken: data.get('cf-turnstile-response') }),
+      });
+      if (response.status === 422) {
+        const body = (await response.json()) as { errors?: Record<string, string> };
+        for (const field of ['name', 'email', 'phone', 'message']) show(field, body.errors?.[field]);
+        throw new Error('validation');
+      }
+      if (!response.ok) throw new Error(String(response.status));
+
+      document.querySelector<HTMLElement>('#success-email')!.textContent = input.email;
+      form.hidden = true;
+      const success = document.querySelector<HTMLElement>('#form-success')!;
+      success.hidden = false;
+      success.focus();
+    } catch (err) {
+      const offline = err instanceof TypeError;
+      formError.textContent = offline ? failure.network : (err as Error).message === 'validation' ? failure.incomplete : failure.generic;
+      formError.hidden = false;
+      (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    } finally {
+      submit.disabled = false;
+      submit.textContent = original;
+    }
+  });
+</script>

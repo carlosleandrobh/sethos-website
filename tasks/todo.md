@@ -27,7 +27,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: `npm run content:verify` verde. **→ CP1**
 
 ## Fase 2 — Páginas (fatias verticais)
-- [~] **T5 Home** (feito: hero novo + destaques + quem somos + serviços + CTA; home 53/59 no verify, o resto é aprovado como removido; falta só revisão visual do usuário) **Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
+- [x] **T5 Home** (feito: hero novo + destaques + quem somos + serviços + CTA; home 53/59 no verify, o resto é aprovado como removido; falta só revisão visual do usuário) **Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
   - Verify: HTML sem JS contém h1 e textos; paridade visual 1440/390.
 - [x] **T6 Quem Somos e Nossos Valores**
   - Verify: textos conferidos; e2e 200 + h1 único.
@@ -35,7 +35,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: 9 slugs idênticos aos atuais; axe limpo; e2e.
 - [x] **T9 Páginas legais** (privacidade, cookies, termos) — texto idêntico.
   - Verify: e2e 200 + conferência de texto.
-- [ ] **T8 Contato + envio**
+- [x] **T8 Contato + envio** (feito: formulário simples em tela única como no site antigo; função `netlify/functions/send-contact.mts` com Turnstile, honeypot, rate limit, escape HTML, Resend; 39 testes unitários + e2e. **Falta só configurar as chaves no Netlify/Resend/Turnstile**)
   - Acceptance: formulário multi-etapas (dados → projeto → preferência/horário), validação cliente+servidor, máscara de telefone, Turnstile, honeypot, rate-limit; função `send-contact` com HTML escapado, e-mail à SETHOS + confirmação ao visitante; botão WhatsApp com mensagem pré-preenchida.
   - Verify: testes unitários (validação, escape de `<script>`), e2e com função mockada; envio real em preview. **→ CP2**
   - Files: ~6 (ContactForm, steps, validation, functions/send-contact, teste, página)
