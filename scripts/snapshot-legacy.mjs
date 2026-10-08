@@ -5,7 +5,8 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 
 const base = process.argv[2] ?? 'https://sethos.com.br';
 const slugs = ['consultoria-rh','implantacao-totvs','sustentacao-erp','outsourcing-rh','customizacoes-totvs','integracao-sistemas','dashboards-rh','treinamentos-totvs','bancodados-sql'];
-const routes = ['/', '/quem-somos', '/nossos-valores', '/servicos', '/contato', '/politica-de-privacidade', '/politica-de-cookies', '/termos-de-uso', ...slugs.map((s) => `/servicos/${s}`)];
+const only = process.argv[3];
+const routes = ['/', '/quem-somos', '/nossos-valores', '/servicos', '/contato', '/politica-de-privacidade', '/politica-de-cookies', '/termos-de-uso', ...slugs.map((s) => `/servicos/${s}`)].filter((r) => !only || r === only);
 const out = 'legacy-content/snapshot';
 mkdirSync(`${out}/screens`, { recursive: true });
 
@@ -19,13 +20,25 @@ for (const route of routes) {
     await page.waitForSelector('h1', { timeout: 20000 }).catch(() => {});
     // rolar para disparar seções lazy
     await page.evaluate(async () => {
-      for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
+      for (let y = 0; y < document.body.scrollHeight; y += 300) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 400)); }
       window.scrollTo(0, 0);
     });
     await page.waitForTimeout(800);
     // abrir acordeões (FAQ) para capturar respostas
     for (const b of await page.$$('[aria-expanded="false"]')) await b.click({ timeout: 1000 }).catch(() => {});
     await page.waitForTimeout(400);
+    // Acordeões de abertura única (páginas legais): abre um por vez e acumula as linhas reveladas.
+    const extraLines = new Set();
+    if (label === 'desktop') {
+      const count = (await page.$$('[aria-expanded]')).length;
+      for (let i = 0; i < count; i++) {
+        const trigger = (await page.$$('[aria-expanded]'))[i];
+        if (!trigger) break;
+        if ((await trigger.getAttribute('aria-expanded')) === 'false') await trigger.click({ timeout: 1000 }).catch(() => {});
+        await page.waitForTimeout(250);
+        for (const line of (await page.evaluate(() => document.body.innerText)).split(String.fromCharCode(10))) if (line.trim()) extraLines.add(line);
+      }
+    }
     if (label === 'desktop') {
       const data = await page.evaluate(() => {
         const t = (s) => (s ?? '').replace(/\s+/g, ' ').trim();
@@ -42,6 +55,9 @@ for (const route of routes) {
           jsonld: [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => s.textContent),
         };
       });
+      const known = new Set(data.text.split(String.fromCharCode(10)).map((l) => l.trim()));
+      const extra = [...extraLines].filter((l) => !known.has(l.trim()));
+      if (extra.length) data.text += String.fromCharCode(10) + extra.join(String.fromCharCode(10));
       writeFileSync(`${out}/${name}.json`, JSON.stringify({ route, ...data }, null, 2));
       summary.push({ route, chars: data.text.length, h1: data.headings.find((h) => h.startsWith('H1')) });
     }

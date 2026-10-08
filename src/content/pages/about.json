@@ -1,0 +1,38 @@
+{
+  "seo": {
+    "title": "Quem Somos | SETHOS - Especialistas em Totvs RM RH",
+    "description": "Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação, outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência."
+  },
+  "hero": {
+    "eyebrow": "Nossa História",
+    "title": ["Conheça a", "SETHOS"],
+    "lead": "Desde 2017, somos especialistas em consultoria Totvs RM com foco em Recursos Humanos. Nossa experiência e dedicação transformam processos e potencializam resultados."
+  },
+  "story": {
+    "title": "Quem Somos",
+    "paragraphs": [
+      "Fundada em 2017 por especialistas com mais de 15 anos de experiência em ERPs, a SETHOS surgiu da identificação de uma necessidade de mercado por consultoria especializada em Totvs RM com foco em Departamento Pessoal e Recursos Humanos. Desde então, expandimos nossa atuação para outros serviços, sempre mantendo nosso compromisso com a qualidade e com os resultados.",
+      "Nossa equipe é formada por profissionais com vasta experiência em implantação e sustentação de sistemas Totvs RM. Contamos com consultores técnicos e de negócios que compreendem profundamente os desafios dos departamentos de Folha de Pagamento e Gestão de Pessoas."
+    ],
+    "cta": "Conheça Nossos Serviços"
+  },
+  "mission": {
+    "title": "Nossa Missão",
+    "text": "Nossa missão é potencializar a transformação digital das áreas de Administração de Pessoal e Gestão de Pessoas nas empresas por meio de soluções tecnológicas e serviços personalizados, atuando como um parceiro do negócio."
+  },
+  "vision": {
+    "title": "Nossa Visão",
+    "text": "Ser referência no mercado de prestação de serviços para Totvs RM RH, destacando-se pela excelência técnica, tendo a entrega dos projetos no prazo e o nível de satisfação dos clientes como medidas de desempenho."
+  },
+  "differentials": {
+    "title": "Nossos Diferenciais",
+    "items": [
+      "Conhecimento profundo do Totvs RM RH e seus módulos",
+      "Especialização em processos de Recursos Humanos",
+      "Atendimento personalizado e próximo ao cliente",
+      "Metodologia ágil e flexível de implantação",
+      "Suporte contínuo pós-implantação"
+    ]
+  },
+  "valuesLink": { "label": "Conheça Nossos Valores e Princípios →", "href": "/nossos-valores" }
+}

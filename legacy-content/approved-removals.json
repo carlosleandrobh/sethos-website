@@ -9,10 +9,34 @@
     "My options",
     "Reject",
     "Accept",
-    "Rodapé"
+    "Rodapé",
+    "🔧 Admin",
+    "Notifications (F8)",
+    "Fechar mensagem",
+    "Slide anterior",
+    "Próximo slide",
+    "Ir para slide 1",
+    "Ir para slide 2",
+    "Ir para slide 3",
+    "Ir para slide 4",
+    "Seção inicial"
   ],
   "_reasons": {
     "cookie widget": "Banner de cookies de terceiro (AdOpt/goadopt); será substituído por consentimento próprio (T11).",
-    "Rodapé": "Rótulo redundante com o landmark <footer>."
-  }
+    "Rodapé": "Rótulo redundante com o landmark <footer>.",
+    "🔧 Admin": "Link do painel /cms, removido (decisão D1).",
+    "Notifications (F8)": "Rótulo do widget de cookies de terceiro (AdOpt).",
+    "Fechar mensagem": "Botão de fechar do balão do WhatsApp; o novo balão aparece só ao passar o mouse/foco, sem botão de fechar.",
+    "Slide anterior ... Seção inicial": "Controles do carrossel do hero, removido em favor de um hero único + destaques (decisão do usuário 2026-10-08).",
+    "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário)."
+  },
+  "/": [
+    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
+  ],
+  "/servicos": [
+    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
+  ],
+  "/servicos/integracao-sistemas": [
+    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
+  ]
 }

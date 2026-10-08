@@ -32,6 +32,11 @@ export const site = {
       'A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes. RM e SmartView são produtos de propriedade da TOTVS S.A., sendo TOTVS uma marca registrada.',
   },
   cta: { label: 'Solicite um contato', href: '/contato' },
+  whatsappTooltip: {
+    title: '💬 Como podemos ajudar?',
+    text: 'Fale conosco pelo WhatsApp sobre Totvs RM RH!',
+    aria: 'Falar no WhatsApp sobre Totvs RM RH',
+  },
 } as const;
 
 export const whatsappUrl = (message: string = site.whatsappMessage) =>
