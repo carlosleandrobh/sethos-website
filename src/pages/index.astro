@@ -1,6 +1,5 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
-import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
@@ -14,20 +13,18 @@ const featured = services.slice(0, 4);
 <Base title={home.seo.title} description={home.seo.description}>
   <Hero {...home.hero} />
 
-  <section class="border-y border-line bg-surface py-12 md:py-14" aria-label="Destaques">
-    <ul class="container-page grid gap-5 md:grid-cols-3">
+  <section class="border-y border-line" aria-label="Destaques">
+    <ul class="container-page grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
       {
         home.highlights.map((item) => (
-          <li class="card group relative flex flex-col p-6 hover:shadow-card-hover">
-            <span class="h-1 w-10 rounded-full bg-brand" aria-hidden="true" />
-            <h2 class="mt-4 text-lg font-semibold leading-snug">{item.title}</h2>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{item.text}</p>
+          <li class="group relative py-8 md:px-8 md:first:pl-0 md:last:pr-0">
+            <h2 class="text-lg font-semibold leading-snug">{item.title}</h2>
+            <p class="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-ink-soft">{item.text}</p>
             <a
               href={item.href}
-              class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark after:absolute after:inset-0 after:content-[''] group-hover:underline"
+              class="mt-4 inline-block font-semibold text-brand-dark underline decoration-brand/40 decoration-2 underline-offset-4 transition-colors after:absolute after:inset-0 after:content-[''] group-hover:decoration-brand"
             >
               {item.cta}
-              <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
             </a>
           </li>
         ))
@@ -35,21 +32,32 @@ const featured = services.slice(0, 4);
     </ul>
   </section>
 
-  <section id="quem-somos" class="py-16 md:py-24">
-    <div class="container-page mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl md:text-4xl">{home.about.title}</h2>
-      <p class="mt-6 text-lg leading-relaxed text-ink-soft">{home.about.text}</p>
-      <a href="/quem-somos" class="btn btn-primary mt-8">{home.about.cta}</a>
+  <section id="quem-somos" class="py-16 md:py-28">
+    <div class="container-page grid gap-8 lg:grid-cols-12 lg:gap-12">
+      <h2 class="text-3xl md:text-5xl lg:col-span-4">{home.about.title}</h2>
+      <div class="lg:col-span-8">
+        <p class="max-w-[42rem] text-xl leading-relaxed text-ink md:text-2xl md:leading-relaxed">{home.about.text}</p>
+        <a href="/quem-somos" class="btn btn-primary mt-8">{home.about.cta}</a>
+      </div>
     </div>
   </section>
 
-  <section id="servicos" class="bg-surface py-16 md:py-24">
+  <section id="servicos" class="pb-16 md:pb-28">
     <div class="container-page">
-      <div class="mx-auto max-w-2xl text-center">
-        <h2 class="text-3xl md:text-4xl">{home.services.title}</h2>
-        <p class="mt-4 text-lg text-ink-soft">{home.services.subtitle}</p>
+      <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl md:text-5xl">{home.services.title}</h2>
+          <p class="mt-4 text-lg text-ink-soft">{home.services.subtitle}</p>
+        </div>
+        <a
+          href="/servicos"
+          class="btn btn-outline shrink-0 self-start md:self-auto"
+          aria-label="Ver todos os serviços especializados em Totvs RM RH"
+        >
+          {home.services.cta}
+        </a>
       </div>
-      <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-12 grid gap-x-12 sm:grid-cols-2">
         {
           featured.map((s) => (
             <li>
@@ -64,27 +72,18 @@ const featured = services.slice(0, 4);
           ))
         }
       </ul>
-      <div class="mt-10 text-center">
-        <a
-          href="/servicos"
-          class="btn btn-primary"
-          aria-label="Ver todos os serviços especializados em Totvs RM RH"
-        >
-          {home.services.cta}
-        </a>
-      </div>
     </div>
   </section>
 
-  <section id="contato-resumo" class="py-16 md:py-24">
-    <div class="container-page">
-      <div class="mx-auto max-w-4xl rounded-3xl bg-brand-dark px-6 py-14 text-center text-white md:px-12">
+  <section id="contato-resumo" class="bg-brand-dark py-16 text-white md:py-20">
+    <div class="container-page grid items-center gap-8 md:grid-cols-[1fr_auto] md:gap-16">
+      <div class="max-w-2xl">
         <h2 class="text-3xl text-white md:text-4xl">{home.contact.title}</h2>
-        <p class="mx-auto mt-5 max-w-2xl text-lg text-white/90">{home.contact.text}</p>
-        <a href="/contato" class="btn mt-8 min-h-12 bg-white px-8 text-base text-brand-dark hover:bg-brand-tint">
-          {home.contact.cta}
-        </a>
+        <p class="mt-4 text-lg text-white/90">{home.contact.text}</p>
       </div>
+      <a href="/contato" class="btn min-h-12 bg-white px-8 text-base text-brand-dark hover:bg-brand-tint">
+        {home.contact.cta}
+      </a>
     </div>
   </section>
 </Base>

@@ -13,80 +13,54 @@ interface Props {
 }
 const { eyebrow, title, subtitle, primaryCta, secondaryCta, chips } = Astro.props;
 
-// Destaca "Totvs RM RH" no título (texto grande e em negrito: #E53935 tem contraste suficiente).
-const highlight = 'Totvs RM RH';
-const at = title.indexOf(highlight);
-const [before, after] = at >= 0 ? [title.slice(0, at), title.slice(at + highlight.length)] : [title, ''];
-
-const chipPositions = [
-  'left-0 top-[14%] sm:-left-4',
-  'right-0 top-[6%] sm:-right-4',
-  'left-0 bottom-[16%] sm:-left-6',
-  'right-0 bottom-[24%] sm:-right-6',
-];
+// "15+ anos de experiência" vira número de credencial + legenda (o texto no conteúdo continua uma frase só).
+const [years, ...rest] = eyebrow.split(' ');
+const caption = rest.join(' ');
 ---
 
-<section
-  class="relative overflow-hidden bg-white"
-  aria-labelledby="hero-title"
->
-  <div
-    class="pointer-events-none absolute -right-40 -top-40 size-[640px] rounded-full bg-brand-tint blur-3xl"
-    aria-hidden="true"
-  >
-  </div>
-
-  <div class="container-page relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:py-24">
-    <div>
-      <p
-        class="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-white px-4 py-1.5 text-sm font-semibold text-ink shadow-card"
+<section class="bg-white" aria-labelledby="hero-title">
+  <div class="container-page grid items-center gap-12 pb-16 pt-10 md:pt-14 lg:grid-cols-12 lg:gap-8 lg:pb-24 lg:pt-20">
+    <div class="lg:col-span-7">
+      <h1
+        id="hero-title"
+        class="text-[clamp(2.5rem,6.2vw,4.75rem)] font-extrabold leading-[1.03] tracking-[-0.035em]"
       >
-        <span class="size-2 rounded-full bg-brand" aria-hidden="true"></span>
-        {eyebrow}
-      </p>
-
-      <h1 id="hero-title" class="mt-6 text-4xl font-extrabold leading-[1.1] sm:text-5xl lg:text-6xl">
-        {before}<span class="text-brand">{highlight}</span>{after}
+        {title}
       </h1>
 
-      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft md:text-xl">{subtitle}</p>
+      <p class="mt-7 max-w-[34rem] text-lg leading-relaxed text-ink-soft md:text-xl">{subtitle}</p>
 
       <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-        <a href="/contato" class="btn btn-primary min-h-12 px-7 text-base">
-          {primaryCta}
-          <Icon name="lucide:arrow-right" class="size-5" aria-hidden="true" />
-        </a>
+        <a href="/contato" class="btn btn-primary min-h-12 px-7 text-base">{primaryCta}</a>
         <a href="/servicos" class="btn btn-outline min-h-12 px-7 text-base">{secondaryCta}</a>
       </div>
+
+      <ul class="mt-10 flex flex-wrap gap-x-2 gap-y-2">
+        {
+          chips.map((chip) => (
+            <li class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-[0.8125rem] text-ink-soft">
+              <Icon name={`lucide:${chip.icon}`} class="size-4 text-brand-dark" aria-hidden="true" />
+              {chip.label}
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
-      <div class="relative mx-auto aspect-square w-full max-w-[460px]">
-        <div class="absolute inset-[6%] rounded-full bg-gradient-to-br from-brand-tint to-white ring-1 ring-brand/15"></div>
-        <div class="absolute inset-[16%] rounded-full ring-1 ring-brand/10"></div>
+    <div class="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+      <div class="rise relative aspect-[5/6] rounded-[2rem] bg-footer sm:aspect-[6/5] lg:aspect-[5/6]">
+        <div class="absolute bottom-6 left-6 z-10 text-white md:bottom-8 md:left-8">
+          <p class="text-5xl font-extrabold leading-none tracking-tight md:text-6xl">{years}</p>
+          <p class="mt-2 text-sm text-white/80 md:text-base">{caption}</p>
+        </div>
         <Image
           src={mascot}
           alt="Mascote da SETHOS, um robô vermelho apontando para o alto"
-          width={400}
+          width={420}
           loading="eager"
           fetchpriority="high"
-          class="absolute bottom-[3%] left-1/2 h-[92%] w-auto -translate-x-1/2 drop-shadow-xl"
+          class="rise-delayed absolute -top-8 right-3 h-[80%] w-auto drop-shadow-2xl sm:-top-10 md:right-6 lg:-top-10 lg:right-5"
         />
-        {
-          chips.map((chip, i) => (
-            <div
-              class:list={[
-                'absolute flex items-center gap-2 rounded-full border border-line bg-white py-2 pl-2 pr-4 text-sm font-semibold text-ink shadow-card',
-                chipPositions[i],
-              ]}
-            >
-              <span class="flex size-8 items-center justify-center rounded-full bg-brand-tint text-brand-dark">
-                <Icon name={`lucide:${chip.icon}`} class="size-4" aria-hidden="true" />
-              </span>
-              {chip.label}
-            </div>
-          ))
-        }
       </div>
     </div>
   </div>

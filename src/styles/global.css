@@ -65,9 +65,12 @@
   }
   .btn-primary { @apply bg-brand-dark text-white hover:bg-brand-darker; }
   .btn-outline { @apply border border-brand-dark bg-white text-brand-dark hover:bg-brand-tint; }
-
-  .card { @apply rounded-card border border-line bg-white shadow-card transition-shadow duration-200; }
-  .card-link:hover { box-shadow: var(--shadow-card-hover); }
-
-  .eyebrow { @apply text-sm font-semibold uppercase tracking-wider text-brand-dark; }
 }
+
+/* Única animação de entrada do site: o hero, uma vez, ao carregar. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-delayed { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both; }
