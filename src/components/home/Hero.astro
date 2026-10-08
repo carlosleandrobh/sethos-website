@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import mascot from '../../assets/brand/mascot-hero.png';
+import { ui } from '../../lib/content';
 
 interface Props {
   eyebrow: string;
@@ -55,7 +56,7 @@ const caption = rest.join(' ');
         </div>
         <Image
           src={mascot}
-          alt="Mascote da SETHOS, um robô vermelho apontando para o alto"
+          alt={ui.hero.mascotAlt}
           width={420}
           loading="eager"
           fetchpriority="high"

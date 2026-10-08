@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { site, whatsappUrl } from '../data/site';
+import { site, ui, whatsappUrl } from '../lib/content';
 ---
 
 <div class="group fixed bottom-5 right-5 z-40 md:bottom-6 md:right-6">
@@ -16,7 +16,7 @@ import { site, whatsappUrl } from '../data/site';
     href={whatsappUrl()}
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Contato via WhatsApp"
+    aria-label={ui.whatsappFloat.aria}
     title={site.whatsappTooltip.aria}
     aria-describedby="wa-tooltip"
     class="flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-card-hover"

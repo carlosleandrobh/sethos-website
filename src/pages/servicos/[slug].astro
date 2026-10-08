@@ -4,8 +4,7 @@ import { Icon } from 'astro-icon/components';
 import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import ServiceAside from '../../components/ServiceAside.astro';
-import { site } from '../../data/site';
-import { ui } from '../../data/ui';
+import { site, ui } from '../../lib/content';
 
 export async function getStaticPaths() {
   const all = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -20,7 +19,7 @@ const s = entry.data;
 const { Content } = await render(entry);
 const t = ui.service;
 const url = `${site.url}/servicos/${entry.id}`;
-const scheduleUrl = ui.contact.serviceScheduleUrl;
+const scheduleUrl = site.schedule.serviceUrl;
 const list = 'mt-5 space-y-3 text-lg';
 ---
 
@@ -87,7 +86,7 @@ const list = 'mt-5 space-y-3 text-lg';
         </div>
       </section>
 
-      <nav aria-label="Navegação entre serviços" class="grid gap-6 border-t border-ink/20 pt-10 sm:grid-cols-2">
+      <nav aria-label={t.navAria} class="grid gap-6 border-t border-ink/20 pt-10 sm:grid-cols-2">
         <div>
           {
             previous && (

@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import mascot from '../assets/brand/mascot.png';
 import wordmark from '../assets/brand/wordmark-tagline.png';
-import { site } from '../data/site';
+import { site, ui } from '../lib/content';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (href: string) =>
@@ -13,12 +13,12 @@ const isActive = (href: string) =>
 <header
   class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85"
 >
-  <nav class="container-page flex h-16 items-center justify-between md:h-20" aria-label="Navegação principal">
-    <a href="/" class="flex items-center gap-3" aria-label="SETHOS - Página inicial">
+  <nav class="container-page flex h-16 items-center justify-between md:h-20" aria-label={ui.nav.mainAria}>
+    <a href="/" class="flex items-center gap-3" aria-label={ui.nav.homeAria}>
       <Image src={mascot} alt="" width={44} height={53} class="h-11 w-auto md:h-14" loading="eager" />
       <Image
         src={wordmark}
-        alt="SETHOS Tecnologia da Informação"
+        alt={ui.nav.logoAlt}
         width={180}
         height={41}
         class="h-8 w-auto md:h-10"
@@ -46,7 +46,7 @@ const isActive = (href: string) =>
     <details class="group relative md:hidden">
       <summary
         class="flex size-11 cursor-pointer list-none items-center justify-center rounded-control text-ink hover:bg-surface [&::-webkit-details-marker]:hidden"
-        aria-label="Abrir menu"
+        aria-label={ui.nav.openMenu}
       >
         <Icon name="lucide:menu" class="size-6 group-open:hidden" aria-hidden="true" />
         <Icon name="lucide:x" class="hidden size-6 group-open:block" aria-hidden="true" />

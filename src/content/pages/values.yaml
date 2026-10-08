@@ -1,0 +1,32 @@
+# ============================================================================
+#  NOSSOS VALORES  (sethos.com.br/nossos-valores)
+#  Edite só o texto entre aspas. Não apague as chaves à esquerda.
+# ============================================================================
+
+seo:
+  title: "Nossos Valores | SETHOS - Compromisso com Excelência em TI"   # até 60 caracteres
+  description: >-
+    Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação,
+    outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+
+hero:
+  eyebrow: "Nossos Valores"
+  title:                                 # cada item é UMA LINHA do título grande
+    - "Princípios que"
+    - "Nos Guiam"
+  lead: "Nossos valores fundamentam cada decisão e ação. Ética, transparência e excelência técnica são os pilares que sustentam nossa relação com clientes e parceiros."
+
+# Os valores, na ordem em que aparecem. Para acrescentar um, copie um bloco de duas linhas (title + text).
+items:
+  - title: "Parceria"
+    text: "Construímos relações de confiança e colaboração para alcançar resultados duradouros."
+  - title: "Integridade"
+    text: "Agimos com ética e transparência em todas as nossas relações profissionais."
+  - title: "Transparência"
+    text: "Comunicação clara e honesta em todos os aspectos do nosso trabalho."
+  - title: "Entender para Atender"
+    text: "Buscamos entender profundamente as necessidades específicas de cada cliente."
+  - title: "Foco em Resultados"
+    text: "Trabalhamos com o objetivo de entregar valor e resultados tangíveis para nossos clientes."
+  - title: "Excelência Técnica"
+    text: "Mantemos um compromisso com a atualização e aprendizado constantes, acompanhando tendências e adotando as melhores práticas do mercado."

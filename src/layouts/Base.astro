@@ -3,7 +3,8 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
-import { site } from '../data/site';
+import { site, ui } from '../lib/content';
+import { canonicalPath } from '../lib/url';
 
 interface Props {
   title: string;
@@ -11,7 +12,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description, noindex = false } = Astro.props;
-const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site.url).href;
+const canonical = new URL(canonicalPath(Astro.url.pathname), site.url).href;
 ---
 
 <!doctype html>
@@ -33,7 +34,7 @@ const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', site.url
       href="#conteudo"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-control focus:bg-white focus:px-4 focus:py-3 focus:font-semibold focus:text-brand-dark focus:shadow-card-hover"
     >
-      Pular para o conteúdo
+      {ui.skipLink}
     </a>
     <Navbar />
     <main id="conteudo" tabindex="-1" class="flex-1 focus:outline-none">

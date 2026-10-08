@@ -1,0 +1,70 @@
+# ============================================================================
+#  PÁGINA INICIAL  (sethos.com.br/)
+#  Edite só o texto entre aspas. Não apague as chaves à esquerda (seo:, hero: …).
+#  Texto com dois-pontos (:) ou # precisa ficar entre aspas "assim".
+# ============================================================================
+
+# O que aparece na aba do navegador e nos resultados do Google.
+seo:
+  title: "Consultoria Totvs RM RH | SETHOS Tecnologia da Informação"   # ideal: até 60 caracteres
+  description: >-
+    Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação,
+    outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+  # ^ resumo do Google: de 120 a 160 caracteres. Um parágrafo único (as quebras de linha viram espaço).
+
+# Bloco principal do topo (título grande + mascote).
+hero:
+  eyebrow: "15+ anos de experiência"     # a 1ª palavra vira o número grande ("15+"); o resto, a legenda
+  title: "Soluções inteligentes para potencializar seu ERP Totvs RM RH"
+  subtitle: "Serviços personalizados e um time de especialistas para impulsionar a eficiência da sua empresa."
+  primaryCta: "Solicite um contato"      # botão vermelho (leva a /contato)
+  secondaryCta: "Nossos Serviços"        # botão de contorno (leva a /servicos)
+  # Etiquetas de áreas abaixo dos botões. "icon" é o nome de um ícone de https://lucide.dev/icons
+  chips:
+    - label: "Gestão de Pessoas"
+      icon: "users"
+    - label: "Relatórios"
+      icon: "chart-line"
+    - label: "Banco de Dados"
+      icon: "database"
+    - label: "Configurações"
+      icon: "settings"
+
+# Três destaques logo abaixo do topo (sempre exatamente 3).
+highlights:
+  - title: "Experiência que Faz a Diferença"
+    text: "Mais de 15 anos transformando a gestão de RH das empresas"
+    cta: "Conheça Nossa História"
+    href: "/quem-somos"                  # endereço interno: sempre começa com /
+  - title: "Sustentação Totvs RM RH"
+    text: "Foque no negócio e deixe a administração do sistema com a gente"
+    cta: "Saiba Mais"
+    href: "/servicos/sustentacao-erp"
+  - title: "Dashboards e Relatórios"
+    text: "Dashboards interativos e relatórios personalizados para auxiliar na tomada de decisões"
+    cta: "Nossos Serviços"
+    href: "/servicos/dashboards-rh"
+
+# Resumo "Quem Somos" da home.
+about:
+  title: "Quem Somos"
+  text: >-
+    Fundada em 2017 por especialistas com mais de 15 anos de experiência em ERPs, a SETHOS surgiu da
+    identificação de uma necessidade de mercado por consultoria especializada em Totvs RM com foco em
+    Departamento Pessoal e Recursos Humanos. Desde então, expandimos nossa atuação para outros serviços,
+    sempre mantendo nosso compromisso com a qualidade e com os resultados.
+  cta: "Conheça Nossa História"
+
+# Seção de serviços da home (mostra os 4 primeiros serviços, na ordem definida em cada serviço).
+services:
+  title: "Soluções especializadas para o seu ERP"
+  subtitle: "Confira nossos principais serviços e como podemos ajudar sua empresa."
+  cta: "Ver todos os serviços"
+
+# Faixa vermelha final.
+contact:
+  title: "Pronto para otimizar o uso do seu ERP no RH?"
+  text: >-
+    Entre em contato conosco para discutir como podemos ajudar a impulsionar o sucesso do seu RH com
+    soluções personalizadas.
+  cta: "Fale Conosco"

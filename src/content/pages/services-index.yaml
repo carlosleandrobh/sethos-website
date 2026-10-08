@@ -1,0 +1,20 @@
+# ============================================================================
+#  LISTA DE SERVIÇOS  (sethos.com.br/servicos)
+#  Aqui ficam só o topo da página e o texto do link dos cards.
+#  Os serviços em si (títulos, descrições, FAQ…) ficam em src/content/services/*.md
+# ============================================================================
+
+seo:
+  title: "Serviços | SETHOS - Consultoria Totvs RM e Soluções ERP"      # até 60 caracteres
+  description: >-
+    Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação,
+    outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+
+hero:
+  eyebrow: "Nossos Serviços"
+  title:                                 # cada item é UMA LINHA do título grande
+    - "Soluções Completas"
+    - "em Totvs RM RH"
+  lead: "Oferecemos consultoria especializada, sustentação, implantação e treinamentos para maximizar a eficiência dos seus processos de RH e Folha de Pagamento."
+
+cardCta: "Saiba mais"                    # texto do link em cada card de serviço

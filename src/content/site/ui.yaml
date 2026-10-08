@@ -1,0 +1,98 @@
+# ============================================================================
+#  RÓTULOS FIXOS DO SITE — botões, títulos pequenos, textos para leitores de tela, página 404…
+#  Textos de cada página ficam em src/content/pages/. Aqui ficam os que se repetem ou são "de sistema".
+#  Itens com {chaves} são preenchidos sozinhos — NÃO apague o que está entre { }.
+#  Texto com dois-pontos (:) ou # precisa ficar entre aspas "assim".
+# ============================================================================
+
+# Link invisível que ajuda quem navega pelo teclado a pular o menu.
+skipLink: "Pular para o conteúdo"
+
+# Menu do topo.
+nav:
+  mainAria: "Navegação principal"            # leitores de tela
+  homeAria: "SETHOS - Página inicial"
+  logoAlt: "SETHOS Tecnologia da Informação" # descrição do logo
+  openMenu: "Abrir menu"                     # botão do menu no celular
+
+# Rodapé.
+footer:
+  logoAlt: "Logo da SETHOS Tecnologia da Informação - Consultoria Totvs RM RH"
+  followUs: "Siga-nos nas redes"
+  followAria: "Siga-nos no"                  # + nome da rede (ex.: "Siga-nos no LinkedIn")
+  quickLinks: "Links Rápidos"
+  quickLinksAria: "Links rápidos do rodapé"
+  contact: "Contato"
+  whatsapp: "WhatsApp"
+  backToTop: "Voltar ao topo"
+  copyright: "© {year} {legalName}. CNPJ: {cnpj}. Todos os direitos reservados."   # {year} muda sozinho
+
+# Botão flutuante do WhatsApp.
+whatsappFloat:
+  aria: "Contato via WhatsApp"
+
+# Imagem do topo da home.
+hero:
+  mascotAlt: "Mascote da SETHOS, um robô vermelho apontando para o alto"
+
+# Home.
+home:
+  highlightsAria: "Destaques"
+  allServicesAria: "Ver todos os serviços especializados em Totvs RM RH"
+
+# Caminho de migalhas (Início / Serviços / …).
+breadcrumb:
+  label: "Breadcrumb"
+  home: "Início"
+  services: "Serviços"
+  allServices: "Todos os serviços"
+
+# Páginas de cada serviço (os textos de cada serviço ficam em src/content/services/).
+service:
+  about: "Sobre este serviço"
+  benefits: "Principais Benefícios"
+  features: "O que está incluso"
+  faq: "Perguntas Frequentes"
+  previous: "Serviço Anterior"
+  next: "Próximo Serviço"
+  navAria: "Navegação entre serviços"
+  interested: "Interessado neste serviço?"
+  proposalPrefix: "Fale conosco e receba uma proposta personalizada para "   # + tema do serviço
+  whatsapp: "Conversar no WhatsApp"
+  share: "Compartilhar este serviço"
+  shareLinkedIn: "Compartilhar no LinkedIn"
+  shareEmail: "Compartilhar por email"
+  copyLink: "Copiar link"
+  linkCopied: "Link copiado!"
+  # E-mail aberto ao clicar em "Compartilhar por email". Mantenha {description} e {url}.
+  shareEmailBody: "{description}\n\nSaiba mais: {url}"
+  # Mensagem enviada ao WhatsApp pelo formulário lateral. Mantenha {title}, {name}, {email}, {phone} e {message}.
+  # \n = nova linha; *texto* = negrito no WhatsApp.
+  whatsappTemplate: "Olá! Gostaria de saber mais sobre *{title}*.\n\n*Nome:* {name}\n*Email:* {email}\n*Telefone:* {phone}\n*Mensagem:* {message}"
+  form:                                      # formulário lateral (abre o WhatsApp)
+    name: "Seu nome completo"
+    email: "Seu melhor e-mail"
+    phone: "Telefone para contato"
+    message: "Conte-nos mais sobre sua necessidade"
+
+# Páginas de Política de Privacidade, Cookies e Termos.
+legal:
+  indexAria: "Índice"
+  ctaTitle: "Precisa de ajuda com consultoria Totvs RM RH?"
+  ctaText: "Entre em contato conosco para saber como podemos ajudar sua empresa."
+  ctaPrimary: "Fale Conosco"
+  ctaSecondary: "Nossos Serviços"
+
+# Página de contato (textos de apoio; o resto está em src/content/pages/contact.yaml).
+contactPage:
+  channelsAria: "Canais de contato"
+  honeypotLabel: "Website"                   # campo invisível anti-robô; pode deixar como está
+
+# Página "não encontrada" (erro 404).
+notFound:
+  title: "Página não encontrada | SETHOS"
+  description: "A página solicitada não foi encontrada. Volte para a página inicial da SETHOS - Consultoria Especializada em Totvs RM."
+  code: "404"
+  heading: "Página não encontrada"
+  text: "A página solicitada não foi encontrada. Ela pode ter sido movida, excluída ou nunca ter existido."
+  cta: "Voltar ao início"

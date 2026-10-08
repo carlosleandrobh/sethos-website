@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { ui } from '../data/ui';
+import { ui } from '../lib/content';
 
 export async function getStaticPaths() {
   const pages = await getCollection('legal');
@@ -10,13 +10,17 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { title, description, sections } = page.data;
+const { title, description } = page.data;
+const { Content, headings } = await render(page);
+const sections = headings.filter((h) => h.depth === 2);
 
-// "3.1 Dados Fornecidos: texto" → rótulo em negrito (o texto não muda).
-const split = (paragraph: string) => {
-  const m = paragraph.match(/^(\d+(?:\.\d+)+ [^:]{1,90}:)\s+([\s\S]*)$/);
-  return m ? { label: m[1], rest: m[2] } : { label: '', rest: paragraph };
-};
+// Tipografia do texto jurídico (o Markdown gera h2/p/strong/a sem classes).
+const prose = [
+  'max-w-[44rem] text-[1.0625rem] leading-relaxed text-ink-soft',
+  '[&_h2]:mt-12 [&_h2]:scroll-mt-24 [&_h2]:text-xl [&_h2]:text-ink [&_h2]:first:mt-0 md:[&_h2]:text-2xl',
+  '[&_p]:mt-4 [&_strong]:font-semibold [&_strong]:text-ink',
+  '[&_a]:text-brand-dark [&_a]:underline [&_a]:underline-offset-4',
+].join(' ');
 ---
 
 <Base title={`${title} - SETHOS`} description={description}>
@@ -30,13 +34,13 @@ const split = (paragraph: string) => {
   </header>
 
   <div class="container-page grid gap-12 pb-20 lg:grid-cols-12 lg:gap-16">
-    <nav aria-label="Índice" class="lg:col-span-4">
+    <nav aria-label={ui.legal.indexAria} class="lg:col-span-4">
       <ol class="space-y-1 text-sm lg:sticky lg:top-28">
         {
           sections.map((s) => (
             <li>
-              <a href={`#${s.id}`} class="inline-flex min-h-9 items-center text-ink-soft underline-offset-4 hover:text-brand-dark hover:underline">
-                {s.title}
+              <a href={`#${s.slug}`} class="inline-flex min-h-9 items-center text-ink-soft underline-offset-4 hover:text-brand-dark hover:underline">
+                {s.text}
               </a>
             </li>
           ))
@@ -44,24 +48,8 @@ const split = (paragraph: string) => {
       </ol>
     </nav>
 
-    <div class="space-y-12 lg:col-span-8">
-      {
-        sections.map((s) => (
-          <section id={s.id} aria-labelledby={`${s.id}-t`} class="scroll-mt-24">
-            <h2 id={`${s.id}-t`} class="text-xl md:text-2xl">{s.title}</h2>
-            <div class="mt-4 max-w-[44rem] space-y-4 text-[1.0625rem] leading-relaxed text-ink-soft">
-              {s.content.map((p) => {
-                const { label, rest } = split(p);
-                return (
-                  <p>
-                    {label && <strong class="font-semibold text-ink">{label}</strong>} {rest}
-                  </p>
-                );
-              })}
-            </div>
-          </section>
-        ))
-      }
+    <div class={`lg:col-span-8 ${prose}`}>
+      <Content />
     </div>
   </div>
 

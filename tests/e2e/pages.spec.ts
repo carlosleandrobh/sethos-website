@@ -1,6 +1,11 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { SERVICE_SLUGS } from '../../src/lib/slug';
+import { readdirSync } from 'node:fs';
+
+// Os serviços vêm dos arquivos em src/content/services/: criar ou apagar um .md muda esta lista sozinho.
+const SERVICE_SLUGS = readdirSync('src/content/services')
+  .filter((f) => f.endsWith('.md'))
+  .map((f) => f.replace(/\.md$/, ''));
 
 const routes = [
   '/quem-somos',

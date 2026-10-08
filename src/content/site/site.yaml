@@ -1,0 +1,78 @@
+# ============================================================================
+#  DADOS GERAIS DO SITE  — usados em várias páginas (menu, rodapé, contato, WhatsApp…)
+#  Mudou o telefone, e-mail ou uma rede social? Altere AQUI, uma vez só, e todo o site acompanha.
+#  Texto com dois-pontos (:) ou # precisa ficar entre aspas "assim".
+# ============================================================================
+
+# --- A empresa ---------------------------------------------------------------
+name: "SETHOS"
+legalName: "SETHOS Tecnologia da Informação Ltda"     # razão social (aparece no rodapé)
+cnpj: "29.298.410/0001-42"
+url: "https://sethos.com.br"                          # endereço oficial do site, sem barra no final
+
+# --- Contato -----------------------------------------------------------------
+email: "falecom@sethos.com.br"
+phone:
+  display: "(31) 97245-7451"      # como aparece escrito no site
+  tel: "+5531972457451"           # para o link de ligar: + código do país + DDD + número, sem espaços
+  whatsapp: "5531972457451"       # para o link do WhatsApp: código do país + DDD + número, sem + nem espaços
+
+# Mensagem que já vem digitada quando a pessoa clica no botão do WhatsApp.
+whatsappMessage: "Olá! Gostaria de saber mais sobre os serviços de consultoria Totvs RM RH da SETHOS."
+# Mensagem do WhatsApp usada na página de contato.
+whatsappMessageContactPage: "Olá! Vim através da página de contato e gostaria de saber mais sobre os serviços da SETHOS."
+
+# Agenda online (Microsoft Bookings). Troque o endereço se a agenda mudar.
+schedule:
+  url: "https://outlook.office.com/book/SETHOS@sethos.com.br/?ismsaljsauthenabled"          # página de contato
+  serviceUrl: "https://outlook.office.com/book/SETHOS@sethos.com.br/s/nUotNPkVF0O-Z7coYgF-rw2?ismsaljsauthenabled"   # botão das páginas de serviço
+
+# --- Redes sociais (rodapé) --------------------------------------------------
+# "icon" é o nome do ícone: simple-icons:linkedin, simple-icons:instagram, simple-icons:facebook, simple-icons:youtube …
+# (lista em https://icon-sets.iconify.design/simple-icons/). Para tirar uma rede, apague o bloco de 3 linhas.
+social:
+  - label: "LinkedIn"
+    icon: "simple-icons:linkedin"
+    href: "https://linkedin.com/company/sethos"
+  - label: "Instagram"
+    icon: "simple-icons:instagram"
+    href: "https://instagram.com/sethos.ti"
+  - label: "Facebook"
+    icon: "simple-icons:facebook"
+    href: "https://www.facebook.com/sethos.ti"
+
+# --- Menu principal e rodapé -------------------------------------------------
+# A ordem aqui é a ordem na tela. "href" é o endereço interno (começa com /).
+nav:
+  - { label: "Início", href: "/" }
+  - { label: "Quem Somos", href: "/quem-somos" }
+  - { label: "Serviços", href: "/servicos" }
+  - { label: "Nossos Valores", href: "/nossos-valores" }
+  - { label: "Contato", href: "/contato" }
+
+# Links legais no rodapé.
+legalNav:
+  - { label: "Política de Privacidade", href: "/politica-de-privacidade" }
+  - { label: "Política de Cookies", href: "/politica-de-cookies" }
+  - { label: "Termos de Uso", href: "/termos-de-uso" }
+
+# Botão vermelho do menu (topo).
+cta:
+  label: "Solicite um contato"
+  href: "/contato"
+
+# --- Texto do rodapé ---------------------------------------------------------
+footer:
+  description: >-
+    Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas. Oferecemos soluções
+    personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
+  disclaimer: >-
+    A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou
+    indireto, com a TOTVS, suas franquias ou representantes. RM e SmartView são produtos de propriedade da
+    TOTVS S.A., sendo TOTVS uma marca registrada.
+
+# --- Balão do botão flutuante do WhatsApp (aparece ao passar o mouse) ----------
+whatsappTooltip:
+  title: "💬 Como podemos ajudar?"
+  text: "Fale conosco pelo WhatsApp sobre Totvs RM RH!"
+  aria: "Falar no WhatsApp sobre Totvs RM RH"

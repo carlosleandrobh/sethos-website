@@ -1,0 +1,129 @@
+# ============================================================================
+#  CONTATO  (sethos.com.br/contato)
+#  Telefone, e-mail e WhatsApp em si ficam em src/content/site/site.yaml.
+#  Aqui ficam os textos desta página e do formulário. Não apague as chaves à esquerda.
+# ============================================================================
+
+seo:
+  title: "Contato | SETHOS - Entre em Contato Conosco"                  # até 60 caracteres
+  description: >-
+    Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação,
+    outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+
+hero:
+  eyebrow: "Fale Conosco"
+  title:                                 # cada item é UMA LINHA do título grande
+    - "Múltiplas Formas de"
+    - "Contato"
+  lead: "Escolha a forma que for mais conveniente para você. Nossa equipe está sempre pronta para ajudar a transformar seus processos de RH."
+
+# Os 4 canais (sempre exatamente 4). O "id" liga cada um ao seu ícone e link — NÃO altere o id.
+channels:
+  - id: "email"
+    title: "E-mail"
+    note: "Resposta em até 2 horas"
+    value: "falecom@sethos.com.br"       # texto exibido (o link de e-mail vem do site.yaml)
+  - id: "whatsapp"
+    title: "WhatsApp"
+    note: "Atendimento imediato"
+    value: "(31) 97245-7451"
+  - id: "phone"
+    title: "Telefone"
+    note: "Horário comercial"
+    value: "(31) 97245-7451"
+  - id: "schedule"
+    title: "Agende uma Conversa Gratuita"
+    note: "Consulte disponibilidade"
+    value: "Reserve um horário"
+
+# Informações de atendimento (sempre exatamente 3).
+info:
+  - title: "Localização"
+    value: "Belo Horizonte, MG"
+    note: "Atendimento em todo o Brasil"
+  - title: "Horário de Funcionamento"
+    value: "Segunda a Sexta: 9h às 18h"
+    note: "Plantão WhatsApp 24h"
+  - title: "Modalidade"
+    value: "Remoto e Presencial"
+    note: "Flexibilidade total"
+
+# Texto ao lado do formulário.
+intro:
+  title: "Conte-nos Sobre Sua Necessidade"
+  text: "Preencha o formulário com detalhes sobre suas necessidades e nossa equipe entrará em contato com uma proposta personalizada."
+
+guarantees:
+  title: "Garantias do Nosso Atendimento"
+  items:                                 # acrescente ou remova blocos de duas linhas (title + text)
+    - title: "Consultoria gratuita inicial"
+      text: "Avaliamos suas necessidades sem custo para uma proposta assertiva"
+    - title: "Proposta sem compromisso"
+      text: "Receba nossa proposta detalhada sem obrigações"
+    - title: "Suporte contínuo pós-venda"
+      text: "Acompanhamento e suporte após a implementação"
+    - title: "Conformidade com LGPD"
+      text: "Seus dados protegidos conforme legislação brasileira"
+
+# Formulário. ATENÇÃO: os campos "value:" das opções (email, phone, whatsapp, morning…) são códigos
+# usados pelo envio de e-mail — altere só o "label:" (o texto que a pessoa vê).
+form:
+  title: "Solicitar Proposta"
+  subtitle: "Preencha os campos abaixo para uma proposta personalizada"
+  groups:
+    personal: "Informações Pessoais"
+    preferences: "Preferências de Contato"
+    project: "Sobre Seu Projeto"
+  fields:
+    name:
+      label: "Nome Completo *"
+      placeholder: "Seu nome completo"
+    email:
+      label: "E-mail Profissional *"
+      placeholder: "seu@email.com"
+    phone:
+      label: "Telefone/WhatsApp"
+      placeholder: "(11) 99999-9999"
+    preference:
+      label: "Preferência de contato"
+      options:
+        - { value: "email", label: "E-mail" }
+        - { value: "phone", label: "Telefone" }
+        - { value: "whatsapp", label: "WhatsApp" }
+    bestTime:
+      label: "Melhor horário para contato"
+      options:
+        - { value: "morning", label: "Manhã (8h às 12h)" }
+        - { value: "afternoon", label: "Tarde (13h às 18h)" }
+        - { value: "businessHours", label: "Horário comercial" }
+    message:
+      label: "Conte-nos sobre suas necessidades *"
+      placeholder: "Descreva seu projeto, principais desafios no RH, tamanho da empresa, principais necessidades no TOTVS RM..."
+      counter: "caracteres"             # aparece depois do contador: "0/2000 caracteres"
+      hint: "Seja específico para uma proposta mais assertiva"
+      suggestionsTitle: "Sugestões para sua mensagem:"
+      suggestions:
+        - "Principais desafios atuais no RH"
+        - "Tamanho da empresa (número de funcionários)"
+        - "Módulos do TOTVS RM que mais interessam"
+        - "Prazos desejados para implementação"
+  submit: "Enviar"
+  sending: "Enviando..."
+  errors:                                # mensagens mostradas embaixo de cada campo
+    name: "Nome é obrigatório"
+    email: "E-mail é obrigatório"
+    emailInvalid: "E-mail inválido"
+    phone: "Telefone é obrigatório"
+    phoneInvalid: "Telefone inválido"
+    message: "Mensagem é obrigatória"
+  failure:
+    network: "Problema de conexão. Verifique sua internet e tente novamente."
+    generic: "Não foi possível enviar sua mensagem agora. Tente novamente em alguns minutos ou fale conosco pelo WhatsApp."
+    incomplete: "Verifique os campos destacados"
+  success:
+    title: "Mensagem Enviada com Sucesso!"
+    text: "Obrigado pelo seu contato. Nossa equipe retornará em breve com uma proposta personalizada."
+    confirmation: "Confirmação enviada para:"
+  security:
+    title: "🔒 Seus dados estão seguros:"
+    text: "Suas informações são criptografadas e protegidas conforme a LGPD. Não compartilhamos dados com terceiros."

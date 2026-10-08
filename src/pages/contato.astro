@@ -4,8 +4,7 @@ import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { MAX_MESSAGE } from '../lib/contact';
-import { site, whatsappUrl } from '../data/site';
-import { ui } from '../data/ui';
+import { site, ui, whatsappUrl } from '../lib/content';
 
 const page = (await getEntry('contact', 'contact'))!.data;
 const f = page.form;
@@ -17,9 +16,9 @@ if (!siteKey) throw new Error('PUBLIC_TURNSTILE_SITE_KEY ausente no deploy de pr
 
 const channelHref: Record<string, string> = {
   email: `mailto:${site.email}`,
-  whatsapp: whatsappUrl(ui.contact.whatsappMessage),
+  whatsapp: whatsappUrl(site.whatsappMessageContactPage),
   phone: `tel:${site.phone.tel}`,
-  schedule: ui.contact.scheduleUrl,
+  schedule: site.schedule.url,
 };
 const channelIcon: Record<string, string> = {
   email: 'lucide:mail',
@@ -38,7 +37,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
 <Base title={page.seo.title} description={page.seo.description}>
   <PageHero {...page.hero} />
 
-  <section class="py-12 md:py-16" aria-label="Canais de contato">
+  <section class="py-12 md:py-16" aria-label={ui.contactPage.channelsAria}>
     <div class="container-page">
       <ul class="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
         {
@@ -184,7 +183,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
 
           <!-- Honeypot: invisível para pessoas; robôs costumam preencher. -->
           <div class="absolute -left-[9999px]" aria-hidden="true">
-            <label for="website">Website</label>
+            <label for="website">{ui.contactPage.honeypotLabel}</label>
             <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
           </div>
 

@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { site, whatsappUrl } from '../data/site';
-import { ui } from '../data/ui';
+import { site, ui, whatsappUrl, fill } from '../lib/content';
 
 interface Props {
   title: string;
@@ -12,7 +11,7 @@ interface Props {
 const { title, proposalTopic, shortDescription, url } = Astro.props;
 const t = ui.service;
 const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${shortDescription}\n\nSaiba mais: ${url}`)}`;
+const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(fill(t.shareEmailBody, { description: shortDescription, url }))}`;
 const fieldClass =
   'w-full rounded-control border border-ink/25 bg-white px-4 py-3 text-base text-ink placeholder:text-muted focus:border-brand-dark';
 ---
@@ -26,6 +25,7 @@ const fieldClass =
       class="mt-6 space-y-4"
       data-service-form
       data-title={title}
+      data-template={t.whatsappTemplate}
       data-wa={whatsappUrl('')}
     >
       <div>
@@ -96,10 +96,15 @@ const fieldClass =
     event.preventDefault();
     const data = new FormData(form);
     const title = form.dataset.title ?? '';
-    const message =
-      `Olá! Gostaria de saber mais sobre *${title}*.\n\n` +
-      `*Nome:* ${data.get('name')}\n*Email:* ${data.get('email')}\n*Telefone:* ${data.get('phone')}\n` +
-      `*Mensagem:* ${data.get('message') || ''}`;
+    const values: Record<string, string> = {
+      title,
+      name: String(data.get('name') ?? ''),
+      email: String(data.get('email') ?? ''),
+      phone: String(data.get('phone') ?? ''),
+      message: String(data.get('message') ?? ''),
+    };
+    // O texto da mensagem vem de src/content/site/ui.yaml (service.whatsappTemplate).
+    const message = (form.dataset.template ?? '').replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? '');
     const base = (form.dataset.wa ?? '').split('?')[0];
     window.open(`${base}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   });

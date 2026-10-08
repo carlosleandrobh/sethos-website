@@ -32,3 +32,6 @@ playwright-report/
 
 # Local Netlify folder
 .netlify
+
+# Netlify CLI (dev local)
+.netlify/

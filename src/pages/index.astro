@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import { ui } from '../lib/content';
 
 const home = (await getEntry('home', 'home'))!.data;
 const cardCta = (await getEntry('servicesIndex', 'services-index'))!.data.cardCta;
@@ -13,7 +14,7 @@ const featured = services.slice(0, 4);
 <Base title={home.seo.title} description={home.seo.description}>
   <Hero {...home.hero} />
 
-  <section class="border-y border-line" aria-label="Destaques">
+  <section class="border-y border-line" aria-label={ui.home.highlightsAria}>
     <ul class="container-page grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
       {
         home.highlights.map((item) => (
@@ -52,7 +53,7 @@ const featured = services.slice(0, 4);
         <a
           href="/servicos"
           class="btn btn-outline shrink-0 self-start md:self-auto"
-          aria-label="Ver todos os serviços especializados em Totvs RM RH"
+          aria-label={ui.home.allServicesAria}
         >
           {home.services.cta}
         </a>
