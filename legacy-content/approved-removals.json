@@ -1,0 +1,18 @@
+{
+  "_comment": "Linhas do site antigo que podem sair do novo, com motivo. '*' vale para todas as rotas.",
+  "*": [
+    "Control your privacy",
+    "AdOpt",
+    "Your personal data will be processed, and information from your device may be stored, accessed, and shared with undefined TCF vendors. Additionally, some of these vendors may process your data based on legitimate interests, allowing you to manage your options and withdraw consent through a link available at the bottom of the page or in the privacy policy.",
+    "We use cookies to share analytics, advertising data, user data, and ad personalization data with Google.",
+    "Privacy Policy - Cookie Policy - Terms of Use",
+    "My options",
+    "Reject",
+    "Accept",
+    "Rodapé"
+  ],
+  "_reasons": {
+    "cookie widget": "Banner de cookies de terceiro (AdOpt/goadopt); será substituído por consentimento próprio (T11).",
+    "Rodapé": "Rótulo redundante com o landmark <footer>."
+  }
+}

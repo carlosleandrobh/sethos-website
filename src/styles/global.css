@@ -1,6 +1,73 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
 
+/* Tokens da marca SETHOS. Cores validadas em tests/contrast.test.ts */
 @theme {
-  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Marca: #E53935 é a cor oficial. Sobre branco tem contraste 4,2:1, então só em
+     fundos/ícones/texto grande (>=24px ou >=18,66px bold). Texto pequeno e botões usam brand-dark. */
+  --color-brand: #e53935;
+  --color-brand-dark: #c62828;
+  --color-brand-darker: #b71c1c;
+  --color-brand-tint: #fdecec;
+
+  --color-ink: #333333;
+  --color-ink-soft: #555555;
+  --color-muted: #6b6b6b;
+  --color-line: #e7e7e7;
+  --color-surface: #f7f7f8;
+  --color-footer: #1f1f23;
+  --color-footer-text: #c9c9ce;
+  --color-whatsapp: #128c7e;
+
+  --radius-card: 1rem;
+  --radius-control: 0.625rem;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 16px rgb(0 0 0 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.05), 0 10px 28px rgb(0 0 0 / 0.1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-base leading-relaxed text-ink antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-bold leading-tight tracking-tight text-ink;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-4 md:px-6; }
+
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-control px-5 py-2.5 text-sm font-semibold
+      transition-colors duration-200;
+  }
+  .btn-primary { @apply bg-brand-dark text-white hover:bg-brand-darker; }
+  .btn-outline { @apply border border-brand-dark bg-white text-brand-dark hover:bg-brand-tint; }
+
+  .card { @apply rounded-card border border-line bg-white shadow-card transition-shadow duration-200; }
+  .card-link:hover { box-shadow: var(--shadow-card-hover); }
+
+  .eyebrow { @apply text-sm font-semibold uppercase tracking-wider text-brand-dark; }
 }

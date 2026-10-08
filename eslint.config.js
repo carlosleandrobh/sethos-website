@@ -10,7 +10,7 @@ export default [
   { rules: { 'no-console': ['error', { allow: ['warn', 'error'] }] } },
   {
     files: ['scripts/**'],
-    languageOptions: { globals: { console: 'readonly', process: 'readonly', document: 'readonly', window: 'readonly', setTimeout: 'readonly' } },
+    languageOptions: { globals: { console: 'readonly', process: 'readonly', document: 'readonly', window: 'readonly', setTimeout: 'readonly', getComputedStyle: 'readonly' } },
     rules: { 'no-console': 'off' },
   },
 ];

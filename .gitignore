@@ -26,3 +26,6 @@ pnpm-debug.log*
 # secrets
 .env.*
 !.env.example
+
+test-results/
+playwright-report/

@@ -13,10 +13,13 @@ export const normalize = (s) =>
 
 const ENTITIES = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' ' };
 
+// Textos em atributos (alt, aria-label, title, placeholder) também são conteúdo.
+const attributeTexts = (html) =>
+  [...html.matchAll(/\s(?:alt|aria-label|title|placeholder)="([^"]+)"/g)].map((m) => m[1]).join(' ');
+
 export const htmlToText = (html) =>
   normalize(
-    html
-      .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
+    (html.replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ') + ' ' + attributeTexts(html))
       .replace(/<[^>]+>/g, ' ')
       .replace(/&(?:amp|lt|gt|quot|#39|nbsp);/g, (m) => ENTITIES[m])
       .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n))),
@@ -24,7 +27,10 @@ export const htmlToText = (html) =>
 
 export const legacyLines = (text) => [...new Set(text.split('\n').map(normalize).filter((l) => l.length > 1))];
 
-/** @returns {{missing: string[], total: number}} */
+/**
+ * @param {{ legacyText: string, newText: string, ignore?: string[], approved?: string[] }} input
+ * @returns {{ missing: string[], total: number }}
+ */
 export function findMissing({ legacyText, newText, ignore = [], approved = [] }) {
   const hay = normalize(newText);
   const skip = new Set([...ignore, ...approved].map(normalize));

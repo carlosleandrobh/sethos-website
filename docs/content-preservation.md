@@ -18,3 +18,8 @@
 - Etapas 2 e 3 do formulário de contato não aparecem sem interação → serão conferidas contra o código antigo (`src/components/contact/steps/*`).
 - Mensagens de validação/sucesso do formulário e a página 404 não estão no snapshot → conferidas contra o código.
 - Conteúdo do `banner_carousel` (se houver banner ativo) não aparecia no hero do snapshot; conferir a tabela se quiser preservá-lo.
+
+## Achados da T2
+- O hero da home é um **carrossel de 4 slides** (não um slide único): "15+ anos de experiência / Soluções inteligentes…", "Experiência que Faz a Diferença", "Sustentação Totvs RM RH / Foque no negócio…", "Dashboards e Relatórios / Dashboards interativos…". Textos capturados em `legacy-content/snapshot/_hero-slides.json` (diferem das sementes das migrações: foram editados no CMS). A verificação da home exige os 4.
+- Typo no texto publicado: "confíavel" (deveria ser "confiável") no card de Integração. A verificação exige o texto como está até você aprovar a correção.
+- `approved-removals.json` já cobre o banner de cookies de terceiros (AdOpt) e o rótulo "Rodapé".

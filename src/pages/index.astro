@@ -1,14 +1,20 @@
 ---
-import '../styles/global.css';
+import Base from '../layouts/Base.astro';
 ---
 
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SETHOS</title>
-  </head>
-  <body class="font-sans">
-    <h1 class="p-8 text-3xl font-bold">SETHOS</h1>
-  </body>
-</html>
+<Base
+  title="SETHOS - Consultoria Totvs RM RH"
+  description="Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil."
+>
+  <section class="container-page py-24">
+    <p class="eyebrow">Em construção</p>
+    <h1 class="mt-2 text-4xl md:text-5xl">SETHOS</h1>
+    <p class="mt-4 max-w-xl text-ink-soft">
+      Página provisória para validar tokens e layout base (T2). Substituída na T5.
+    </p>
+    <div class="mt-8 flex gap-3">
+      <a href="/contato" class="btn btn-primary">Solicite um contato</a>
+      <a href="/servicos" class="btn btn-outline">Nossos serviços</a>
+    </div>
+  </section>
+</Base>

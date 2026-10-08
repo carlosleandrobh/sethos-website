@@ -14,7 +14,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Acceptance: projeto em `C:\repository\sethos-astro`, git init, Astro 5 + Tailwind 3.4 + TS strict + Vitest + ESLint; `.env.example`, `.gitignore` com `.env`.
   - Verify: `npm run build && npm run check && npm test` verdes.
   - Files: package.json, astro.config.mjs, tailwind.config.ts, tsconfig.json, .gitignore (~5)
-- [ ] **T2 Tokens e layout base** (aplicar princípios 4-A: menos gradientes/efeitos, CTA primário no menu)
+- [x] **T2 Tokens e layout base** (feito: tokens em `global.css`, Base/Navbar/Footer/FloatingWhatsApp, logos em `src/assets/brand`, favicon/apple-touch gerados; axe 0 violações desktop+mobile; teste de contraste). **Botões usam `#C62828` (não `#E53935`) porque branco sobre `#E53935` = 4,2:1**; `#E53935` fica em acentos, ícones, foco e texto grande. (aplicar princípios 4-A: menos gradientes/efeitos, CTA primário no menu)
   - Acceptance: `tokens.css` (brand `#E53935`, brand-dark `#C62828`, gray `#333`, light-gray `#aaa`, Inter self-hosted, raios, sombras); `Base.astro`, Navbar (menu mobile), Footer, FloatingWhatsApp, skip-link, `prefers-reduced-motion`; logos otimizados com nomes legíveis.
   - Verify: página de teste renderiza; axe sem violações; contraste de cada par texto/fundo ≥ 4.5 (ou ≥ 3 se grande) conferido por teste.
   - Files: ~8
@@ -27,7 +27,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: `npm run content:verify` verde. **→ CP1**
 
 ## Fase 2 — Páginas (fatias verticais)
-- [ ] **T5 Home** — hero fixo, Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
+- [ ] **T5 Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
   - Verify: HTML sem JS contém h1 e textos; paridade visual 1440/390.
 - [ ] **T6 Quem Somos e Nossos Valores**
   - Verify: textos conferidos; e2e 200 + h1 único.
