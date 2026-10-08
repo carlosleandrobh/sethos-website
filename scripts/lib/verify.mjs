@@ -4,10 +4,10 @@
 export const normalize = (s) =>
   s
     .normalize('NFC')
-    .replace(/[​-‍﻿]/g, '')
-    .replace(/[‘’]/g, "'")
-    .replace(/[“”]/g, '"')
-    .replace(/ /g, ' ')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/\u00A0/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
 
