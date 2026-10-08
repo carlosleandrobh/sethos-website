@@ -1,0 +1,53 @@
+# Tarefas: reconstrução SETHOS
+
+Legenda: [ ] pendente · Verificação entre "Verify".
+
+## Fase 0 — Pré-requisitos (usuário)
+- [x] **T0a** Exportar `site_content` do Supabase (JSON/CSV) → `legacy-content/site_content.json`
+  - Acceptance: arquivo com todas as chaves e valores atuais. Verify: contagem ≈ 66+ chaves.
+- [ ] **T0b** Excluir o projeto Supabase antigo **depois** do export (T0a) e do snapshot do site (T4); revogar a chave vazada e outras chaves antigas.
+- [ ] **T0c** Criar conta Resend, verificar o domínio `sethos.com.br` (SPF/DKIM no DNS), gerar API key; conta Netlify; repositório GitHub novo (privado) com 2FA.
+- [x] **T0d (usar logos de lovable-uploads)** Fornecer logos originais (SVG/PNG alta) se existirem; senão usarei os de `public/lovable-uploads`.
+
+## Fase 1 — Fundação
+- [x] **T1 Scaffold Astro** (feito: Astro 7.3 + Tailwind 4.3 em vez de 5/3.4; build, check, lint, test verdes; commit inicial)
+  - Acceptance: projeto em `C:\repository\sethos-astro`, git init, Astro 5 + Tailwind 3.4 + TS strict + Vitest + ESLint; `.env.example`, `.gitignore` com `.env`.
+  - Verify: `npm run build && npm run check && npm test` verdes.
+  - Files: package.json, astro.config.mjs, tailwind.config.ts, tsconfig.json, .gitignore (~5)
+- [ ] **T2 Tokens e layout base** (aplicar princípios 4-A: menos gradientes/efeitos, CTA primário no menu)
+  - Acceptance: `tokens.css` (brand `#E53935`, brand-dark `#C62828`, gray `#333`, light-gray `#aaa`, Inter self-hosted, raios, sombras); `Base.astro`, Navbar (menu mobile), Footer, FloatingWhatsApp, skip-link, `prefers-reduced-motion`; logos otimizados com nomes legíveis.
+  - Verify: página de teste renderiza; axe sem violações; contraste de cada par texto/fundo ≥ 4.5 (ou ≥ 3 se grande) conferido por teste.
+  - Files: ~8
+- [ ] **T3 Schemas de conteúdo (Zod)**
+  - Acceptance: coleções `services` (title, shortDescription, fullDescription, benefits, features, cta, faq, related, keywords, metaDescription, icon), `pages`, `legal`.
+  - Verify: `astro check` falha com campo faltando (teste).
+  - Files: src/content/config.ts + 1 teste
+- [ ] **T4 Migração de conteúdo + snapshot de referência** (parcial: export do banco, snapshot de 17 páginas com screenshots e `content:verify` prontos; falta migrar os textos para `src/content/`)
+  - Acceptance: 9 serviços, home, quem-somos, valores, contato, rodapé, legais em `src/content/`, com texto do banco prevalecendo sobre o fallback do código; diferenças banco×código listadas em `docs/content-diff.md`; screenshots do site atual em `legacy-content/screenshots/`.
+  - Verify: `npm run content:verify` verde. **→ CP1**
+
+## Fase 2 — Páginas (fatias verticais)
+- [ ] **T5 Home** — hero fixo, Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
+  - Verify: HTML sem JS contém h1 e textos; paridade visual 1440/390.
+- [ ] **T6 Quem Somos e Nossos Valores**
+  - Verify: textos conferidos; e2e 200 + h1 único.
+- [ ] **T7 Serviços** — `/servicos` e `/servicos/[slug]` (9), breadcrumbs, FAQ accordion acessível, relacionados, CTA, JSON-LD `Service`+`FAQPage`.
+  - Verify: 9 slugs idênticos aos atuais; axe limpo; e2e.
+- [ ] **T9 Páginas legais** (privacidade, cookies, termos) — texto idêntico.
+  - Verify: e2e 200 + conferência de texto.
+- [ ] **T8 Contato + envio**
+  - Acceptance: formulário multi-etapas (dados → projeto → preferência/horário), validação cliente+servidor, máscara de telefone, Turnstile, honeypot, rate-limit; função `send-contact` com HTML escapado, e-mail à SETHOS + confirmação ao visitante; botão WhatsApp com mensagem pré-preenchida.
+  - Verify: testes unitários (validação, escape de `<script>`), e2e com função mockada; envio real em preview. **→ CP2**
+  - Files: ~6 (ContactForm, steps, validation, functions/send-contact, teste, página)
+
+## Fase 3 — Qualidade e publicação
+- [ ] **T10 SEO, OG e redirects**
+  - Acceptance: componente de `<head>` único; título/description por página; imagem OG 1200×630 por página (gerada no build); canonical; JSON-LD `Organization/LocalBusiness`; sitemap gerado com `lastmod` real; robots.txt; `_redirects`/netlify.toml com 301 de URLs antigas (inclui `/cms` → 410 ou 404, `/lovable-uploads/*` mapeados se indexados).
+  - Verify: teste percorre todas as rotas validando meta/OG; lista de redirects testada.
+- [ ] **T11 Consentimento e tracking** — banner de cookies LGPD; GTM `GTM-TPK4FL5N` e Meta Pixel só após aceite; CSP sem `unsafe-eval`; headers de segurança.
+  - Verify: e2e confirma 0 requests de terceiros antes do aceite.
+- [ ] **T12 Testes, acessibilidade, performance**
+  - Acceptance: Playwright + axe em todas as rotas; Lighthouse CI mobile ≥ 95/95/95/100; LCP < 2,0 s; CLS < 0,1; `npm audit --omit=dev` sem alta/crítica. **→ CP3**
+- [ ] **T13 Docs e cutover**
+  - Acceptance: README (editar texto, adicionar serviço, publicar), ADR da decisão "sem CMS"; deploy preview; checklist de DNS; envio do sitemap ao Search Console; projeto antigo mantido 30 dias.
+  - Verify: checklist de lançamento executado; comparação preview×produção aprovada.

@@ -1,43 +1,29 @@
-# Astro Starter Kit: Minimal
+# SETHOS — site institucional (Astro)
 
-```sh
-npm create astro@latest -- --template minimal
+Reconstrução do site da SETHOS (consultoria Totvs RM RH), saindo do Lovable. Mesma identidade, textos e URLs; HTML estático, sem CMS, sem banco.
+
+## Leia nesta ordem
+1. [`SPEC.md`](SPEC.md) — objetivo, decisões (D1–D12), stack, estrutura, princípios de UX, critérios de sucesso.
+2. [`tasks/plan.md`](tasks/plan.md) — ordem de construção, riscos, checkpoints.
+3. [`tasks/todo.md`](tasks/todo.md) — tarefas T0–T13 com critérios de aceite (veja o que já está feito).
+4. [`docs/content-preservation.md`](docs/content-preservation.md) — como garantimos que nenhum texto se perde.
+5. [`docs/content-audit.md`](docs/content-audit.md) — banco × código, chaves órfãs.
+
+## Comandos
+```
+npm run dev              # servidor local
+npm run build            # gera dist/
+npm run check            # tipos (astro check)
+npm run lint
+npm test                 # Vitest
+npm run content:verify   # após build: todo texto do site antigo existe no novo?
+npm run content:snapshot # recaptura o site antigo (só enquanto ele estiver no ar)
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Pastas
+- `legacy-content/` — referência do site antigo: `site_content.json` (export do Supabase), `snapshot/` (texto e screenshots das 17 páginas). Não é publicado.
+- `scripts/` — snapshot e verificação de conteúdo.
+- `src/` — site novo. `tests/` — testes unitários.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Segredos
+Nunca versionar `.env`. Variáveis em `.env.example`; valores reais ficam no painel do Netlify. O projeto antigo teve uma chave vazada no GitHub; este repositório começou sem aquele histórico.

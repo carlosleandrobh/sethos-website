@@ -20,3 +20,9 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Contexto do projeto SETHOS
+- Fonte de verdade: `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`. Atualize-os quando decisões mudarem.
+- Não alterar textos nem slugs sem aprovação; `npm run content:verify` deve passar.
+- Cores: `#E53935` (marca, só texto grande/botões) e `#C62828` (texto pequeno/hover). E-mail via Resend; hospedagem Netlify; sem Supabase na v1.
+- O projeto antigo (Lovable) está em `C:\repository\sethos-website`, somente referência.
