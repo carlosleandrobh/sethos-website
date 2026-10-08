@@ -13,7 +13,9 @@
     "check": "astro check",
     "lint": "eslint .",
     "test": "vitest run",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "content:verify": "node scripts/content-verify.mjs",
+    "content:snapshot": "node scripts/snapshot-legacy.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.0",
     "eslint": "^10.12.0",
     "eslint-plugin-astro": "^3.2.1",
     "prettier": "^3.9.9",

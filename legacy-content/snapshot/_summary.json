@@ -1,0 +1,87 @@
+[
+  {
+    "route": "/",
+    "chars": 2521,
+    "h1": "H1 Experiência que Faz a Diferença"
+  },
+  {
+    "route": "/quem-somos",
+    "chars": 3055,
+    "h1": "H1 Conheça aSETHOS"
+  },
+  {
+    "route": "/nossos-valores",
+    "chars": 2282,
+    "h1": "H1 Princípios queNos Guiam"
+  },
+  {
+    "route": "/servicos",
+    "chars": 2737,
+    "h1": "H1 Soluções Completasem Totvs RM RH"
+  },
+  {
+    "route": "/contato",
+    "chars": 3237,
+    "h1": "H1 Múltiplas Formas deContato"
+  },
+  {
+    "route": "/politica-de-privacidade",
+    "chars": 3625,
+    "h1": "H1 Política de Privacidade"
+  },
+  {
+    "route": "/politica-de-cookies",
+    "chars": 3292,
+    "h1": "H1 Política de Cookies"
+  },
+  {
+    "route": "/termos-de-uso",
+    "chars": 2817,
+    "h1": "H1 Termos de Uso"
+  },
+  {
+    "route": "/servicos/consultoria-rh",
+    "chars": 3353,
+    "h1": "H1 Consultoria Especializada em RH"
+  },
+  {
+    "route": "/servicos/implantacao-totvs",
+    "chars": 3145,
+    "h1": "H1 Implantação de Sistema e Migração de Dados"
+  },
+  {
+    "route": "/servicos/sustentacao-erp",
+    "chars": 3496,
+    "h1": "H1 Sustentação"
+  },
+  {
+    "route": "/servicos/outsourcing-rh",
+    "chars": 3082,
+    "h1": "H1 Outsourcing Técnico"
+  },
+  {
+    "route": "/servicos/customizacoes-totvs",
+    "chars": 3075,
+    "h1": "H1 Desenvolvimento de Customizações"
+  },
+  {
+    "route": "/servicos/integracao-sistemas",
+    "chars": 2988,
+    "h1": "H1 Integração entre Sistemas"
+  },
+  {
+    "route": "/servicos/dashboards-rh",
+    "chars": 3104,
+    "h1": "H1 Dashboards e Relatórios"
+  },
+  {
+    "route": "/servicos/treinamentos-totvs",
+    "chars": 3116,
+    "h1": "H1 Treinamentos sob Demanda"
+  },
+  {
+    "route": "/servicos/bancodados-sql",
+    "chars": 3033,
+    "h1": "H1 Administração de Banco de Dados SQL Server"
+  }
+]
