@@ -18,16 +18,16 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Acceptance: `tokens.css` (brand `#E53935`, brand-dark `#C62828`, gray `#333`, light-gray `#aaa`, Inter self-hosted, raios, sombras); `Base.astro`, Navbar (menu mobile), Footer, FloatingWhatsApp, skip-link, `prefers-reduced-motion`; logos otimizados com nomes legíveis.
   - Verify: página de teste renderiza; axe sem violações; contraste de cada par texto/fundo ≥ 4.5 (ou ≥ 3 se grande) conferido por teste.
   - Files: ~8
-- [ ] **T3 Schemas de conteúdo (Zod)**
+- [x] **T3 Schemas de conteúdo (Zod)** (feito: `src/content.config.ts`, 7 coleções; `astro check` valida)
   - Acceptance: coleções `services` (title, shortDescription, fullDescription, benefits, features, cta, faq, related, keywords, metaDescription, icon), `pages`, `legal`.
   - Verify: `astro check` falha com campo faltando (teste).
   - Files: src/content/config.ts + 1 teste
-- [ ] **T4 Migração de conteúdo + snapshot de referência** (parcial: export do banco, snapshot de 17 páginas com screenshots e `content:verify` prontos; falta migrar os textos para `src/content/`)
+- [x] **T4 Migração de conteúdo + snapshot de referência** (feito: 9 serviços, legais, home, quem-somos, valores, contato, serviços em `src/content/`; `npm run content:coverage` mostra o que falta; typo "confíavel" corrigido). `content:verify` fecha página a página em T5–T9.
   - Acceptance: 9 serviços, home, quem-somos, valores, contato, rodapé, legais em `src/content/`, com texto do banco prevalecendo sobre o fallback do código; diferenças banco×código listadas em `docs/content-diff.md`; screenshots do site atual em `legacy-content/screenshots/`.
   - Verify: `npm run content:verify` verde. **→ CP1**
 
 ## Fase 2 — Páginas (fatias verticais)
-- [ ] **T5 Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
+- [~] **T5 Home** (feito: hero novo + destaques + quem somos + serviços + CTA; home 53/59 no verify, o resto é aprovado como removido; falta só revisão visual do usuário) **Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
   - Verify: HTML sem JS contém h1 e textos; paridade visual 1440/390.
 - [ ] **T6 Quem Somos e Nossos Valores**
   - Verify: textos conferidos; e2e 200 + h1 único.

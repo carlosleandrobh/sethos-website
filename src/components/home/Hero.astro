@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import mascot from '../../assets/brand/mascot-hero.png';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  primaryCta: string;
+  secondaryCta: string;
+  chips: { label: string; icon: string }[];
+}
+const { eyebrow, title, subtitle, primaryCta, secondaryCta, chips } = Astro.props;
+
+// Destaca "Totvs RM RH" no título (texto grande e em negrito: #E53935 tem contraste suficiente).
+const highlight = 'Totvs RM RH';
+const at = title.indexOf(highlight);
+const [before, after] = at >= 0 ? [title.slice(0, at), title.slice(at + highlight.length)] : [title, ''];
+
+const chipPositions = [
+  'left-0 top-[14%] sm:-left-4',
+  'right-0 top-[6%] sm:-right-4',
+  'left-0 bottom-[16%] sm:-left-6',
+  'right-0 bottom-[24%] sm:-right-6',
+];
+---
+
+<section
+  class="relative overflow-hidden bg-white"
+  aria-labelledby="hero-title"
+>
+  <div
+    class="pointer-events-none absolute -right-40 -top-40 size-[640px] rounded-full bg-brand-tint blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-page relative grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-6 lg:py-24">
+    <div>
+      <p
+        class="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-white px-4 py-1.5 text-sm font-semibold text-ink shadow-card"
+      >
+        <span class="size-2 rounded-full bg-brand" aria-hidden="true"></span>
+        {eyebrow}
+      </p>
+
+      <h1 id="hero-title" class="mt-6 text-4xl font-extrabold leading-[1.1] sm:text-5xl lg:text-6xl">
+        {before}<span class="text-brand">{highlight}</span>{after}
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft md:text-xl">{subtitle}</p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="/contato" class="btn btn-primary min-h-12 px-7 text-base">
+          {primaryCta}
+          <Icon name="lucide:arrow-right" class="size-5" aria-hidden="true" />
+        </a>
+        <a href="/servicos" class="btn btn-outline min-h-12 px-7 text-base">{secondaryCta}</a>
+      </div>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+      <div class="relative mx-auto aspect-square w-full max-w-[460px]">
+        <div class="absolute inset-[6%] rounded-full bg-gradient-to-br from-brand-tint to-white ring-1 ring-brand/15"></div>
+        <div class="absolute inset-[16%] rounded-full ring-1 ring-brand/10"></div>
+        <Image
+          src={mascot}
+          alt="Mascote da SETHOS, um robô vermelho apontando para o alto"
+          width={400}
+          loading="eager"
+          fetchpriority="high"
+          class="absolute bottom-[3%] left-1/2 h-[92%] w-auto -translate-x-1/2 drop-shadow-xl"
+        />
+        {
+          chips.map((chip, i) => (
+            <div
+              class:list={[
+                'absolute flex items-center gap-2 rounded-full border border-line bg-white py-2 pl-2 pr-4 text-sm font-semibold text-ink shadow-card',
+                chipPositions[i],
+              ]}
+            >
+              <span class="flex size-8 items-center justify-center rounded-full bg-brand-tint text-brand-dark">
+                <Icon name={`lucide:${chip.icon}`} class="size-4" aria-hidden="true" />
+              </span>
+              {chip.label}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

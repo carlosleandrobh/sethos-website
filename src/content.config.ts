@@ -52,6 +52,7 @@ const home = page(
       subtitle: z.string(),
       primaryCta: z.string(),
       secondaryCta: z.string(),
+      chips: z.array(z.object({ label: z.string(), icon: z.string() })).length(4),
     }),
     highlights: z.array(titledText.extend({ cta: z.string(), href: z.string().startsWith('/') })).length(3),
     about: z.object({ title: z.string(), text: z.string(), cta: z.string() }),

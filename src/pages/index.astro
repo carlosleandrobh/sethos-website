@@ -1,20 +1,90 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
+import Hero from '../components/home/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+
+const home = (await getEntry('home', 'home'))!.data;
+const cardCta = (await getEntry('servicesIndex', 'services-index'))!.data.cardCta;
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const featured = services.slice(0, 4);
 ---
 
-<Base
-  title="SETHOS - Consultoria Totvs RM RH"
-  description="Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil."
->
-  <section class="container-page py-24">
-    <p class="eyebrow">Em construção</p>
-    <h1 class="mt-2 text-4xl md:text-5xl">SETHOS</h1>
-    <p class="mt-4 max-w-xl text-ink-soft">
-      Página provisória para validar tokens e layout base (T2). Substituída na T5.
-    </p>
-    <div class="mt-8 flex gap-3">
-      <a href="/contato" class="btn btn-primary">Solicite um contato</a>
-      <a href="/servicos" class="btn btn-outline">Nossos serviços</a>
+<Base title={home.seo.title} description={home.seo.description}>
+  <Hero {...home.hero} />
+
+  <section class="border-y border-line bg-surface py-12 md:py-14" aria-label="Destaques">
+    <ul class="container-page grid gap-5 md:grid-cols-3">
+      {
+        home.highlights.map((item) => (
+          <li class="card group relative flex flex-col p-6 hover:shadow-card-hover">
+            <span class="h-1 w-10 rounded-full bg-brand" aria-hidden="true" />
+            <h2 class="mt-4 text-lg font-semibold leading-snug">{item.title}</h2>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">{item.text}</p>
+            <a
+              href={item.href}
+              class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-dark after:absolute after:inset-0 after:content-[''] group-hover:underline"
+            >
+              {item.cta}
+              <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="quem-somos" class="py-16 md:py-24">
+    <div class="container-page mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl md:text-4xl">{home.about.title}</h2>
+      <p class="mt-6 text-lg leading-relaxed text-ink-soft">{home.about.text}</p>
+      <a href="/quem-somos" class="btn btn-primary mt-8">{home.about.cta}</a>
+    </div>
+  </section>
+
+  <section id="servicos" class="bg-surface py-16 md:py-24">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl md:text-4xl">{home.services.title}</h2>
+        <p class="mt-4 text-lg text-ink-soft">{home.services.subtitle}</p>
+      </div>
+      <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          featured.map((s) => (
+            <li>
+              <ServiceCard
+                slug={s.id}
+                title={s.data.title}
+                description={s.data.shortDescription}
+                icon={s.data.icon}
+                cta={cardCta}
+              />
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-10 text-center">
+        <a
+          href="/servicos"
+          class="btn btn-primary"
+          aria-label="Ver todos os serviços especializados em Totvs RM RH"
+        >
+          {home.services.cta}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato-resumo" class="py-16 md:py-24">
+    <div class="container-page">
+      <div class="mx-auto max-w-4xl rounded-3xl bg-brand-dark px-6 py-14 text-center text-white md:px-12">
+        <h2 class="text-3xl text-white md:text-4xl">{home.contact.title}</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg text-white/90">{home.contact.text}</p>
+        <a href="/contato" class="btn mt-8 min-h-12 bg-white px-8 text-base text-brand-dark hover:bg-brand-tint">
+          {home.contact.cta}
+        </a>
+      </div>
     </div>
   </section>
 </Base>

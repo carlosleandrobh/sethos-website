@@ -208,8 +208,8 @@ Convenções: nomes de arquivos em PascalCase (componentes) e kebab-case (conte�
 |---|---|---|
 | D1 | CMS | **Removido.** Edição via arquivos no repositório. |
 | D2 | Stack | **Astro** estático + Tailwind. |
-| D3 | Hero | Fixo, um slide (padrão assumido). |
-| D4 | Hospedagem / e-mail | Netlify + **Resend** (Postmark descartado: sem conta). Domínio `sethos.com.br` precisa de SPF/DKIM do Resend. |
+| D3 | Hero | **Revisada (2026-10-08):** o site antigo tem carrossel de 4 slides. Novo: hero único, grande e chamativo (mascote + título com destaque em `#E53935` + 2 CTAs), e as outras 3 mensagens viram 3 cards de destaque logo abaixo. Nenhum texto dos slides se perde. |
+| D4 | Hospedagem / e-mail | Netlify (testado com `netlify dev`: redirects, 404, 410, headers) + **Resend** (Postmark descartado: sem conta). Domínio `sethos.com.br` precisa de SPF/DKIM do Resend. |
 | D5 | Vermelho oficial | **`#E53935`**. Contraste com branco = 4,2:1: passa só para texto grande/negrito (≥ 24px, ou ≥ 18,66px bold) e componentes de UI. Para texto pequeno e links usa-se o tom escuro **`#C62828`** (≈ 5,6:1), também como hover dos botões. Detalhes na tarefa T2. |
 | D6 | Dados antigos | Você exporta `site_content` (JSON/CSV) para `legacy-content/`; eu também faço um snapshot do site publicado para conferência. |
 | D7 | Inclusões v1 | **Somente:** redirecionamentos 301 das URLs antigas e imagens Open Graph por página. Prova social, FAQ da home e blog ficam fora da v1. |

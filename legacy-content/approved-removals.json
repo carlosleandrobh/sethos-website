@@ -19,7 +19,13 @@
     "Ir para slide 2",
     "Ir para slide 3",
     "Ir para slide 4",
-    "Seção inicial"
+    "Seção inicial",
+    "Logo SETHOS - Robô",
+    "Ir para a página inicial",
+    "Ir para a página quem somos",
+    "Ir para a página de serviços",
+    "Ir para a página de valores",
+    "Ir para a página de contato"
   ],
   "_reasons": {
     "cookie widget": "Banner de cookies de terceiro (AdOpt/goadopt); será substituído por consentimento próprio (T11).",
@@ -28,7 +34,8 @@
     "Notifications (F8)": "Rótulo do widget de cookies de terceiro (AdOpt).",
     "Fechar mensagem": "Botão de fechar do balão do WhatsApp; o novo balão aparece só ao passar o mouse/foco, sem botão de fechar.",
     "Slide anterior ... Seção inicial": "Controles do carrossel do hero, removido em favor de um hero único + destaques (decisão do usuário 2026-10-08).",
-    "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário)."
+    "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário).",
+    "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível."
   },
   "/": [
     "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."

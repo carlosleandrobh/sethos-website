@@ -8,7 +8,25 @@
     "title": "Soluções inteligentes para potencializar seu ERP Totvs RM RH",
     "subtitle": "Serviços personalizados e um time de especialistas para impulsionar a eficiência da sua empresa.",
     "primaryCta": "Solicite um contato",
-    "secondaryCta": "Nossos Serviços"
+    "secondaryCta": "Nossos Serviços",
+    "chips": [
+      {
+        "label": "Gestão de Pessoas",
+        "icon": "users"
+      },
+      {
+        "label": "Relatórios",
+        "icon": "chart-line"
+      },
+      {
+        "label": "Banco de Dados",
+        "icon": "database"
+      },
+      {
+        "label": "Configurações",
+        "icon": "settings"
+      }
+    ]
   },
   "highlights": [
     {
