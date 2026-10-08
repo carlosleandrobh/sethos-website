@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { ui } from '../data/ui';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('legal');
+  return pages.map((page) => ({ params: { legal: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { title, description, sections } = page.data;
+
+// "3.1 Dados Fornecidos: texto" → rótulo em negrito (o texto não muda).
+const split = (paragraph: string) => {
+  const m = paragraph.match(/^(\d+(?:\.\d+)+ [^:]{1,90}:)\s+([\s\S]*)$/);
+  return m ? { label: m[1], rest: m[2] } : { label: '', rest: paragraph };
+};
+---
+
+<Base title={`${title} - SETHOS`} description={description}>
+  <div class="container-page pt-8">
+    <Breadcrumb current={title} />
+  </div>
+
+  <header class="container-page pb-10 pt-8 md:pb-14">
+    <h1 class="text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em]">{title}</h1>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">{description}</p>
+  </header>
+
+  <div class="container-page grid gap-12 pb-20 lg:grid-cols-12 lg:gap-16">
+    <nav aria-label="Índice" class="lg:col-span-4">
+      <ol class="space-y-1 text-sm lg:sticky lg:top-28">
+        {
+          sections.map((s) => (
+            <li>
+              <a href={`#${s.id}`} class="inline-flex min-h-9 items-center text-ink-soft underline-offset-4 hover:text-brand-dark hover:underline">
+                {s.title}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="space-y-12 lg:col-span-8">
+      {
+        sections.map((s) => (
+          <section id={s.id} aria-labelledby={`${s.id}-t`} class="scroll-mt-24">
+            <h2 id={`${s.id}-t`} class="text-xl md:text-2xl">{s.title}</h2>
+            <div class="mt-4 max-w-[44rem] space-y-4 text-[1.0625rem] leading-relaxed text-ink-soft">
+              {s.content.map((p) => {
+                const { label, rest } = split(p);
+                return (
+                  <p>
+                    {label && <strong class="font-semibold text-ink">{label}</strong>} {rest}
+                  </p>
+                );
+              })}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="border-t border-line py-14">
+    <div class="container-page grid items-center gap-6 md:grid-cols-[1fr_auto]">
+      <div>
+        <h2 class="text-2xl">{ui.legal.ctaTitle}</h2>
+        <p class="mt-2 text-lg text-ink-soft">{ui.legal.ctaText}</p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href="/contato" class="btn btn-primary min-h-12 px-7 text-base">{ui.legal.ctaPrimary}</a>
+        <a href="/servicos" class="btn btn-outline min-h-12 px-7 text-base">{ui.legal.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+</Base>

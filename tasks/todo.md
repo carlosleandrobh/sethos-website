@@ -29,11 +29,11 @@ Legenda: [ ] pendente · Verificação entre "Verify".
 ## Fase 2 — Páginas (fatias verticais)
 - [~] **T5 Home** (feito: hero novo + destaques + quem somos + serviços + CTA; home 53/59 no verify, o resto é aprovado como removido; falta só revisão visual do usuário) **Home** — hero (**ver decisão D3 revisada: o site antigo tem carrossel de 4 slides**), Quem Somos resumido, Serviços resumidos, Contato resumido; animações de entrada leves.
   - Verify: HTML sem JS contém h1 e textos; paridade visual 1440/390.
-- [ ] **T6 Quem Somos e Nossos Valores**
+- [x] **T6 Quem Somos e Nossos Valores**
   - Verify: textos conferidos; e2e 200 + h1 único.
-- [ ] **T7 Serviços** — `/servicos` e `/servicos/[slug]` (9), breadcrumbs, FAQ accordion acessível, relacionados, CTA, JSON-LD `Service`+`FAQPage`.
+- [x] **T7 Serviços** — `/servicos` e `/servicos/[slug]` (9), breadcrumbs, FAQ accordion acessível, relacionados, CTA, JSON-LD `Service`+`FAQPage`.
   - Verify: 9 slugs idênticos aos atuais; axe limpo; e2e.
-- [ ] **T9 Páginas legais** (privacidade, cookies, termos) — texto idêntico.
+- [x] **T9 Páginas legais** (privacidade, cookies, termos) — texto idêntico.
   - Verify: e2e 200 + conferência de texto.
 - [ ] **T8 Contato + envio**
   - Acceptance: formulário multi-etapas (dados → projeto → preferência/horário), validação cliente+servidor, máscara de telefone, Turnstile, honeypot, rate-limit; função `send-contact` com HTML escapado, e-mail à SETHOS + confirmação ao visitante; botão WhatsApp com mensagem pré-preenchida.

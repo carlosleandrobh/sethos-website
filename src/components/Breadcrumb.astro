@@ -1,0 +1,27 @@
+---
+import { ui } from '../data/ui';
+
+interface Props {
+  current: string;
+  /** Segmentos intermediários, ex.: Serviços. */
+  trail?: { label: string; href: string; title?: string }[];
+}
+const { current, trail = [] } = Astro.props;
+const items = [{ label: ui.breadcrumb.home, href: '/' }, ...trail];
+---
+
+<nav aria-label={ui.breadcrumb.label} class="text-sm text-ink-soft">
+  <ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+    {
+      items.map((item) => (
+        <li class="flex items-center gap-2">
+          <a href={item.href} title={item.title} class="underline-offset-4 hover:text-brand-dark hover:underline">
+            {item.label}
+          </a>
+          <span aria-hidden="true">/</span>
+        </li>
+      ))
+    }
+    <li aria-current="page" class="font-medium text-ink">{current}</li>
+  </ol>
+</nav>

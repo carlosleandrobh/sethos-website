@@ -1,0 +1,25 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+
+const page = (await getEntry('servicesIndex', 'services-index'))!.data;
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title={page.seo.title} description={page.seo.description}>
+  <PageHero eyebrow={page.hero.eyebrow} title={page.hero.title} lead={page.hero.lead} />
+
+  <section class="py-12 md:py-20">
+    <ul class="container-page grid gap-x-12 md:grid-cols-2">
+      {
+        services.map((s) => (
+          <li>
+            <ServiceCard slug={s.id} title={s.data.title} description={s.data.shortDescription} icon={s.data.icon} cta={page.cardCta} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

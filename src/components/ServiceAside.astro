@@ -1,0 +1,118 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site, whatsappUrl } from '../data/site';
+import { ui } from '../data/ui';
+
+interface Props {
+  title: string;
+  proposalTopic: string;
+  shortDescription: string;
+  url: string;
+}
+const { title, proposalTopic, shortDescription, url } = Astro.props;
+const t = ui.service;
+const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`${shortDescription}\n\nSaiba mais: ${url}`)}`;
+const fieldClass =
+  'w-full rounded-control border border-ink/25 bg-white px-4 py-3 text-base text-ink placeholder:text-muted focus:border-brand-dark';
+---
+
+<aside class="space-y-8 lg:sticky lg:top-28">
+  <section class="rounded-3xl bg-surface p-6 md:p-8" aria-labelledby="interessado">
+    <h2 id="interessado" class="text-2xl">{t.interested}</h2>
+    <p class="mt-3 text-ink-soft">{t.proposalPrefix}{proposalTopic}</p>
+
+    <form
+      class="mt-6 space-y-4"
+      data-service-form
+      data-title={title}
+      data-wa={whatsappUrl('')}
+    >
+      <div>
+        <label for="sf-name" class="sr-only">{t.form.name}</label>
+        <input id="sf-name" name="name" type="text" required autocomplete="name" placeholder={t.form.name} class={fieldClass} />
+      </div>
+      <div>
+        <label for="sf-email" class="sr-only">{t.form.email}</label>
+        <input id="sf-email" name="email" type="email" required autocomplete="email" placeholder={t.form.email} class={fieldClass} />
+      </div>
+      <div>
+        <label for="sf-phone" class="sr-only">{t.form.phone}</label>
+        <input id="sf-phone" name="phone" type="tel" required autocomplete="tel" placeholder={t.form.phone} class={fieldClass} />
+      </div>
+      <div>
+        <label for="sf-message" class="sr-only">{t.form.message}</label>
+        <textarea id="sf-message" name="message" rows="4" placeholder={t.form.message} class={`${fieldClass} resize-y`}></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary w-full min-h-12 text-base">
+        <Icon name="simple-icons:whatsapp" class="size-5" aria-hidden="true" />
+        {t.whatsapp}
+      </button>
+    </form>
+
+    <ul class="mt-6 space-y-2 border-t border-ink/15 pt-6 text-[0.9375rem]">
+      <li>
+        <a href={`tel:${site.phone.tel}`} class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+          <Icon name="lucide:phone" class="size-4" aria-hidden="true" />{site.phone.display}
+        </a>
+      </li>
+      <li>
+        <a href={`mailto:${site.email}`} class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+          <Icon name="lucide:mail" class="size-4" aria-hidden="true" />{site.email}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="compartilhar">
+    <h2 id="compartilhar" class="text-base font-semibold">{t.share}</h2>
+    <ul class="mt-3 flex gap-3">
+      <li>
+        <a href={linkedin} target="_blank" rel="noopener noreferrer" title={t.shareLinkedIn} aria-label={t.shareLinkedIn}
+          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+          <Icon name="simple-icons:linkedin" class="size-5" aria-hidden="true" />
+        </a>
+      </li>
+      <li>
+        <a href={email} title={t.shareEmail} aria-label={t.shareEmail}
+          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+          <Icon name="lucide:mail" class="size-5" aria-hidden="true" />
+        </a>
+      </li>
+      <li>
+        <button type="button" data-copy-link={url} title={t.copyLink} aria-label={t.copyLink}
+          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+          <Icon name="lucide:link" class="size-5" aria-hidden="true" />
+        </button>
+      </li>
+    </ul>
+    <p class="mt-2 hidden text-sm font-medium text-brand-dark" role="status" data-copy-feedback>{t.linkCopied}</p>
+  </section>
+</aside>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-service-form]');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const title = form.dataset.title ?? '';
+    const message =
+      `Olá! Gostaria de saber mais sobre *${title}*.\n\n` +
+      `*Nome:* ${data.get('name')}\n*Email:* ${data.get('email')}\n*Telefone:* ${data.get('phone')}\n` +
+      `*Mensagem:* ${data.get('message') || ''}`;
+    const base = (form.dataset.wa ?? '').split('?')[0];
+    window.open(`${base}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  });
+
+  const copy = document.querySelector<HTMLButtonElement>('[data-copy-link]');
+  const feedback = document.querySelector<HTMLElement>('[data-copy-feedback]');
+  copy?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copy.dataset.copyLink ?? location.href);
+      feedback?.classList.remove('hidden');
+      setTimeout(() => feedback?.classList.add('hidden'), 2500);
+    } catch {
+      /* clipboard indisponível: o link continua visível na barra de endereço */
+    }
+  });
+</script>

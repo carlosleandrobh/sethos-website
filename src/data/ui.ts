@@ -35,5 +35,7 @@ export const ui = {
     whatsappMessage:
       'Olá! Vim através da página de contato e gostaria de saber mais sobre os serviços da SETHOS.',
     scheduleUrl: 'https://outlook.office.com/book/SETHOS@sethos.com.br/?ismsaljsauthenabled',
+    serviceScheduleUrl:
+      'https://outlook.office.com/book/SETHOS@sethos.com.br/s/nUotNPkVF0O-Z7coYgF-rw2?ismsaljsauthenabled',
   },
 } as const;

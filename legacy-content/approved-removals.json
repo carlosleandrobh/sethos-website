@@ -25,7 +25,8 @@
     "Ir para a página quem somos",
     "Ir para a página de serviços",
     "Ir para a página de valores",
-    "Ir para a página de contato"
+    "Ir para a página de contato",
+    "breadcrumb"
   ],
   "_reasons": {
     "cookie widget": "Banner de cookies de terceiro (AdOpt/goadopt); será substituído por consentimento próprio (T11).",
@@ -35,7 +36,8 @@
     "Fechar mensagem": "Botão de fechar do balão do WhatsApp; o novo balão aparece só ao passar o mouse/foco, sem botão de fechar.",
     "Slide anterior ... Seção inicial": "Controles do carrossel do hero, removido em favor de um hero único + destaques (decisão do usuário 2026-10-08).",
     "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário).",
-    "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível."
+    "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível.",
+    "breadcrumb": "Rótulo ARIA das páginas legais; o novo usa 'Breadcrumb' (já aprovado/presente nos serviços)."
   },
   "/": [
     "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."

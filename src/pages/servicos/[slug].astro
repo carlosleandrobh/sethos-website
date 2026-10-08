@@ -1,0 +1,131 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ServiceAside from '../../components/ServiceAside.astro';
+import { site } from '../../data/site';
+import { ui } from '../../data/ui';
+
+export async function getStaticPaths() {
+  const all = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: { entry, previous: all[i - 1], next: all[i + 1] },
+  }));
+}
+
+const { entry, previous, next } = Astro.props;
+const s = entry.data;
+const { Content } = await render(entry);
+const t = ui.service;
+const url = `${site.url}/servicos/${entry.id}`;
+const scheduleUrl = ui.contact.serviceScheduleUrl;
+const list = 'mt-5 space-y-3 text-lg';
+---
+
+<Base title={`${s.title} | SETHOS - Consultoria Especializada Totvs RM`} description={s.metaDescription}>
+  <div class="container-page pt-8">
+    <Breadcrumb current={s.title} trail={[{ label: ui.breadcrumb.services, href: '/servicos', title: ui.breadcrumb.allServices }]} />
+  </div>
+
+  <header class="container-page pb-10 pt-8 md:pb-14">
+    <h1 class="max-w-3xl text-[clamp(2rem,4.6vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em]">{s.title}</h1>
+    <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">{s.shortDescription}</p>
+  </header>
+
+  <div class="container-page grid gap-12 pb-20 lg:grid-cols-12 lg:gap-16 lg:pb-28">
+    <div class="space-y-14 lg:col-span-8">
+      <section aria-labelledby="sobre">
+        <h2 id="sobre" class="text-2xl md:text-3xl">{t.about}</h2>
+        <div class="mt-5 max-w-[42rem] text-lg leading-relaxed [&_p+p]:mt-5"><Content /></div>
+      </section>
+
+      <section aria-labelledby="beneficios" class="border-t border-ink/20 pt-10">
+        <h2 id="beneficios" class="text-2xl md:text-3xl">{t.benefits}</h2>
+        <ul class={list}>
+          {
+            s.benefits.map((b) => (
+              <li class="flex gap-3">
+                <Icon name="lucide:check" class="mt-1.5 size-5 shrink-0 text-brand-dark" aria-hidden="true" />
+                {b}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="incluso" class="border-t border-ink/20 pt-10">
+        <h2 id="incluso" class="text-2xl md:text-3xl">{t.features}</h2>
+        <ul class={list}>
+          {
+            s.features.map((f) => (
+              <li class="flex gap-3">
+                <Icon name="lucide:check" class="mt-1.5 size-5 shrink-0 text-brand-dark" aria-hidden="true" />
+                {f}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="faq" class="border-t border-ink/20 pt-10">
+        <h2 id="faq" class="text-2xl md:text-3xl">{t.faq}</h2>
+        <div class="mt-6 divide-y divide-ink/15 border-y border-ink/15">
+          {
+            s.faq.map((item) => (
+              <details class="group py-1">
+                <summary class="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3 text-lg font-semibold [&::-webkit-details-marker]:hidden">
+                  {item.question}
+                  <Icon name="lucide:plus" class="size-5 shrink-0 text-brand-dark group-open:hidden" aria-hidden="true" />
+                  <Icon name="lucide:minus" class="hidden size-5 shrink-0 text-brand-dark group-open:block" aria-hidden="true" />
+                </summary>
+                <p class="max-w-[42rem] pb-4 text-lg leading-relaxed text-ink-soft">{item.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </section>
+
+      <nav aria-label="Navegação entre serviços" class="grid gap-6 border-t border-ink/20 pt-10 sm:grid-cols-2">
+        <div>
+          {
+            previous && (
+              <a href={`/servicos/${previous.id}`} class="block hover:text-brand-dark">
+                <span class="block text-sm text-ink-soft">{t.previous}</span>
+                <span class="mt-1 block text-lg font-semibold underline decoration-brand/40 decoration-2 underline-offset-4">{previous.data.title}</span>
+              </a>
+            )
+          }
+        </div>
+        <div class="sm:text-right">
+          {
+            next && (
+              <a href={`/servicos/${next.id}`} class="block hover:text-brand-dark">
+                <span class="block text-sm text-ink-soft">{t.next}</span>
+                <span class="mt-1 block text-lg font-semibold underline decoration-brand/40 decoration-2 underline-offset-4">{next.data.title}</span>
+              </a>
+            )
+          }
+        </div>
+      </nav>
+
+      <section class="rounded-3xl bg-brand-dark p-8 text-white md:p-10" aria-labelledby="cta">
+        <h2 id="cta" class="text-2xl text-white md:text-3xl">{s.cta.title}</h2>
+        <p class="mt-3 max-w-xl text-lg text-white/90">{s.cta.subtitle}</p>
+        <a
+          href={scheduleUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn mt-6 min-h-12 bg-white px-7 text-base text-brand-dark hover:bg-brand-tint"
+        >
+          {s.cta.button}
+        </a>
+      </section>
+    </div>
+
+    <div class="lg:col-span-4">
+      <ServiceAside title={s.title} proposalTopic={s.proposalTopic} shortDescription={s.shortDescription} url={url} />
+    </div>
+  </div>
+</Base>
