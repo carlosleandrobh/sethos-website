@@ -4,15 +4,14 @@ import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { MAX_MESSAGE } from '../lib/contact';
+import { resolveTurnstileSiteKey } from '../lib/turnstile';
 import { site, ui, whatsappUrl } from '../lib/content';
 
 const page = (await getEntry('contact', 'contact'))!.data;
 const f = page.form;
 
-// Chave de teste da Cloudflare (sempre aprova) só fora de produção.
-const TEST_SITE_KEY = '1x00000000000000000000AA';
-const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? (process.env.CONTEXT === 'production' ? undefined : TEST_SITE_KEY);
-if (!siteKey) throw new Error('PUBLIC_TURNSTILE_SITE_KEY ausente no deploy de produção');
+// Chave pública do Turnstile: obrigatória em qualquer build do Netlify; local usa a chave de teste da Cloudflare.
+const siteKey = resolveTurnstileSiteKey(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY, process.env.NETLIFY === 'true');
 
 const channelHref: Record<string, string> = {
   email: `mailto:${site.email}`,
