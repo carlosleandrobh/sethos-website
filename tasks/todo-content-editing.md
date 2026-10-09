@@ -20,12 +20,12 @@
   - Verify: testes de esquema (casos válidos e inválidos); teste de varredura.
   - Files: content.config.ts, tests/schemas.test.ts, tests/no-loose-text.test.ts
 
-- [ ] **T-CE-4 Comando `npm run cms`**
+- [x] **T-CE-4 Comando `npm run cms`** (feito: `scripts/cms.mjs` + `scripts/lib/cms/*`; `--dry-run`, `--preview`, `--undo`, `--all`, `--no-redirect`, `--skip-e2e`; redirecionamento automático ao apagar serviço (`redirects.yaml` → `public/_redirects`); 25 testes com repositórios git temporários; provado no projeto real com `--dry-run`)
   - Acceptance: `scripts/cms.mjs` com `--dry-run`, resumo legível, confirmação, `--yes`, `-m`, `--preview`, `--undo`, `--all`; só adiciona caminhos de conteúdo; `git pull --rebase`; sem remoto → explica e para antes do push; remoção de serviço gera redirect em `redirects.yaml` (com aviso); `npm run validate` (= check + schemas + build + test + e2e smoke).
   - Verify: testes com repositório git temporário (não envia se validação falha; recusa fora do conteúdo; undo reverte só o último commit de conteúdo; dry-run não toca no git).
   - Files: scripts/cms.mjs, scripts/lib/cms/{git,summary,validate}.mjs, tests/cms/*.test.ts, package.json
 
-- [~] **T-CE-5 Guia, edição real e README** (parcial: `docs/EDITAR-CONTEUDO.md`, ADR 0001 e README prontos; falta o teste de ida-e-volta `tests/edit-roundtrip.test.ts` e o CP-CE com o usuário)
+- [x] **T-CE-5 Guia, edição real e README** (feito: guia, ADR 0001, README e `tests/edit-roundtrip.test.ts` (10 casos). **Falta só o CP-CE: o usuário publicar uma edição real com `npm run cms`.**)
   - Acceptance: `docs/EDITAR-CONTEUDO.md` (mapa de arquivos, 5 regras de YAML, receitas: trocar texto, trocar imagem, criar/remover serviço, editar contato, desfazer); teste automatizado que altera um texto de cada tipo, builda e confere o HTML; README e `tasks/todo.md` atualizados.
   - Verify: `npm run validate`; **CP-CE** com o usuário.
   - Files: docs/EDITAR-CONTEUDO.md, tests/edit-roundtrip.test.ts, README.md
@@ -35,3 +35,8 @@
 - **Imagens de compartilhamento (OG) por página** serão arquivos em `public/og/` referenciados no YAML (entram na T10).
 - **Remoção de serviço:** hoje manual (`netlify.toml`); a T-CE-4 automatiza com `redirects.yaml`.
 - `npm run parity` e `content:verify` são ferramentas de migração/refatoração; **saem do portão de publicação** quando o `npm run cms` existir (após uma edição intencional, `parity -- --update`).
+
+## Achados da T-CE-4 (testando no projeto real)
+- `.env` copiado de `.env.example` tem `PUBLIC_TURNSTILE_SITE_KEY=` **vazia** e derrubava o build → vazio agora conta como não definido (`src/lib/turnstile.ts`); em qualquer build do Netlify a chave real é obrigatória.
+- Os testes e2e e de e-mail **escreviam texto do site à mão**: editar um texto reprovaria o portão → testes agora leem os arquivos de conteúdo (`tests/content.ts`) e `tests/no-copy-in-tests.test.ts` impede a regressão.
+- Telefone/e-mail estavam **repetidos** em `contact.yaml` e nas 3 páginas legais → fonte única `site.yaml`; textos jurídicos usam `{email}`/`{phone}`; telefone escrito uma vez (links `tel:` e WhatsApp derivados). `tests/single-source.test.ts` impede a regressão.

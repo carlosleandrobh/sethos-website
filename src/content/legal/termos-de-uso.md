@@ -4,6 +4,7 @@
 #  - Separe parágrafos com UMA LINHA EM BRANCO.
 #  - Negrito: **assim**. Para um sublinhado ou asterisco literal, escreva \_ e \*.
 #  - Para criar uma seção, copie um bloco "## título" + parágrafos.
+#  - {email} e {phone} são preenchidos com os dados de src/content/site/site.yaml (não escreva o número aqui).
 #  - title e description: aba do navegador, topo da página e Google. Mantenha as aspas.
 title: "Termos de Uso"
 description: "Estes Termos de Uso estabelecem as condições para o uso do site da SETHOS e de nossos serviços de consultoria Totvs RM RH."
@@ -147,15 +148,15 @@ SETHOS Tecnologia da Informação
 
 Endereço: Belo Horizonte, MG, Brasil
 
-E-mail: falecom@sethos.com.br
+E-mail: {email}
 
-Telefone/WhatsApp: (31) 97245-7451
+Telefone/WhatsApp: {phone}
 
 Site: https://sethos.com.br
 
 Horário de Atendimento: Segunda a sexta-feira, das 8:00 às 18:00 horas
 
-Encarregado de Proteção de Dados (DPO): E-mail: falecom@sethos.com.br, Telefone: (31) 97245-7451
+Encarregado de Proteção de Dados (DPO): E-mail: {email}, Telefone: {phone}
 
 Última atualização: 07 de julho de 2025 | Versão: 1.0
 

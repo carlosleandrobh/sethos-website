@@ -24,7 +24,8 @@ npm run check            # tipos (astro check)
 npm run lint
 npm test                 # unitários: esquemas, conteúdo, formulário, texto solto em componentes
 npm run test:e2e         # Playwright: 18 páginas, acessibilidade (axe), formulário
-npm run validate         # tudo acima, na ordem — o "portão" antes de publicar
+npm run cms              # PUBLICA o conteúdo: valida → resume → pergunta → commit → push na main (--dry-run, --preview, --undo)
+npm run validate         # tudo acima, na ordem — o "portão" que o cms roda antes de publicar
 npm run parity           # texto renderizado igual ao snapshot? (prova de refatoração; -- --update grava novo)
 npm run content:verify   # (migração) todo texto do site antigo existe no novo? (rode após o build)
 npm run content:snapshot # (migração) recaptura o site antigo, se ainda estiver no ar

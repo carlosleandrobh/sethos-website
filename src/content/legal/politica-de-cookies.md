@@ -4,6 +4,7 @@
 #  - Separe parágrafos com UMA LINHA EM BRANCO.
 #  - Negrito: **assim**. Para um sublinhado ou asterisco literal, escreva \_ e \*.
 #  - Para criar uma seção, copie um bloco "## título" + parágrafos.
+#  - {email} e {phone} são preenchidos com os dados de src/content/site/site.yaml (não escreva o número aqui).
 #  - title e description: aba do navegador, topo da página e Google. Mantenha as aspas.
 title: "Política de Cookies"
 description: "Esta Política de Cookies explica como a SETHOS utiliza cookies e tecnologias similares em nosso site para melhorar sua experiência e analisar o uso de nossos serviços."
@@ -91,7 +92,7 @@ Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD) e nosso c
 
 **7.5 Direito de Retificação e Exclusão:** Se você identificar que informações coletadas através de cookies estão incorretas ou desatualizadas, pode solicitar sua correção.
 
-**7.6 Como Exercer Seus Direitos:** Para exercer qualquer dos direitos mencionados, você pode utilizar nossas ferramentas online, entrar em contato conosco (falecom@sethos.com.br, (31) 97245-7451) ou buscar orientação externa junto à ANPD.
+**7.6 Como Exercer Seus Direitos:** Para exercer qualquer dos direitos mencionados, você pode utilizar nossas ferramentas online, entrar em contato conosco ({email}, {phone}) ou buscar orientação externa junto à ANPD.
 
 ## 8. SEGURANÇA E RETENÇÃO DE DADOS
 
@@ -119,15 +120,15 @@ SETHOS Tecnologia da Informação
 
 Endereço: Belo Horizonte, MG, Brasil
 
-E-mail: falecom@sethos.com.br
+E-mail: {email}
 
-Telefone/WhatsApp: (31) 97245-7451
+Telefone/WhatsApp: {phone}
 
 Site: https://sethos.com.br
 
 Horário de Atendimento: Segunda a sexta-feira, das 8:00 às 18:00 horas
 
-Encarregado de Proteção de Dados (DPO): E-mail: falecom@sethos.com.br, Telefone: (31) 97245-7451
+Encarregado de Proteção de Dados (DPO): E-mail: {email}, Telefone: {phone}
 
 **10.1 Canais Adicionais:** Central de Preferências (acesse nossas configurações de cookies através do link 'Configurações de Cookies' no rodapé do site), Autoridade Nacional de Proteção de Dados (ANPD): https://www.gov.br/anpd
 

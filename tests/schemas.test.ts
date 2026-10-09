@@ -103,15 +103,15 @@ describe('erros de edição são pegos', () => {
     expect(r.success).toBe(false);
   });
   it('dados do site inválidos: telefone, e-mail e CNPJ', () => {
-    const site = clone(yamlFile('src/content/site/site.yaml')) as { email: string; cnpj: string; phone: { tel: string } };
+    const site = clone(yamlFile('src/content/site/site.yaml')) as { email: string; cnpj: string; phone: { display: string } };
     site.email = 'falecom@';
     site.cnpj = '123';
-    site.phone.tel = '(31) 97245-7451';
+    site.phone.display = '31 97245 7451';
     const r = siteSchema.safeParse(site);
     const msg = r.success ? '' : r.error.issues.map((i) => i.message).join('\n');
     expect(msg).toContain('e-mail inválido');
     expect(msg).toContain('00.000.000/0000-00');
-    expect(msg).toContain('sem espaços');
+    expect(msg).toContain('(31) 97245-7451');
   });
   it('ui.yaml: não pode apagar as variáveis {year}', () => {
     const ui = clone(yamlFile('src/content/site/ui.yaml')) as { footer: { copyright: string } };
@@ -131,8 +131,8 @@ describe('mensagens em português', () => {
     expect(() => parseYaml('site.yaml', 'name: "SETHOS"', siteSchema)).toThrow(/obrigatório ausente — não apague esta linha/);
   });
   it('valor errado: aponta o campo com › e a explicação', () => {
-    const site = clone(yamlFile('src/content/site/site.yaml')) as { phone: { tel: string } };
-    site.phone.tel = 'abc';
+    const site = clone(yamlFile('src/content/site/site.yaml')) as { phone: { display: string } };
+    site.phone.display = 'abc';
     const text = (() => {
       try {
         parseYaml('site.yaml', JSON.stringify(site), siteSchema);
@@ -142,6 +142,6 @@ describe('mensagens em português', () => {
       }
     })();
     expect(text).toContain('Erro no arquivo site.yaml');
-    expect(text).toContain('phone › tel');
+    expect(text).toContain('phone › display');
   });
 });

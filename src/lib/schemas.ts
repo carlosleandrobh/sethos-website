@@ -16,11 +16,15 @@ export const siteSchema = z.object({
   cnpj: text.regex(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/, 'formato: 00.000.000/0000-00'),
   url: externalUrl.refine((u) => !u.endsWith('/'), 'sem barra no final'),
   email: text.regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'e-mail inválido'),
-  phone: z.object({
-    display: text,
-    tel: text.regex(/^\+\d{10,14}$/, 'formato: + código do país + DDD + número, sem espaços (ex.: +5531972457451)'),
-    whatsapp: text.regex(/^\d{10,14}$/, 'só números: código do país + DDD + número (ex.: 5531972457451)'),
-  }),
+  // O telefone é escrito UMA vez (como aparece no site); os formatos do link de ligar (tel) e do WhatsApp são derivados.
+  phone: z
+    .object({
+      display: text.regex(/^\(\d{2}\) \d{4,5}-\d{4}$/, 'formato: (31) 97245-7451 — com DDD entre parênteses, espaço e hífen'),
+    })
+    .transform(({ display }) => {
+      const digits = display.replace(/\D/g, '');
+      return { display, tel: `+55${digits}`, whatsapp: `55${digits}` };
+    }),
   whatsappMessage: text.max(300, 'máximo de 300 caracteres'),
   whatsappMessageContactPage: text.max(300, 'máximo de 300 caracteres'),
   schedule: z.object({ url: externalUrl, serviceUrl: externalUrl }),
@@ -118,7 +122,17 @@ export const contactSchema = z.object({
   seo,
   hero,
   channels: z
-    .array(z.object({ id: z.enum(['email', 'whatsapp', 'phone', 'schedule'], { error: 'não altere o "id" dos canais' }), title: text.max(50), note: line, value: line }))
+    .array(
+      z
+        .object({
+          id: z.enum(['email', 'whatsapp', 'phone', 'schedule'], { error: 'não altere o "id" dos canais' }),
+          title: text.max(50),
+          note: line,
+          // E-mail e telefone vêm de site.yaml; só o canal "schedule" precisa de texto próprio.
+          value: line.optional(),
+        })
+        .refine((c) => c.id !== 'schedule' || !!c.value, 'o canal "schedule" precisa de um texto (value)'),
+    )
     .length(4, 'precisa ter exatamente 4 canais'),
   info: z.array(z.object({ title: text.max(50), value: line, note: line })).length(3, 'precisa ter exatamente 3 informações'),
   intro: titledText,

@@ -13,9 +13,8 @@ url: "https://sethos.com.br"                          # endereço oficial do sit
 # --- Contato -----------------------------------------------------------------
 email: "falecom@sethos.com.br"
 phone:
-  display: "(31) 97245-7451"      # como aparece escrito no site
-  tel: "+5531972457451"           # para o link de ligar: + código do país + DDD + número, sem espaços
-  whatsapp: "5531972457451"       # para o link do WhatsApp: código do país + DDD + número, sem + nem espaços
+  # Escreva o telefone UMA vez, como aparece no site. Os links de ligar e do WhatsApp (código +55) são gerados sozinhos.
+  display: "(31) 97245-7451"      # formato: (DDD) 99999-9999 ou (DDD) 9999-9999
 
 # Mensagem que já vem digitada quando a pessoa clica no botão do WhatsApp.
 whatsappMessage: "Olá! Gostaria de saber mais sobre os serviços de consultoria Totvs RM RH da SETHOS."

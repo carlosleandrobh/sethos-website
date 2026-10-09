@@ -18,19 +18,18 @@ hero:
   lead: "Escolha a forma que for mais conveniente para você. Nossa equipe está sempre pronta para ajudar a transformar seus processos de RH."
 
 # Os 4 canais (sempre exatamente 4). O "id" liga cada um ao seu ícone e link — NÃO altere o id.
+# O e-mail e o telefone mostrados vêm de src/content/site/site.yaml (mude lá, uma vez só). Só o canal
+# "schedule" tem texto próprio (value).
 channels:
   - id: "email"
     title: "E-mail"
     note: "Resposta em até 2 horas"
-    value: "falecom@sethos.com.br"       # texto exibido (o link de e-mail vem do site.yaml)
   - id: "whatsapp"
     title: "WhatsApp"
     note: "Atendimento imediato"
-    value: "(31) 97245-7451"
   - id: "phone"
     title: "Telefone"
     note: "Horário comercial"
-    value: "(31) 97245-7451"
   - id: "schedule"
     title: "Agende uma Conversa Gratuita"
     note: "Consulte disponibilidade"

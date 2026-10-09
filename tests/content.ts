@@ -2,11 +2,11 @@
 // e não com textos escritos à mão: assim editar um texto NÃO quebra os testes.
 import { readdirSync, readFileSync } from 'node:fs';
 import { parse } from 'yaml';
-import type { EmailsConfig, Site, Ui } from '../src/lib/schemas';
+import { siteSchema, type EmailsConfig, type Site, type Ui } from '../src/lib/schemas';
 
 const yaml = <T>(path: string) => parse(readFileSync(path, 'utf8')) as T;
 
-export const site = yaml<Site>('src/content/site/site.yaml');
+export const site: Site = siteSchema.parse(yaml('src/content/site/site.yaml')); // com o telefone derivado (tel/whatsapp)
 export const ui = yaml<Ui>('src/content/site/ui.yaml');
 export const emails = yaml<EmailsConfig>('src/content/site/emails.yaml');
 

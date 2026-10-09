@@ -3,8 +3,8 @@
 Todo texto do site mora em arquivos simples (**YAML** e **Markdown**) dentro de `src/content/`.
 Você edita o arquivo, confere no navegador e publica. **Nenhum código precisa ser tocado.**
 
-> Estado atual: edição, pré-visualização e validação funcionam hoje. O comando que publica sozinho
-> (`npm run cms`) é a próxima tarefa (T-CE-4); enquanto isso, publique com `git add`, `git commit` e `git push`.
+> **`npm run cms`** valida, mostra o que mudou, pergunta e publica sozinho (commit + envio ao GitHub, de onde o
+> Netlify faz o deploy). Você não precisa usar `git` para publicar texto.
 
 ---
 
@@ -13,13 +13,47 @@ Você edita o arquivo, confere no navegador e publica. **Nenhum código precisa 
 ```
 1. Abra o arquivo (mapa abaixo) e altere o texto entre aspas.
 2. npm run dev          → abre http://localhost:4321 com o texto novo (atualiza ao salvar)
-3. npm run validate     → confere tudo: formato, tamanhos, build, testes e acessibilidade
-4. Publicar             → (hoje) git add . && git commit -m "content: ..." && git push
-                          (em breve) npm run cms
+3. npm run cms -- --dry-run   → só confere tudo (formato, tamanhos, build, testes, acessibilidade); não envia nada
+4. npm run cms          → confere de novo, mostra o resumo, pergunta "Publicar? (s/N)" e publica
 ```
 
 Se você errar algo, o site **não compila** e a mensagem diz o arquivo, o campo e como corrigir
 (veja "Mensagens de erro" no fim). Nada vai ao ar quebrado.
+
+---
+
+## Publicar com `npm run cms`
+
+```
+npm run cms                                  valida e publica (pergunta antes)
+npm run cms -- --dry-run                     só confere; não altera o git nem envia
+npm run cms -- -m "atualiza prazos" --yes    publica com mensagem própria, sem perguntar
+npm run cms -- --preview                     envia para uma branch (content/AAAAMMDD-HHMM) para revisar antes
+npm run cms -- --undo                        desfaz o último envio de conteúdo
+npm run cms -- --help                        lista todas as opções
+```
+
+O que ele faz, nesta ordem (e **para na primeira falha, sem enviar nada**):
+
+1. Sincroniza com o GitHub (traz novidades de outras pessoas).
+2. Lista o que mudou, em português: `página inicial — 1 campo: hero.title`.
+3. **Valida**: formato dos arquivos, lint, testes, build do site e testes no navegador (acessibilidade, formulário).
+4. Pergunta `Publicar na main? (s/N)`.
+5. Faz o commit (`content: atualiza página inicial`) e envia para a `main`. O Netlify publica em 1 a 2 minutos.
+
+Regras de segurança:
+- **Só publica conteúdo**: `src/content/`, `src/assets/` e `public/`. Se houver alteração em outros arquivos
+  (código), ele para e explica; use `--all` só se tiver certeza.
+- Só funciona a partir da branch `main` (para revisar antes, use `--preview`).
+- Arquivos novos fora do conteúdo (ex.: anotações) são ignorados, nunca entram no commit.
+- Nunca usa `--force`. Se o GitHub tiver novidades, sincroniza com `git pull --rebase`; em caso de conflito,
+  para e mostra como resolver.
+- **Apagou um serviço?** O comando cria sozinho o redirecionamento 301 de `/servicos/<nome>` para `/servicos`
+  (arquivo `src/content/site/redirects.yaml`); use `--no-redirect` para recusar. Recriou o serviço? Remove o redirecionamento.
+- **Errou?** `npm run cms -- --undo` desfaz o último envio de conteúdo (cria um commit de desfazer e publica).
+  Não desfaz duas vezes o mesmo envio.
+- `--preview`: o Netlify cria um endereço de pré-visualização da branch. Revise, faça o *merge* no GitHub
+  (o comando mostra o link) e depois rode `git pull`.
 
 ---
 
@@ -52,13 +86,15 @@ Abra o arquivo da página, ache o texto, altere **só o que está entre aspas**.
 
 ### Mudou o telefone, e-mail ou WhatsApp
 `src/content/site/site.yaml` — altere **uma vez**; menu, rodapé, página de contato e serviços acompanham.
-Atenção ao formato do telefone (o teste avisa se errar):
+Escreva o telefone **uma única vez**, como aparece no site; os links de ligar e do WhatsApp (código +55)
+são gerados sozinhos. O formato é conferido (`(DDD) 99999-9999`):
 ```yaml
 phone:
-  display: "(31) 97245-7451"   # como aparece escrito
-  tel: "+5531972457451"        # + país + DDD + número, sem espaços
-  whatsapp: "5531972457451"    # só números
+  display: "(31) 97245-7451"
 ```
+O telefone e o e-mail também aparecem dentro das páginas legais, mas ali são marcadores `{phone}` e `{email}`
+preenchidos com estes dados — **não é preciso mexer nelas**. Há um teste que falha se alguém digitar o número
+à mão em outro arquivo de conteúdo.
 
 ### Adicionar ou remover uma rede social
 Em `site.yaml`, na lista `social:`, copie ou apague um bloco de 3 linhas
@@ -81,20 +117,21 @@ parágrafos com uma linha em branco). O campo `order:` define a posição na lis
 4. Salve. O serviço aparece sozinho na lista, em "anterior/próximo" e no mapa do site (sitemap).
 
 ### Remover um serviço
-Apague o arquivo `.md` do serviço. **Cuidado:** o endereço antigo passa a dar "página não encontrada".
-Para mandar quem chegar nele para a lista de serviços, acrescente em `netlify.toml`:
-```toml
-[[redirects]]
-  from = "/servicos/nome-do-servico"
-  to = "/servicos"
-  status = 301
+Apague o arquivo `.md` do serviço e rode `npm run cms`. O endereço antigo (`/servicos/<nome>`) passaria a dar
+"página não encontrada"; por isso o comando **cria sozinho um redirecionamento 301 para `/servicos`**
+(`src/content/site/redirects.yaml`) e avisa no resumo. Para recusar: `npm run cms -- --no-redirect`.
+Se publicar sem usar o comando, acrescente à mão em `redirects.yaml`:
+```yaml
+redirects:
+  - from: "/servicos/nome-do-servico"
+    to: "/servicos"
 ```
-(Na T-CE-4 o comando `npm run cms` fará isso por você.)
 
 ### Editar uma página legal
 `src/content/legal/*.md`: cada seção começa com `## `. Parágrafos separados por linha em branco.
 **Negrito:** `**assim**`. Para mostrar um `_` ou `*` literal, escreva `\_` e `\*`.
 Aspas e travessões **não** são trocados automaticamente (o texto fica exatamente como digitado).
+`{email}` e `{phone}` dentro do texto são preenchidos com o e-mail e o telefone de `site.yaml` (não digite o número).
 
 ### Mudar o texto dos e-mails do formulário
 `src/content/site/emails.yaml` tem duas partes: `company` (o aviso que chega para a SETHOS) e `visitor`
@@ -186,7 +223,13 @@ Dica: se não achar o erro, desfaça a última alteração do arquivo com `git c
 
 ## Para quem mantém o código
 
-- `npm run validate` = tipos (`astro check`) + lint + testes (esquemas, conteúdo, formulário) + build + e2e (17 páginas, acessibilidade).
+- `npm run validate` = tipos (`astro check`) + lint + testes (esquemas, conteúdo, formulário, comando `cms`) + build + e2e (18 páginas, acessibilidade).
+  É exatamente o portão que o `npm run cms` roda antes de publicar.
+- **Os testes não escrevem texto do site à mão**: leem os arquivos de conteúdo (`tests/content.ts`). Por isso editar um
+  texto não quebra o portão. `tests/no-copy-in-tests.test.ts` falha se alguém colar um texto do site num teste.
+- `tests/edit-roundtrip.test.ts` copia o projeto, edita um texto de **cada tipo** de arquivo (página, dados globais, rótulos,
+  e-mails, serviço, página legal), cria e remove um serviço, faz o build de verdade e confere o resultado.
+- Implementação do comando: `scripts/cms.mjs` + `scripts/lib/cms/*` (testes em `tests/cms/`, com repositórios git temporários).
 - `npm run parity` compara o texto renderizado de cada página com o snapshot de `tests/fixtures/rendered-text/`.
   Serve para provar que uma **refatoração** não mudou nenhum texto. Depois de uma edição **intencional** de texto:
   `npm run build && npm run parity -- --update` (e commite o snapshot).

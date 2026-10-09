@@ -1,6 +1,6 @@
 # Spec: Edição e publicação de conteúdo por arquivos (`npm run cms`)
 
-> Status: **em execução.** T-CE-0 a T-CE-3 concluídas (conteúdo todo em YAML/Markdown, validado por esquemas, com paridade de texto); faltam T-CE-4 (comando `npm run cms`, depende do repositório GitHub) e T-CE-5 (teste de ida-e-volta e checkpoint). Guia pronto em `docs/EDITAR-CONTEUDO.md`; decisão registrada em `docs/adr/0001-conteudo-em-arquivos.md`.
+> Status: **implementada.** T-CE-0 a T-CE-5 concluídas (conteúdo em YAML/Markdown, esquemas, comando `npm run cms`, teste de ida-e-volta). Falta só o checkpoint CP-CE: o usuário publicar uma edição real.
 > Origem: pedido de 2026-10-08 — "cada conteúdo do site deve poder ser atualizado depois". Referência de uso: fluxo `uv run cms` de outro projeto (editar YAML → comando → deploy, sem commit manual). Sem painel web e sem login (reforça a decisão D1 do `SPEC.md`).
 
 ## Avaliação do fluxo "editar arquivo → comando → deploy"

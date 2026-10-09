@@ -4,6 +4,7 @@
 #  - Separe parágrafos com UMA LINHA EM BRANCO.
 #  - Negrito: **assim**. Para um sublinhado ou asterisco literal, escreva \_ e \*.
 #  - Para criar uma seção, copie um bloco "## título" + parágrafos.
+#  - {email} e {phone} são preenchidos com os dados de src/content/site/site.yaml (não escreva o número aqui).
 #  - title e description: aba do navegador, topo da página e Google. Mantenha as aspas.
 title: "Política de Privacidade"
 description: "Esta Política de Privacidade descreve como a SETHOS coleta, usa e protege suas informações pessoais quando você interage com nossos serviços de consultoria Totvs RM RH."
@@ -137,7 +138,7 @@ Em conformidade com o artigo 18 da LGPD, você possui os seguintes direitos em r
 
 **9.7 Direito de Informação sobre Compartilhamento:** Você tem o direito de obter informações sobre as entidades com as quais a SETHOS realizou uso compartilhado de seus dados pessoais.
 
-**9.8 Como Exercer Seus Direitos:** Para exercer qualquer dos direitos acima, você pode entrar em contato conosco através do e-mail falecom@sethos.com.br ou telefone/WhatsApp (31) 97245-7451, no horário de segunda a sexta-feira, das 9:00 às 18:00 horas.
+**9.8 Como Exercer Seus Direitos:** Para exercer qualquer dos direitos acima, você pode entrar em contato conosco através do e-mail {email} ou telefone/WhatsApp {phone}, no horário de segunda a sexta-feira, das 9:00 às 18:00 horas.
 
 ## 10. COOKIES E TECNOLOGIAS SIMILARES
 
@@ -167,7 +168,7 @@ Caso seja necessário realizar transferência internacional no futuro, isso ser�
 
 A SETHOS designou um Encarregado de Proteção de Dados (Data Protection Officer - DPO) para atuar como canal de comunicação entre a empresa, os titulares dos dados e a Autoridade Nacional de Proteção de Dados (ANPD).
 
-Contato do Encarregado: E-mail: falecom@sethos.com.br, Telefone: (31) 97245-7451, Endereço: Belo Horizonte, MG.
+Contato do Encarregado: E-mail: {email}, Telefone: {phone}, Endereço: Belo Horizonte, MG.
 
 O Encarregado está disponível para esclarecer dúvidas sobre esta Política de Privacidade, receber solicitações relacionadas aos direitos dos titulares e tratar questões relacionadas à proteção de dados pessoais.
 
@@ -189,15 +190,15 @@ SETHOS Tecnologia da Informação
 
 Endereço: Belo Horizonte, MG, Brasil
 
-E-mail: falecom@sethos.com.br
+E-mail: {email}
 
-Telefone/WhatsApp: (31) 97245-7451
+Telefone/WhatsApp: {phone}
 
 Site: https://sethos.com.br
 
 Horário de Atendimento: Segunda a sexta-feira, das 8:00 às 18:00 horas
 
-Encarregado de Proteção de Dados (DPO): E-mail: falecom@sethos.com.br, Telefone: (31) 97245-7451
+Encarregado de Proteção de Dados (DPO): E-mail: {email}, Telefone: {phone}
 
 ## 16. DISPOSIÇÕES FINAIS
 

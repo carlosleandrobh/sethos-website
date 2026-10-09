@@ -13,6 +13,18 @@ export function defaultSteps({ skipE2e = false } = {}) {
   return steps;
 }
 
+/** Deixa só o que ajuda quem edita: sem cores, sem rastro de pilha (at …) nem links de documentação. */
+export function cleanTail(output, max = 40) {
+  const ansi = new RegExp(`${String.fromCharCode(27)}\\[[0-9;]*m`, 'g');
+  const noise = [/^\s*at\s/, /^\s*Stack trace:/, /^\s*Error reference:/, /^\s*Location:\s*$/, /^\s*Hint:\s*$/, /^\s*See https?:\/\//, /^\s*https?:\/\//];
+  return output
+    .replace(ansi, '')
+    .split('\n')
+    .filter((l) => l.trim() && !noise.some((re) => re.test(l)))
+    .slice(-max)
+    .join('\n');
+}
+
 function runCommand(cmd, cwd) {
   return new Promise((resolve) => {
     const child = spawn(cmd, { cwd, shell: true, env: { ...process.env, FORCE_COLOR: '0', CI: '1' } });
@@ -34,7 +46,7 @@ export async function runSteps(steps, { cwd, log }) {
     const started = Date.now();
     const { code, output } = await runCommand(step.cmd, cwd);
     if (code !== 0) {
-      const tail = output.split('\n').filter((l) => l.trim()).slice(-40).join('\n');
+      const tail = cleanTail(output);
       return { ok: false, failed: { name: step.name, tail } };
     }
     log(`      ✓ ok (${((Date.now() - started) / 1000).toFixed(1)} s)`);

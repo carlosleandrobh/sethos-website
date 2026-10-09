@@ -51,7 +51,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
                 rel={c.id === 'whatsapp' || c.id === 'schedule' ? 'noopener noreferrer' : undefined}
                 class="mt-3 inline-block break-all font-semibold text-brand-dark underline decoration-brand/40 decoration-2 underline-offset-4 after:absolute after:inset-0 after:content-[''] group-hover:decoration-brand"
               >
-                {c.value}
+                {c.value ?? (c.id === 'email' ? site.email : site.phone.display)}
               </a>
             </li>
           ))

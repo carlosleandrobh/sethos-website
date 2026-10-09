@@ -38,6 +38,12 @@ Netlify é empacotada à parte do site, o `npm run build` gera `netlify/function
 importa esse JSON (sem ler arquivos em tempo de execução: mais simples de testar e sem depender do caminho do deploy).
 O texto do YAML é sempre escapado (nunca interpretado como HTML).
 
+## Addendum — `npm run cms` (publicação)
+Implementado em `scripts/cms.mjs`: valida → resume → confirma → commit (só `src/content`, `src/assets`, `public`) → push na `main`;
+`--dry-run`, `--preview` (branch), `--undo` (git revert), redirecionamento 301 automático ao apagar serviço. Nunca `--force`.
+Testado com repositórios git temporários e provado no projeto real. Lições: testes não podem conter texto do site
+(leem `tests/content.ts`); dados de contato têm fonte única (`site.yaml`); chave pública vazia do Turnstile conta como ausente.
+
 ## Achados durante a migração (registro)
 - **`canonical` errado em todas as páginas** (`/x.html` em vez de `/x`): o `build.format: 'file'` expõe
   `.html` em `Astro.url`. Corrigido em `src/lib/url.ts` (+ teste). Teria gerado conteúdo duplicado no Google.

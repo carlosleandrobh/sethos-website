@@ -146,3 +146,27 @@ describe('githubBase', () => {
     ['/tmp/remote.git', null],
   ])('%s', (url, expected) => expect(githubBase(url)).toBe(expected));
 });
+
+describe('cleanTail (saída de erro legível)', () => {
+  it('remove cores, rastros de pilha e links de documentação', async () => {
+    const { cleanTail } = await import('../../scripts/lib/cms/validate.mjs');
+    const esc = String.fromCharCode(27);
+    const raw = [
+      `${esc}[31m[InvalidContentEntryDataError]${esc}[39m home data does not match collection schema.`,
+      `  ${esc}[1mseo.title${esc}[22m: máximo de 70 caracteres`,
+      '  Hint:',
+      '    See https://docs.astro.build/en/guides/content-collections/ for more information',
+      '  Error reference:',
+      '    https://docs.astro.build/en/reference/errors/x/',
+      '  Stack trace:',
+      '    at getEntryData (C:/x/utils.js:126:9)',
+      '    at async eval (C:/x/glob.js:227:13)',
+    ].join('\n');
+    expect(cleanTail(raw)).toBe('[InvalidContentEntryDataError] home data does not match collection schema.\n  seo.title: máximo de 70 caracteres');
+  });
+  it('limita o número de linhas', async () => {
+    const { cleanTail } = await import('../../scripts/lib/cms/validate.mjs');
+    const raw = Array.from({ length: 100 }, (_, i) => `linha ${i}`).join('\n');
+    expect(cleanTail(raw, 5).split('\n')).toEqual(['linha 95', 'linha 96', 'linha 97', 'linha 98', 'linha 99']);
+  });
+});
