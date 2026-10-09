@@ -7,6 +7,10 @@
 [build.environment]
   NODE_VERSION = "22"
   NPM_FLAGS = "--no-audit --no-fund"
+  # A chave PÚBLICA do Turnstile vai (de propósito) dentro do HTML da página de contato. Sem esta linha, o
+  # "secrets scanning" do Netlify a confundiria com um segredo vazado e reprovaria o deploy.
+  # (Os segredos de verdade — RESEND_API_KEY e TURNSTILE_SECRET_KEY — nunca aparecem no HTML.)
+  SECRETS_SCAN_OMIT_KEYS = "PUBLIC_TURNSTILE_SITE_KEY"
 
 # O Netlify serve /quem-somos a partir de quem-somos.html (Astro build.format = 'file').
 # Mantém exatamente as URLs do site antigo (sem barra final).

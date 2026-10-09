@@ -47,5 +47,7 @@ docs/                   guia de edição, ADRs, notas de design e de preservaç�
 ```
 
 ## Segredos
-Nunca versionar `.env`. Variáveis em `.env.example`; valores reais no painel do Netlify.
+Nunca versionar `.env`. O arquivo `.env.example` é só o **modelo** (nomes das variáveis, sem valores) e fica no git;
+para rodar localmente, **copie** `.env.example` para `.env` (ignorado pelo git) e preencha. Em produção, os valores
+reais ficam no painel do Netlify (Site configuration → Environment variables).
 O projeto antigo teve uma chave vazada no GitHub; este repositório começou sem aquele histórico.
