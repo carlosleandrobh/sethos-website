@@ -32,14 +32,14 @@ npm run content:snapshot # (migração) recaptura o site antigo, se ainda estive
 
 ## Pastas
 ```
-src/content/site/       site.yaml (dados globais) e ui.yaml (rótulos)         ← EDITAR
+src/content/site/       site.yaml (dados globais), ui.yaml (rótulos), emails.yaml (e-mails do formulário)  ← EDITAR
 src/content/pages/      home, about, values, services-index, contact (.yaml)  ← EDITAR
 src/content/services/   1 .md por serviço                                     ← EDITAR
 src/content/legal/      privacidade, cookies, termos (.md)                    ← EDITAR
 src/assets/brand/       logos e mascote
-src/lib/                schemas.ts (réguas), content.ts (leitura/validação), contact.ts, url.ts
+src/lib/                schemas.ts (réguas), content.ts (leitura/validação), contact.ts, emails.ts, text.ts, url.ts
 src/pages, components, layouts   estrutura das páginas (sem texto em português: há teste)
-netlify/functions/      send-contact.mts (formulário → Resend, com Turnstile)
+netlify/functions/      send-contact.mts (formulário → Resend, com Turnstile); emails.generated.json é gerado (não editar)
 tests/                  unitários; tests/e2e (Playwright); tests/fixtures/rendered-text (snapshot)
 legacy-content/         referência do site antigo (export do Supabase, snapshot, screenshots) — não publicado
 scripts/                snapshot, verificação, paridade; scripts/migration = migrações únicas (histórico)

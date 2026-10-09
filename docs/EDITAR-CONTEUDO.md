@@ -28,6 +28,7 @@ Se você errar algo, o site **não compila** e a mensagem diz o arquivo, o campo
 | Quero mudar… | Arquivo | Formato |
 |---|---|---|
 | Telefone, e-mail, WhatsApp, CNPJ, redes sociais, itens do menu, texto do rodapé, balão do WhatsApp | `src/content/site/site.yaml` | YAML |
+| **Texto dos e-mails** do formulário (aviso que chega à SETHOS e confirmação enviada à pessoa) | `src/content/site/emails.yaml` | YAML |
 | Botões repetidos, textos para leitores de tela, página 404, rótulos das páginas de serviço, mensagem do WhatsApp dos serviços | `src/content/site/ui.yaml` | YAML |
 | **Página inicial** (topo, destaques, resumo, faixa final, título do Google) | `src/content/pages/home.yaml` | YAML |
 | **Quem Somos** | `src/content/pages/about.yaml` | YAML |
@@ -94,6 +95,13 @@ Para mandar quem chegar nele para a lista de serviços, acrescente em `netlify.t
 `src/content/legal/*.md`: cada seção começa com `## `. Parágrafos separados por linha em branco.
 **Negrito:** `**assim**`. Para mostrar um `_` ou `*` literal, escreva `\_` e `\*`.
 Aspas e travessões **não** são trocados automaticamente (o texto fica exatamente como digitado).
+
+### Mudar o texto dos e-mails do formulário
+`src/content/site/emails.yaml` tem duas partes: `company` (o aviso que chega para a SETHOS) e `visitor`
+(a confirmação que a pessoa recebe). Escreva **texto puro** (HTML não funciona: aparece literalmente) e
+**não mexa no que está entre `{ }`**: `{name}`, `{phone}` e `{siteEmail}` são preenchidos sozinhos.
+Para acrescentar um parágrafo à confirmação, copie uma linha `- "…"` em `visitor.paragraphs`.
+O texto novo vale a partir do próximo deploy (o `npm run build` regenera os e-mails sozinho).
 
 ### Trocar logo ou mascote
 Substitua o arquivo em `src/assets/brand/` **mantendo o mesmo nome** (ex.: `mascot-hero.png`).
@@ -168,8 +176,8 @@ Dica: se não achar o erro, desfaça a última alteração do arquivo com `git c
 ## O que NÃO está nos arquivos de conteúdo
 
 - **Cores, fontes e espaçamentos:** `src/styles/global.css` (bloco `@theme`).
-- **Corpo dos e-mails** enviados pelo formulário (aviso à SETHOS e confirmação ao visitante):
-  `netlify/functions/send-contact.mts`. *Pendente: decidir se também vão para YAML.*
+- **Quem recebe e quem envia os e-mails** do formulário (endereços): variáveis do Netlify, não ficam em arquivo
+  (veja `.env.example`). O **texto** dos e-mails fica em `src/content/site/emails.yaml`.
 - **Estrutura das páginas** (a ordem das seções): arquivos `.astro` em `src/pages/` e `src/components/`.
   Há um teste (`tests/no-loose-text.test.ts`) que **falha se alguém escrever texto em português
   direto num componente** — assim todo texto continua editável pelos arquivos acima.
@@ -182,5 +190,8 @@ Dica: se não achar o erro, desfaça a última alteração do arquivo com `git c
 - `npm run parity` compara o texto renderizado de cada página com o snapshot de `tests/fixtures/rendered-text/`.
   Serve para provar que uma **refatoração** não mudou nenhum texto. Depois de uma edição **intencional** de texto:
   `npm run build && npm run parity -- --update` (e commite o snapshot).
+- Os e-mails são montados por `src/lib/emails.ts` (funções puras, testadas). O `npm run build`/`dev`/`test` rodam
+  `scripts/build-emails.mjs`, que gera `netlify/functions/emails.generated.json` (ignorado pelo git) a partir do
+  `emails.yaml`; a função do Netlify importa esse JSON. **Nunca edite o JSON: edite o YAML.**
 - As "réguas" (limites e formatos) estão em `src/lib/schemas.ts`; a leitura de `site.yaml`/`ui.yaml` em `src/lib/content.ts`.
 - Decisões e histórico: `SPEC-content-editing.md`, `docs/adr/0001-conteudo-em-arquivos.md`.

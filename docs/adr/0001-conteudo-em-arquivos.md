@@ -32,6 +32,12 @@
 - (−) YAML tem pegadinhas (aspas, dois-pontos, indentação): mitigadas por esquemas estritos, comentários
   nos arquivos e `docs/EDITAR-CONTEUDO.md`.
 
+## Addendum — e-mails do formulário
+O texto dos e-mails (aviso à SETHOS e confirmação ao visitante) também fica em YAML (`emails.yaml`). Como a função do
+Netlify é empacotada à parte do site, o `npm run build` gera `netlify/functions/emails.generated.json` e a função
+importa esse JSON (sem ler arquivos em tempo de execução: mais simples de testar e sem depender do caminho do deploy).
+O texto do YAML é sempre escapado (nunca interpretado como HTML).
+
 ## Achados durante a migração (registro)
 - **`canonical` errado em todas as páginas** (`/x.html` em vez de `/x`): o `build.format: 'file'` expõe
   `.html` em `Astro.url`. Corrigido em `src/lib/url.ts` (+ teste). Teria gerado conteúdo duplicado no Google.

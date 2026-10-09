@@ -41,6 +41,7 @@ Todo texto, rótulo, dado de contato, SEO e imagem do site fica em **arquivos YA
 | Conteúdo | Arquivo | Formato |
 |---|---|---|
 | Menu, dados de contato, redes sociais, mensagem de WhatsApp, rodapé, CNPJ | `src/content/site/site.yaml` | YAML |
+| Texto dos e-mails do formulário (aviso à SETHOS e confirmação ao visitante) | `src/content/site/emails.yaml` | YAML (gera `netlify/functions/emails.generated.json` no build) |
 | Rótulos fixos (botões, "Saiba mais", `aria-label`, 404, textos de serviço) | `src/content/site/ui.yaml` | YAML |
 | Home, Quem Somos, Valores, Serviços (índice), Contato (incl. formulário e SEO de cada página) | `src/content/pages/*.yaml` | YAML |
 | 9 serviços (benefícios, FAQ, CTA, SEO) + texto "Sobre este serviço" | `src/content/services/*.md` | Markdown + frontmatter YAML |

@@ -166,3 +166,24 @@ export const serviceSchema = z.object({
 });
 
 export const legalSchema = z.object({ title: text.max(80), description: text.max(300) });
+
+/** src/content/site/emails.yaml — textos dos e-mails enviados pelo formulário de contato. */
+const withVars = (vars: string[]) => (t: string) => vars.every((v) => t.includes(`{${v}}`));
+export const emailsSchema = z.object({
+  company: z.object({
+    subject: text.max(120).refine(withVars(['name']), 'o assunto precisa conter {name}'),
+    heading: text.max(120),
+    messageHeading: text.max(60),
+    notInformed: text.max(40),
+    labels: z.object({ name: text.max(40), email: text.max(40), phone: text.max(40), preference: text.max(60), bestTime: text.max(60) }),
+  }),
+  preferenceLabels: z.object({ email: text.max(40), phone: text.max(40), whatsapp: text.max(40) }),
+  bestTimeLabels: z.object({ morning: text.max(60), afternoon: text.max(60), businessHours: text.max(60) }),
+  visitor: z.object({
+    subject: text.max(120),
+    greeting: text.max(120).refine(withVars(['name']), 'a saudação precisa conter {name}'),
+    paragraphs: z.array(text.max(600, 'cada parágrafo: máximo de 600 caracteres')).min(1).max(8),
+    signature: z.array(text.max(120)).min(1).max(6),
+  }),
+});
+export type EmailsConfig = z.infer<typeof emailsSchema>;

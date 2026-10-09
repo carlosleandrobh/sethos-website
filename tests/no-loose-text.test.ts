@@ -10,6 +10,8 @@ const walk = (dir: string): string[] =>
   });
 
 const files = [...walk('src/components'), ...walk('src/layouts'), ...walk('src/pages')].filter((f) => f.endsWith('.astro'));
+// A função do formulário também não pode ter texto de e-mail escrito no código (fica em emails.yaml).
+const functionFiles = walk('netlify/functions').filter((f) => f.endsWith('.mts'));
 const LETTERS = /[A-Za-zÀ-ÿ]{2,}/;
 const ACCENTED = /[À-ÿ]/;
 
@@ -36,7 +38,7 @@ export function looseText(source: string): string[] {
   // Mensagens de erro para quem faz o deploy (não são conteúdo do site).
   const visibleCode = code
     .split('\n')
-    .filter((l) => !l.includes('throw new Error'))
+    .filter((l) => !/throw new Error|console\.(error|warn|log)/.test(l))
     .join('\n');
   for (const m of visibleCode.matchAll(/(['"`])((?:\\.|(?!\1)[^\\])*)\1/g)) {
     if (ACCENTED.test(m[2]) || /Olá|Nome:|Saiba mais/.test(m[2])) found.push(`string: "${m[2].slice(0, 70)}"`);
@@ -56,5 +58,16 @@ describe('texto solto em componentes', () => {
 
   it.each(files)('%s não tem texto fixo em português', (file) => {
     expect(looseText(readFileSync(file, 'utf8')), `mova estes textos para src/content/ (YAML/Markdown): ${file}`).toEqual([]);
+  });
+});
+
+describe('texto solto na função do Netlify', () => {
+  it.each(functionFiles)('%s não tem texto de e-mail no código', (file) => {
+    const source = readFileSync(file, 'utf8');
+    // .mts não tem marcação: trata o arquivo inteiro como "código".
+    const found = looseText(`---
+${source}
+---`);
+    expect(found, `mova estes textos para src/content/site/emails.yaml: ${file}`).toEqual([]);
   });
 });

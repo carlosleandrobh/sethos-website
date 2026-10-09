@@ -3,7 +3,11 @@ import { parse } from 'yaml';
 import type { ZodType } from 'astro/zod';
 import siteRaw from '../content/site/site.yaml?raw';
 import uiRaw from '../content/site/ui.yaml?raw';
-import { siteSchema, uiSchema, type Site, type Ui } from './schemas';
+import emailsRaw from '../content/site/emails.yaml?raw';
+import { emailsSchema, siteSchema, uiSchema, type EmailsConfig, type Site, type Ui } from './schemas';
+import { fill } from './text';
+
+export { fill };
 
 /** Converte os erros do Zod em mensagens em português que apontam o arquivo e o campo. */
 export function describeIssues(file: string, issues: { path: PropertyKey[]; message: string }[]): string {
@@ -31,10 +35,8 @@ export function parseYaml<T>(file: string, raw: string, schema: ZodType<T>): T {
 
 export const site: Site = parseYaml('src/content/site/site.yaml', siteRaw, siteSchema);
 export const ui: Ui = parseYaml('src/content/site/ui.yaml', uiRaw, uiSchema);
-
-/** Preenche {variavel} em um texto do ui.yaml. */
-export const fill = (template: string, vars: Record<string, string | number>) =>
-  template.replace(/\{(\w+)\}/g, (_, key: string) => String(vars[key] ?? `{${key}}`));
+// Validado em todo build (o texto dos e-mails é usado pela função do Netlify, que lê o mesmo arquivo).
+export const emails: EmailsConfig = parseYaml('src/content/site/emails.yaml', emailsRaw, emailsSchema);
 
 export const whatsappUrl = (message: string = site.whatsappMessage) =>
   `https://wa.me/${site.phone.whatsapp}?text=${encodeURIComponent(message)}`;

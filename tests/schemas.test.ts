@@ -6,6 +6,7 @@ import { describeIssues, parseYaml } from '../src/lib/content';
 import {
   aboutSchema,
   contactSchema,
+  emailsSchema,
   homeSchema,
   legalSchema,
   serviceSchema,
@@ -24,6 +25,7 @@ describe('conteúdo real passa nos esquemas', () => {
   it.each([
     ['site.yaml', siteSchema],
     ['ui.yaml', uiSchema],
+    ['emails.yaml', emailsSchema],
   ] as const)('src/content/site/%s', (file, schema) => {
     expect(schema.safeParse(yamlFile(`src/content/site/${file}`)).success).toBe(true);
   });

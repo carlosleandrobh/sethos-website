@@ -11,7 +11,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
 
 ## Fase 1 — Fundação
 - [x] **T1 Scaffold Astro** (feito: Astro 7.3 + Tailwind 4.3 em vez de 5/3.4; build, check, lint, test verdes; commit inicial)
-  - Acceptance: projeto em `C:\repository\sethos-astro`, git init, Astro 5 + Tailwind 3.4 + TS strict + Vitest + ESLint; `.env.example`, `.gitignore` com `.env`.
+  - Acceptance: projeto em `C:\repository\sethos-website` (antes `sethos-astro`), git init, Astro 5 + Tailwind 3.4 + TS strict + Vitest + ESLint; `.env.example`, `.gitignore` com `.env`.
   - Verify: `npm run build && npm run check && npm test` verdes.
   - Files: package.json, astro.config.mjs, tailwind.config.ts, tsconfig.json, .gitignore (~5)
 - [x] **T2 Tokens e layout base** (feito: tokens em `global.css`, Base/Navbar/Footer/FloatingWhatsApp, logos em `src/assets/brand`, favicon/apple-touch gerados; axe 0 violações desktop+mobile; teste de contraste). **Botões usam `#C62828` (não `#E53935`) porque branco sobre `#E53935` = 4,2:1**; `#E53935` fica em acentos, ícones, foco e texto grande. (aplicar princípios 4-A: menos gradientes/efeitos, CTA primário no menu)

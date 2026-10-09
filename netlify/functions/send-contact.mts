@@ -1,11 +1,15 @@
 // Envio do formulário de contato: valida, confere o Turnstile e envia via Resend.
 // Variáveis (painel do Netlify): RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL, TURNSTILE_SECRET_KEY.
 import type { Config, Context } from '@netlify/functions';
-import { escapeHtml, parseContactBody, singleLine, validateContact, type ContactInput } from '../../src/lib/contact';
+import { parseContactBody, validateContact } from '../../src/lib/contact';
+import { companyEmail, visitorEmail } from '../../src/lib/emails';
+import type { EmailsConfig } from '../../src/lib/schemas';
+// Gerado no build a partir de src/content/site/emails.yaml (scripts/build-emails.mjs). Edite o YAML, não o JSON.
+import generated from './emails.generated.json';
 
 const MAX_BODY_BYTES = 10_000;
-const PREFERENCE_LABEL = { email: 'E-mail', phone: 'Telefone', whatsapp: 'WhatsApp' } as const;
-const TIME_LABEL = { morning: 'Manhã (8h às 12h)', afternoon: 'Tarde (13h às 18h)', businessHours: 'Horário comercial' } as const;
+const templates = generated.emails as EmailsConfig;
+const siteInfo = generated.site as { email: string; phone: string };
 
 const json = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
@@ -40,28 +44,6 @@ async function sendEmail(apiKey: string, payload: Record<string, unknown>): Prom
   });
   if (!res.ok) console.error('Resend recusou o envio', res.status);
   return res.ok;
-}
-
-const row = (label: string, value: string) =>
-  `<tr><td style="padding:6px 12px 6px 0;color:#555;vertical-align:top"><strong>${escapeHtml(label)}</strong></td><td style="padding:6px 0">${escapeHtml(value)}</td></tr>`;
-
-function companyEmail(c: ContactInput) {
-  const rows = [
-    row('Nome', c.name),
-    row('E-mail', c.email),
-    row('Telefone', c.phone || 'Não informado'),
-    row('Preferência de contato', PREFERENCE_LABEL[c.preference]),
-    row('Melhor horário', c.bestTime ? TIME_LABEL[c.bestTime] : 'Não informado'),
-  ].join('');
-  const html = `<h2 style="font-family:Arial,sans-serif">Nova mensagem pelo site</h2><table style="font-family:Arial,sans-serif;font-size:15px">${rows}</table><h3 style="font-family:Arial,sans-serif">Mensagem</h3><p style="font-family:Arial,sans-serif;font-size:15px;white-space:pre-wrap">${escapeHtml(c.message)}</p>`;
-  const text = `Nova mensagem pelo site\n\nNome: ${c.name}\nE-mail: ${c.email}\nTelefone: ${c.phone || 'Não informado'}\nPreferência: ${PREFERENCE_LABEL[c.preference]}\nMelhor horário: ${c.bestTime ? TIME_LABEL[c.bestTime] : 'Não informado'}\n\n${c.message}`;
-  return { html, text };
-}
-
-function visitorEmail(c: ContactInput) {
-  const html = `<div style="font-family:Arial,sans-serif;font-size:15px"><p>Olá, ${escapeHtml(c.name)}!</p><p>Recebemos sua mensagem e nossa equipe retornará em breve com uma proposta personalizada.</p><p>Se preferir, fale conosco pelo WhatsApp: (31) 97245-7451.</p><p>SETHOS Tecnologia da Informação<br>falecom@sethos.com.br</p></div>`;
-  const text = `Olá, ${c.name}!\n\nRecebemos sua mensagem e nossa equipe retornará em breve com uma proposta personalizada.\nSe preferir, fale conosco pelo WhatsApp: (31) 97245-7451.\n\nSETHOS Tecnologia da Informação\nfalecom@sethos.com.br`;
-  return { html, text };
 }
 
 export default async (req: Request, context: Context): Promise<Response> => {
@@ -102,13 +84,11 @@ export default async (req: Request, context: Context): Promise<Response> => {
   const { valid, errors } = validateContact(contact);
   if (!valid) return json(422, { error: 'validation', errors });
 
-  const company = companyEmail(contact);
   const sent = await sendEmail(RESEND_API_KEY, {
     from: CONTACT_FROM_EMAIL,
     to: [CONTACT_TO_EMAIL],
     reply_to: contact.email,
-    subject: `Nova mensagem do site - ${singleLine(contact.name)}`.slice(0, 200),
-    ...company,
+    ...companyEmail(templates, contact),
   });
   if (!sent) return json(502, { error: 'delivery' });
 
@@ -117,8 +97,7 @@ export default async (req: Request, context: Context): Promise<Response> => {
     from: CONTACT_FROM_EMAIL,
     to: [contact.email],
     reply_to: CONTACT_TO_EMAIL,
-    subject: 'Recebemos sua mensagem - SETHOS',
-    ...visitorEmail(contact),
+    ...visitorEmail(templates, contact, siteInfo),
   }).catch(() => false);
 
   return json(200, { ok: true });

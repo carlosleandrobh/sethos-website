@@ -35,3 +35,6 @@ playwright-report/
 
 # Netlify CLI (dev local)
 .netlify/
+
+# Gerado a partir de src/content/site/emails.yaml (scripts/build-emails.mjs)
+netlify/functions/emails.generated.json

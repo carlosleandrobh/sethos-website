@@ -25,4 +25,5 @@ Consult these guides before working on related tasks:
 - Fonte de verdade: `SPEC.md`, `tasks/plan.md`, `tasks/todo.md`. Atualize-os quando decisões mudarem.
 - Não alterar textos nem slugs sem aprovação; `npm run content:verify` deve passar.
 - Cores: `#E53935` (marca, só texto grande/botões) e `#C62828` (texto pequeno/hover). E-mail via Resend; hospedagem Netlify; sem Supabase na v1.
-- O projeto antigo (Lovable) está em `C:\repository\sethos-website`, somente referência.
+- O projeto antigo (Lovable) está em `C:\repository\site-sethos`, somente referência.
+- Todo texto do site mora em `src/content/` (YAML/Markdown); componentes não podem ter texto em português (`tests/no-loose-text.test.ts`). Guia: `docs/EDITAR-CONTEUDO.md`.

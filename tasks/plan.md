@@ -1,6 +1,6 @@
 # Plano: reconstrução do site SETHOS (Astro)
 
-Fonte: `SPEC.md` (aprovado). Novo projeto em `C:\repository\sethos-astro` (repo git novo); este diretório vira referência somente-leitura.
+Fonte: `SPEC.md` (aprovado). Novo projeto em `C:\repository\sethos-website` (repo git novo; antes `sethos-astro`); o projeto antigo do Lovable ficou em `C:\repository\site-sethos`, somente referência.
 
 ## Ordem de construção
 ```

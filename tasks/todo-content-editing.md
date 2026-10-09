@@ -31,7 +31,7 @@
   - Files: docs/EDITAR-CONTEUDO.md, tests/edit-roundtrip.test.ts, README.md
 
 ## Pendências levantadas durante a execução
-- **Corpo dos e-mails do formulário** (`netlify/functions/send-contact.mts`) ainda é texto em código. Decidir: mover para YAML (a função leria o arquivo) ou manter no código e documentar.
+- ~~**Corpo dos e-mails do formulário** ainda era texto em código.~~ **Resolvido (2026-10-08):** `src/content/site/emails.yaml` + `src/lib/emails.ts`; a função importa o JSON gerado no build; testes em `tests/emails.test.ts`; o teste de texto solto agora também varre `netlify/functions/*.mts`.
 - **Imagens de compartilhamento (OG) por página** serão arquivos em `public/og/` referenciados no YAML (entram na T10).
 - **Remoção de serviço:** hoje manual (`netlify.toml`); a T-CE-4 automatiza com `redirects.yaml`.
 - `npm run parity` e `content:verify` são ferramentas de migração/refatoração; **saem do portão de publicação** quando o `npm run cms` existir (após uma edição intencional, `parity -- --update`).

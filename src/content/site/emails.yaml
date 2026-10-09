@@ -1,0 +1,48 @@
+# ============================================================================
+#  E-MAILS DO FORMULÁRIO DE CONTATO
+#  Dois e-mails são enviados quando alguém preenche o formulário em /contato:
+#    1) "company": o aviso que chega para a SETHOS (com os dados da pessoa e a mensagem);
+#    2) "visitor": a confirmação que a própria pessoa recebe.
+#  Quem recebe e quem envia (endereços) NÃO ficam aqui: são variáveis do Netlify (veja .env.example).
+#
+#  Regras:
+#  - Escreva TEXTO PURO. Não use HTML (<b>, <br>…): ele seria mostrado literalmente.
+#  - Palavras entre { } são preenchidas sozinhas — NÃO apague nem altere o que está entre { }.
+#      {name}   nome digitado pela pessoa            {email}  e-mail digitado pela pessoa
+#      {phone}  telefone da SETHOS (site.yaml)       {siteEmail}  e-mail da SETHOS (site.yaml)
+#  - Textos com dois-pontos (:) ou # precisam ficar entre aspas "assim".
+# ============================================================================
+
+# --- 1) Aviso que chega para a SETHOS ---------------------------------------
+company:
+  subject: "Nova mensagem do site - {name}"      # assunto (precisa conter {name})
+  heading: "Nova mensagem pelo site"             # título dentro do e-mail
+  messageHeading: "Mensagem"                      # título acima do texto digitado pela pessoa
+  notInformed: "Não informado"                   # aparece quando a pessoa deixou o campo em branco
+  labels:                                        # nomes dos campos na tabela
+    name: "Nome"
+    email: "E-mail"
+    phone: "Telefone"
+    preference: "Preferência de contato"
+    bestTime: "Melhor horário"
+
+# Como as opções do formulário aparecem nos e-mails (um texto para cada código; não altere os códigos).
+preferenceLabels:
+  email: "E-mail"
+  phone: "Telefone"
+  whatsapp: "WhatsApp"
+bestTimeLabels:
+  morning: "Manhã (8h às 12h)"
+  afternoon: "Tarde (13h às 18h)"
+  businessHours: "Horário comercial"
+
+# --- 2) Confirmação enviada para quem preencheu ------------------------------
+visitor:
+  subject: "Recebemos sua mensagem - SETHOS"     # assunto
+  greeting: "Olá, {name}!"                       # primeira linha (precisa conter {name})
+  paragraphs:                                    # um item por parágrafo; acrescente ou remova linhas com "- "
+    - "Recebemos sua mensagem e nossa equipe retornará em breve com uma proposta personalizada."
+    - "Se preferir, fale conosco pelo WhatsApp: {phone}."
+  signature:                                     # assinatura: um item por linha
+    - "SETHOS Tecnologia da Informação"
+    - "{siteEmail}"

@@ -1,7 +1,7 @@
 // Migração única: páginas legais do site antigo (arrays em TSX) -> src/content/legal/*.json
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
-const OLD = process.argv[2] ?? '../sethos-website/src/pages';
+const OLD = process.argv[2] ?? '../site-sethos/src/pages';
 const out = 'src/content/legal';
 mkdirSync(out, { recursive: true });
 
