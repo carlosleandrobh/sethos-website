@@ -2,10 +2,12 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import type { ContactInput } from '../src/lib/contact';
-import { companyEmail, visitorEmail } from '../src/lib/emails';
 import { describeIssues } from '../src/lib/content';
+import { companyEmail, visitorEmail } from '../src/lib/emails';
 import { emailsSchema, type EmailsConfig } from '../src/lib/schemas';
+import { fill } from '../src/lib/text';
 
+// Os textos esperados vêm do próprio emails.yaml: editar o texto dos e-mails NÃO quebra estes testes.
 const templates = emailsSchema.parse(parse(readFileSync('src/content/site/emails.yaml', 'utf8')));
 const site = { phone: '(31) 97245-7451', email: 'falecom@sethos.com.br' };
 const contact: ContactInput = {
@@ -17,6 +19,7 @@ const contact: ContactInput = {
   message: 'Olá <script>alert(1)</script>\nPreciso de ajuda com a folha.',
 };
 const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v));
+const escaped = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 describe('emails.yaml', () => {
   it('passa no esquema', () => {
@@ -36,11 +39,17 @@ describe('emails.yaml', () => {
 describe('e-mail para a SETHOS', () => {
   const mail = companyEmail(templates, contact);
   it('usa o assunto do YAML com o nome preenchido', () => {
-    expect(mail.subject).toBe('Nova mensagem do site - Maria <b>Silva</b>');
+    expect(mail.subject).toBe(fill(templates.company.subject, { name: contact.name }));
   });
-  it('mostra todos os campos, com "Não informado" no telefone vazio', () => {
-    for (const piece of ['Nome', 'E-mail', 'Telefone', 'Não informado', 'Preferência de contato', 'WhatsApp', 'Melhor horário', 'Manhã (8h às 12h)', 'Mensagem']) {
-      expect(mail.html).toContain(piece);
+  it('mostra todos os campos, com o texto de "não informado" no telefone vazio', () => {
+    const l = templates.company.labels;
+    const pieces = [
+      templates.company.heading, templates.company.messageHeading, templates.company.notInformed,
+      l.name, l.email, l.phone, l.preference, l.bestTime,
+      templates.preferenceLabels.whatsapp, templates.bestTimeLabels.morning,
+    ];
+    for (const piece of pieces) {
+      expect(mail.html).toContain(escaped(piece));
       expect(mail.text).toContain(piece);
     }
   });
@@ -55,7 +64,7 @@ describe('e-mail para a SETHOS', () => {
     t.company.labels.phone = 'Fone';
     const m = companyEmail(t, contact);
     expect(m.html).toContain('Contato novo vindo do site');
-    expect(m.text).toContain('Fone: Não informado');
+    expect(m.text).toContain(`Fone: ${t.company.notInformed}`);
   });
   it('assunto não aceita quebra de linha (injeção de cabeçalho)', () => {
     const m = companyEmail(templates, { ...contact, name: 'Maria\r\nBcc: x@y.com' });
@@ -65,14 +74,21 @@ describe('e-mail para a SETHOS', () => {
 
 describe('e-mail de confirmação ao visitante', () => {
   const mail = visitorEmail(templates, contact, site);
+  const vars = { name: contact.name, email: contact.email, phone: site.phone, siteEmail: site.email };
   it('saúda pelo nome (escapado) e usa o assunto do YAML', () => {
-    expect(mail.subject).toBe('Recebemos sua mensagem - SETHOS');
-    expect(mail.html).toContain('Olá, Maria &lt;b&gt;Silva&lt;/b&gt;!');
-    expect(mail.text.startsWith('Olá, Maria <b>Silva</b>!')).toBe(true);
+    expect(mail.subject).toBe(fill(templates.visitor.subject, vars));
+    expect(mail.html).toContain(escaped(fill(templates.visitor.greeting, vars)));
+    expect(mail.text.startsWith(fill(templates.visitor.greeting, vars))).toBe(true);
   });
-  it('preenche telefone e e-mail da SETHOS a partir do site.yaml', () => {
-    expect(mail.text).toContain('WhatsApp: (31) 97245-7451.');
-    expect(mail.text).toContain('falecom@sethos.com.br');
+  it('preenche telefone e e-mail da SETHOS a partir do site.yaml, onde o YAML pedir', () => {
+    const all = [...templates.visitor.paragraphs, ...templates.visitor.signature].join(' ');
+    if (all.includes('{phone}')) expect(mail.text).toContain(site.phone);
+    if (all.includes('{siteEmail}')) expect(mail.text).toContain(site.email);
+    expect(mail.text).not.toMatch(/\{(name|phone|siteEmail|email)\}/); // nenhuma variável fica sem preencher
+  });
+  it('mostra todos os parágrafos e a assinatura do YAML', () => {
+    for (const p of templates.visitor.paragraphs) expect(mail.text).toContain(fill(p, vars));
+    for (const s of templates.visitor.signature) expect(mail.text).toContain(fill(s, vars));
   });
   it('texto do YAML nunca vira HTML (um <b> digitado por quem edita é mostrado como texto)', () => {
     const t = clone(templates) as EmailsConfig;

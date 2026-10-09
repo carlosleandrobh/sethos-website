@@ -1,17 +1,14 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { readdirSync } from 'node:fs';
+import { services, site, ui } from '../content';
 
-// Os serviços vêm dos arquivos em src/content/services/: criar ou apagar um .md muda esta lista sozinho.
-const SERVICE_SLUGS = readdirSync('src/content/services')
-  .filter((f) => f.endsWith('.md'))
-  .map((f) => f.replace(/\.md$/, ''));
-
+// As rotas e os textos esperados vêm dos arquivos de conteúdo: criar, apagar ou editar um serviço/texto
+// NÃO quebra estes testes.
 const routes = [
   '/quem-somos',
   '/nossos-valores',
   '/servicos',
-  ...SERVICE_SLUGS.map((s) => `/servicos/${s}`),
+  ...services.map((s) => `/servicos/${s.slug}`),
   '/politica-de-privacidade',
   '/politica-de-cookies',
   '/termos-de-uso',
@@ -31,7 +28,12 @@ for (const route of routes) {
   });
 }
 
+// Usa um serviço do meio da lista (tem anterior e próximo), seja qual for.
+const middle = services[Math.min(1, services.length - 1)];
+const index = services.indexOf(middle);
+
 test('serviço: FAQ abre, navegação anterior/próximo e formulário lateral gera link do WhatsApp', async ({ page }) => {
+  test.skip(services.length < 3, 'precisa de pelo menos 3 serviços');
   await page.addInitScript(() => {
     (window as unknown as { opened: string[] }).opened = [];
     window.open = (u) => {
@@ -39,23 +41,23 @@ test('serviço: FAQ abre, navegação anterior/próximo e formulário lateral ge
       return null;
     };
   });
-  await page.goto('/servicos/consultoria-rh');
+  await page.goto(`/servicos/${middle.slug}`);
   const first = page.locator('main details').first();
   await first.locator('summary').click();
   await expect(first).toHaveAttribute('open', '');
-  await expect(page.getByRole('link', { name: /Serviço Anterior/ })).toHaveAttribute('href', '/servicos/customizacoes-totvs');
-  await expect(page.getByRole('link', { name: /Próximo Serviço/ })).toHaveAttribute('href', '/servicos/treinamentos-totvs');
+  await expect(page.getByRole('link', { name: new RegExp(ui.service.previous) })).toHaveAttribute('href', `/servicos/${services[index - 1].slug}`);
+  await expect(page.getByRole('link', { name: new RegExp(ui.service.next) })).toHaveAttribute('href', `/servicos/${services[index + 1].slug}`);
 
-  await page.getByPlaceholder('Seu nome completo').fill('Maria Teste');
-  await page.getByPlaceholder('Seu melhor e-mail').fill('maria@empresa.com.br');
-  await page.getByPlaceholder('Telefone para contato').fill('31999999999');
-  await page.getByRole('button', { name: 'Conversar no WhatsApp' }).click();
+  await page.getByPlaceholder(ui.service.form.name).fill('Maria Teste');
+  await page.getByPlaceholder(ui.service.form.email).fill('maria@empresa.com.br');
+  await page.getByPlaceholder(ui.service.form.phone).fill('31999999999');
+  await page.getByRole('button', { name: ui.service.whatsapp }).click();
   const url = (await page.evaluate(() => (window as unknown as { opened: string[] }).opened))[0];
-  expect(url).toContain('wa.me/5531972457451');
+  expect(url).toContain(`wa.me/${site.phone.whatsapp}`);
   expect(decodeURIComponent(url)).toContain('Maria Teste');
 });
 
-test('serviço sem anterior (primeiro) não exibe link anterior', async ({ page }) => {
-  await page.goto('/servicos/sustentacao-erp');
-  await expect(page.getByRole('link', { name: /Serviço Anterior/ })).toHaveCount(0);
+test('o primeiro serviço não exibe "anterior"', async ({ page }) => {
+  await page.goto(`/servicos/${services[0].slug}`);
+  await expect(page.getByRole('link', { name: new RegExp(ui.service.previous) })).toHaveCount(0);
 });
