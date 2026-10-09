@@ -4,7 +4,8 @@ import type { ZodType } from 'astro/zod';
 import siteRaw from '../content/site/site.yaml?raw';
 import uiRaw from '../content/site/ui.yaml?raw';
 import emailsRaw from '../content/site/emails.yaml?raw';
-import { emailsSchema, siteSchema, uiSchema, type EmailsConfig, type Site, type Ui } from './schemas';
+import redirectsRaw from '../content/site/redirects.yaml?raw';
+import { emailsSchema, redirectsSchema, siteSchema, uiSchema, type EmailsConfig, type Site, type Ui } from './schemas';
 import { fill } from './text';
 
 export { fill };
@@ -37,6 +38,9 @@ export const site: Site = parseYaml('src/content/site/site.yaml', siteRaw, siteS
 export const ui: Ui = parseYaml('src/content/site/ui.yaml', uiRaw, uiSchema);
 // Validado em todo build (o texto dos e-mails é usado pela função do Netlify, que lê o mesmo arquivo).
 export const emails: EmailsConfig = parseYaml('src/content/site/emails.yaml', emailsRaw, emailsSchema);
+
+// Validado em todo build (o arquivo public/_redirects é gerado a partir dele por scripts/build-redirects.mjs).
+export const redirects = parseYaml('src/content/site/redirects.yaml', redirectsRaw, redirectsSchema).redirects;
 
 export const whatsappUrl = (message: string = site.whatsappMessage) =>
   `https://wa.me/${site.phone.whatsapp}?text=${encodeURIComponent(message)}`;

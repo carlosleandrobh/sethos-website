@@ -19,9 +19,10 @@
     "test:e2e": "playwright test",
     "parity": "node scripts/parity.mjs",
     "validate": "npm run check && npm run lint && npm test && npm run build && npm run test:e2e",
-    "prebuild": "node scripts/build-emails.mjs",
-    "predev": "node scripts/build-emails.mjs",
-    "pretest": "node scripts/build-emails.mjs"
+    "prebuild": "node scripts/build-emails.mjs && node scripts/build-redirects.mjs",
+    "predev": "node scripts/build-emails.mjs && node scripts/build-redirects.mjs",
+    "pretest": "node scripts/build-emails.mjs",
+    "cms": "node scripts/cms.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.3",

@@ -187,3 +187,8 @@ export const emailsSchema = z.object({
   }),
 });
 export type EmailsConfig = z.infer<typeof emailsSchema>;
+
+/** src/content/site/redirects.yaml — endereços antigos que passam a apontar para outra página (301). */
+export const redirectsSchema = z.object({
+  redirects: z.array(z.object({ from: internalPath, to: internalPath })),
+});

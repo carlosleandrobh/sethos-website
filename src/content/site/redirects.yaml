@@ -1,0 +1,16 @@
+# ============================================================================
+#  REDIRECIONAMENTOS (301) — para endereços antigos que não existem mais
+#  Quando você APAGA um serviço (src/content/services/<nome>.md), quem chegar pelo endereço antigo
+#  (Google, favoritos, links de outros sites) veria "página não encontrada". Cada item abaixo manda
+#  essa pessoa para outra página.
+#
+#  Normalmente você NÃO precisa editar este arquivo: `npm run cms` acrescenta o item sozinho ao
+#  detectar um serviço apagado (use --no-redirect para recusar).
+#
+#  Formato (um bloco de duas linhas por endereço):
+#    redirects:
+#      - from: "/servicos/nome-antigo"   # endereço que saiu do ar
+#        to: "/servicos"                 # para onde enviar a pessoa
+#  Regras: os dois começam com /, só minúsculas, números e hífen; "from" não pode ser uma página que ainda existe.
+# ============================================================================
+redirects: []
