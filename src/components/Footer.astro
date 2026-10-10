@@ -99,6 +99,11 @@ const year = new Date().getFullYear();
             </li>
           ))
         }
+        <li>
+          <button type="button" data-open-consent class="inline-flex min-h-9 items-center hover:text-white hover:underline">
+            {ui.footer.cookieSettings}
+          </button>
+        </li>
       </ul>
       <p>{fill(ui.footer.copyright, { year, legalName: site.legalName, cnpj: site.cnpj })}</p>
       <p class="max-w-3xl">{site.footer.disclaimer}</p>

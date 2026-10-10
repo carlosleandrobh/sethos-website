@@ -31,6 +31,12 @@ schedule:
   url: "https://outlook.office.com/book/SETHOS@sethos.com.br/?ismsaljsauthenabled"          # página de contato
   serviceUrl: "https://outlook.office.com/book/SETHOS@sethos.com.br/s/nUotNPkVF0O-Z7coYgF-rw2?ismsaljsauthenabled"   # botão das páginas de serviço
 
+# --- Rastreamento (só ativa DEPOIS que a pessoa clica em "Aceitar" no aviso de cookies) -----------------
+# Deixe "" (vazio) para desligar uma ferramenta. Os IDs não são segredos: aparecem no código de qualquer site.
+tracking:
+  metaPixelId: "2270406940042061"      # Meta Pixel (Facebook/Instagram) — Gerenciador de Eventos
+  googleAdsId: "AW-17031992209"        # Tag do Google Ads (remarketing) — formato AW-números
+
 # --- Redes sociais (rodapé) --------------------------------------------------
 # "icon" é o nome do ícone: simple-icons:linkedin, simple-icons:instagram, simple-icons:facebook, simple-icons:youtube …
 # (lista em https://icon-sets.iconify.design/simple-icons/). Para tirar uma rede, apague o bloco de 3 linhas.

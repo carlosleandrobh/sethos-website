@@ -3,7 +3,9 @@ DESCRIPTION: Desenvolvimento de customizações Totvs RM sob medida. Soluções 
 CANONICAL: https://sethos.com.br/servicos/customizacoes-totvs
 ROBOTS: 
 ---
-Pular para o conteúdo Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Desenvolvimento de Customizações Desenvolvimento de Customizações Desenvolvimento de soluções personalizadas para atender processos específicos.
+Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
+Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Desenvolvimento de Customizações Desenvolvimento de Customizações Desenvolvimento de soluções personalizadas para atender processos específicos.
 Sobre este serviço Desenvolvemos customizações que atendem exatamente às necessidades do seu negócio e do seu processo quando as funcionalidades padrão não são suficientes.
 Criamos desde pequenas personalizações de cadastros e telas até sistemas complementares complexos que se integram perfeitamente ao seu ERP.
 Principais Benefícios Soluções sob medida para seu negócio Integração perfeita com Totvs RM Redução de processos manuais Aumento da produtividade ROI comprovado O que está incluso Análise de viabilidade técnica Desenvolvimento em tecnologias Totvs Testes integrados Documentação técnica Manutenção e evolução Perguntas Frequentes As customizações são perdidas em atualizações?
@@ -16,7 +18,7 @@ Serviço Anterior Implantação de Sistema e Migração de Dados Próximo Servi�
 Fale conosco e receba uma proposta personalizada para desenvolvimento de customizações Seu nome completo Seu melhor e-mail Telefone para contato Conte-nos mais sobre sua necessidade Conversar no WhatsApp (31) 97245-7451 falecom@sethos.com.br Compartilhar este serviço Link copiado!
 Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

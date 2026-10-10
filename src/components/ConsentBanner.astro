@@ -1,0 +1,111 @@
+---
+import { site, ui } from '../lib/content';
+
+const c = ui.consent;
+---
+
+<!--
+  Aviso de cookies. Começa escondido: sem JavaScript nada é mostrado e NENHUM rastreador é carregado (privacidade por padrão).
+  Aceitar e Recusar têm o mesmo peso visual, como recomenda a ANPD.
+-->
+<section
+  id="consent"
+  hidden
+  role="dialog"
+  aria-modal="false"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-text"
+  data-meta-pixel={site.tracking.metaPixelId}
+  data-google-ads={site.tracking.googleAdsId}
+  data-msg-accepted={c.currentAccepted}
+  data-msg-rejected={c.currentRejected}
+  data-msg-gpc={c.gpc}
+  class="fixed inset-x-0 bottom-0 z-50 p-3 sm:inset-x-auto sm:bottom-4 sm:left-4 sm:max-w-md sm:p-0"
+>
+  <div class="rounded-card border border-line bg-white p-5 shadow-card-hover">
+    <h2 id="consent-title" class="text-base font-semibold">{c.title}</h2>
+    <p id="consent-text" class="mt-2 text-sm leading-relaxed text-ink-soft">
+      {c.text}{' '}
+      <a href="/politica-de-cookies" class="font-medium text-brand-dark underline underline-offset-4">{c.policyLink}</a>
+    </p>
+    <p id="consent-current" class="mt-2 text-sm font-medium text-ink" hidden></p>
+    <div class="mt-4 grid grid-cols-2 gap-3">
+      <button type="button" data-consent="accept" class="btn btn-primary">{c.accept}</button>
+      <button type="button" data-consent="reject" class="btn btn-outline">{c.reject}</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { CONSENT_KEY, consentState, gpcEnabled, parseConsent, serializeConsent, TRACKING_COOKIE_PATTERNS } from '../lib/consent';
+  import { loadGoogleAds, loadMetaPixel, trackLead } from '../lib/trackers';
+
+  const root = document.getElementById('consent')!;
+  const current = document.getElementById('consent-current')!;
+  const gpc = gpcEnabled(navigator as { globalPrivacyControl?: boolean });
+
+  const read = () => {
+    try {
+      return parseConsent(localStorage.getItem(CONSENT_KEY), Date.now());
+    } catch {
+      return null; // armazenamento bloqueado: trata como "sem escolha"
+    }
+  };
+
+  /** Ativa as ferramentas — somente quando o consentimento foi dado. */
+  const activate = () => {
+    loadMetaPixel(root.dataset.metaPixel ?? '');
+    loadGoogleAds(root.dataset.googleAds ?? '');
+  };
+
+  const clearTrackingCookies = () => {
+    const host = location.hostname;
+    const domains = [host, `.${host}`, `.${host.split('.').slice(-2).join('.')}`];
+    for (const pair of document.cookie.split(';')) {
+      const name = pair.split('=')[0].trim();
+      if (!TRACKING_COOKIE_PATTERNS.some((re) => re.test(name))) continue;
+      for (const d of domains) document.cookie = `${name}=; Max-Age=0; path=/; domain=${d}`;
+      document.cookie = `${name}=; Max-Age=0; path=/`;
+    }
+  };
+
+  const show = (message?: string) => {
+    current.textContent = message ?? '';
+    current.hidden = !message;
+    root.hidden = false;
+  };
+
+  const choose = (marketing: boolean) => {
+    const wasLoaded = Boolean(window.fbq || window.gtag);
+    try {
+      localStorage.setItem(CONSENT_KEY, serializeConsent(marketing, new Date()));
+    } catch {
+      /* sem armazenamento: a escolha vale só nesta página */
+    }
+    root.hidden = true;
+    if (marketing) activate();
+    else {
+      clearTrackingCookies();
+      if (wasLoaded) location.reload(); // para de vez as ferramentas que já estavam rodando nesta página
+    }
+  };
+
+  root.querySelector('[data-consent="accept"]')!.addEventListener('click', () => choose(true));
+  root.querySelector('[data-consent="reject"]')!.addEventListener('click', () => choose(false));
+
+  // Link "Configurações de Cookies" do rodapé: reabre o aviso mostrando a escolha atual.
+  document.addEventListener('click', (event) => {
+    if (!(event.target as Element).closest('[data-open-consent]')) return;
+    const state = consentState(read(), gpc);
+    show(gpc ? root.dataset.msgGpc : state === 'accepted' ? root.dataset.msgAccepted : state === 'rejected' ? root.dataset.msgRejected : undefined);
+    root.querySelector<HTMLButtonElement>('[data-consent="accept"]')!.focus();
+  });
+
+  // Contato enviado: avisa as ferramentas (se estiverem ativas).
+  document.addEventListener('sethos:lead', trackLead);
+
+  // Estado inicial
+  const state = consentState(read(), gpc);
+  if (state === 'accepted') activate();
+  else if (state === 'undecided') show();
+</script>

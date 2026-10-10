@@ -12,14 +12,20 @@ const redirects = [...toml.matchAll(/\[\[redirects\]\]\s+from\s*=\s*"([^"]+)"\s+
 }));
 
 describe('netlify.toml — segurança', () => {
-  it('CSP estrita: sem unsafe-eval nem unsafe-inline, só o Turnstile como terceiro', () => {
+  it('CSP estrita: sem unsafe-eval nem unsafe-inline; terceiros só os da lista (Turnstile, Google Ads, Meta Pixel)', () => {
     expect(csp).not.toContain('unsafe-eval');
     expect(csp).not.toContain('unsafe-inline');
     expect(csp).toContain("default-src 'self'");
     expect(csp).toContain("object-src 'none'");
     expect(csp).toContain("frame-ancestors 'none'");
     const origins = [...csp.matchAll(/https?:\/\/[^\s;]+/g)].map((m) => m[0]);
-    expect(new Set(origins)).toEqual(new Set(['https://challenges.cloudflare.com']));
+    const allowed = new Set([
+      'https://challenges.cloudflare.com', // Turnstile (formulário)
+      'https://www.googletagmanager.com', 'https://www.google.com', 'https://www.google.com.br', 'https://www.googleadservices.com',
+      'https://googleads.g.doubleclick.net', 'https://td.doubleclick.net', 'https://*.google-analytics.com', // Google Ads (após aceite)
+      'https://connect.facebook.net', 'https://www.facebook.com', // Meta Pixel (após aceite)
+    ]);
+    expect([...new Set(origins)].filter((o) => !allowed.has(o))).toEqual([]);
   });
   it.each(['Strict-Transport-Security', 'X-Content-Type-Options', 'X-Frame-Options', 'Referrer-Policy', 'Permissions-Policy'])(
     'cabeçalho %s',

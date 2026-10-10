@@ -25,7 +25,19 @@ footer:
   contact: "Contato"
   whatsapp: "WhatsApp"
   backToTop: "Voltar ao topo"
+  cookieSettings: "Configurações de Cookies"   # reabre o aviso de cookies (a Política de Cookies cita este nome)
   copyright: "© {year} {legalName}. CNPJ: {cnpj}. Todos os direitos reservados."   # {year} muda sozinho
+
+# Aviso de cookies (aparece na 1ª visita e quando a pessoa clica em "Configurações de Cookies" no rodapé).
+consent:
+  title: "Sua privacidade"
+  text: "Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios. Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento."
+  accept: "Aceitar"
+  reject: "Recusar"
+  policyLink: "Política de Cookies"
+  currentAccepted: "Sua escolha atual: cookies de marketing aceitos."
+  currentRejected: "Sua escolha atual: cookies de marketing recusados."
+  gpc: "Seu navegador enviou o sinal de privacidade (GPC); por isso não ativamos cookies de marketing."
 
 # Botão flutuante do WhatsApp.
 whatsappFloat:

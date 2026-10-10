@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
 import { site, ui } from '../lib/content';
 import { canonicalPath, ogSlug } from '../lib/url';
 import { toScript } from '../lib/jsonld';
@@ -61,6 +62,7 @@ const ogImage = new URL(`/og/${ogSlug(Astro.url.pathname)}.png`, site.url).href;
     >
       {ui.skipLink}
     </a>
+    <ConsentBanner />
     <Navbar />
     <main id="conteudo" tabindex="-1" class="flex-1 focus:outline-none">
       <slot />

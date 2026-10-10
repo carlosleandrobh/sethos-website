@@ -1,9 +1,11 @@
 TITLE: Quem Somos | SETHOS - Especialistas em Totvs RM RH
-DESCRIPTION: Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação, outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+DESCRIPTION: Conheça a SETHOS: consultoria Totvs RM focada em Folha de Pagamento e Gestão de Pessoas, fundada em 2017 por especialistas com mais de 15 anos de ERP.
 CANONICAL: https://sethos.com.br/quem-somos
 ROBOTS: 
 ---
-Pular para o conteúdo Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Nossa História Conheça a SETHOS Desde 2017, somos especialistas em consultoria Totvs RM com foco em Recursos Humanos.
+Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
+Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Nossa História Conheça a SETHOS Desde 2017, somos especialistas em consultoria Totvs RM com foco em Recursos Humanos.
 Nossa experiência e dedicação transformam processos e potencializam resultados.
 Quem Somos Fundada em 2017 por especialistas com mais de 15 anos de experiência em ERPs, a SETHOS surgiu da identificação de uma necessidade de mercado por consultoria especializada em Totvs RM com foco em Departamento Pessoal e Recursos Humanos.
 Desde então, expandimos nossa atuação para outros serviços, sempre mantendo nosso compromisso com a qualidade e com os resultados.
@@ -13,7 +15,7 @@ Conheça Nossos Serviços Nossa Missão Nossa missão é potencializar a transfo
 Nossa Visão Ser referência no mercado de prestação de serviços para Totvs RM RH, destacando-se pela excelência técnica, tendo a entrega dos projetos no prazo e o nível de satisfação dos clientes como medidas de desempenho.
 Nossos Diferenciais Conhecimento profundo do Totvs RM RH e seus módulos Especialização em processos de Recursos Humanos Atendimento personalizado e próximo ao cliente Metodologia ágil e flexível de implantação Suporte contínuo pós-implantação Conheça Nossos Valores e Princípios → Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

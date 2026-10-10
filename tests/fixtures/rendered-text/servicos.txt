@@ -1,9 +1,11 @@
 TITLE: Serviços | SETHOS - Consultoria Totvs RM e Soluções ERP
-DESCRIPTION: Consultoria Especializada Totvs RM RH em Belo Horizonte/MG e todo Brasil. Implantação, sustentação, outsourcing e expertise em Folha de Pagamento/Labore. +15 anos de experiência.
+DESCRIPTION: Sustentação, outsourcing técnico, dashboards, integrações, implantação, customizações, consultoria, treinamentos e banco de dados para Totvs RM RH.
 CANONICAL: https://sethos.com.br/servicos
 ROBOTS: 
 ---
-Pular para o conteúdo Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Nossos Serviços Soluções Completas em Totvs RM RH Oferecemos consultoria especializada, sustentação, implantação e treinamentos para maximizar a eficiência dos seus processos de RH e Folha de Pagamento.
+Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
+Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Nossos Serviços Soluções Completas em Totvs RM RH Oferecemos consultoria especializada, sustentação, implantação e treinamentos para maximizar a eficiência dos seus processos de RH e Folha de Pagamento.
 Sustentação Suporte especializado para resolver questões técnicas e manter a operação do sistema estável e segura.
 Saiba mais — Sustentação Outsourcing Técnico Terceirização das operações do sistema de folha de pagamento com segurança total.
 Saiba mais — Outsourcing Técnico Dashboards e Relatórios Desenvolvimento de relatórios e dashboards para análise estratégica ou operacional de dados.
@@ -15,7 +17,7 @@ Saiba mais — Consultoria Especializada em RH Treinamentos sob Demanda Capacita
 Saiba mais — Treinamentos sob Demanda Administração de Banco de Dados SQL Server Otimização e gestão do banco de dados para garantir performance.
 Saiba mais — Administração de Banco de Dados SQL Server Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

@@ -3,7 +3,9 @@ DESCRIPTION: Dashboards e relatórios para RH com dados do Totvs RM. Business In
 CANONICAL: https://sethos.com.br/servicos/dashboards-rh
 ROBOTS: 
 ---
-Pular para o conteúdo Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Dashboards e Relatórios Dashboards e Relatórios Desenvolvimento de relatórios e dashboards para análise estratégica ou operacional de dados.
+Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
+Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Dashboards e Relatórios Dashboards e Relatórios Desenvolvimento de relatórios e dashboards para análise estratégica ou operacional de dados.
 Sobre este serviço Criamos dashboards interativos e relatórios personalizados que transformam os dados do seu Totvs RM em informações estratégicas para tomada de decisões.
 Utilizamos as ferramentas Microsoft Power BI, Microsoft SQL Server Reporting Services (SSRS) e Totvs Smartview para criar visualizações intuitivas e dinâmicas dos seus indicadores mais importantes e relatórios operacionais.
 Principais Benefícios Decisões baseadas em dados Indicadores em tempo real Redução no tempo de análise Visualizações intuitivas Acessibilidade mobile O que está incluso Dashboards interativos Relatórios automatizados Análises preditivas Exportação em múltiplos formatos Acesso controlado por perfil Perguntas Frequentes Os dashboards são acessíveis via mobile?
@@ -17,7 +19,7 @@ Serviço Anterior Outsourcing Técnico Próximo Serviço Integração entre Sist
 Fale conosco e receba uma proposta personalizada para dashboards e relatórios Seu nome completo Seu melhor e-mail Telefone para contato Conte-nos mais sobre sua necessidade Conversar no WhatsApp (31) 97245-7451 falecom@sethos.com.br Compartilhar este serviço Link copiado!
 Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

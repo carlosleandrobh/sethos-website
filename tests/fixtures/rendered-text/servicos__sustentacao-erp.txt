@@ -3,7 +3,9 @@ DESCRIPTION: Sustentação ERP Totvs RM com suporte 24/7, monitoramento proativo
 CANONICAL: https://sethos.com.br/servicos/sustentacao-erp
 ROBOTS: 
 ---
-Pular para o conteúdo Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Sustentação Sustentação Suporte especializado para resolver questões técnicas e manter a operação do sistema estável e segura.
+Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
+Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Sustentação Sustentação Suporte especializado para resolver questões técnicas e manter a operação do sistema estável e segura.
 Sobre este serviço Nossa equipe especializada oferece suporte técnico contínuo e proativo para o seu ERP nos módulos Totvs RM Folha de Pagamento (RM Labore), Totvs RM Automação de Ponto (RM Chronus), Totvs RM Gestão de Pessoas (RM Vitae), Totvs RM Segurança e Saúde Ocupacional (RM SSO), Meu RH e Portal RM, garantindo que seu ambiente corporativo funcione sem interrupções.
 Trabalhamos com modelos de atendimento personalizados, incluindo plantões, monitoramento constante e suporte remoto imediato para solução de problemas críticos.
 Nosso objetivo é minimizar o tempo de inatividade e otimizar o desempenho de todas as áreas que utilizam o sistema.
@@ -17,7 +19,7 @@ Próximo Serviço Outsourcing Técnico Garanta a operação diária do seu ERP F
 Fale conosco e receba uma proposta personalizada para sustentação Seu nome completo Seu melhor e-mail Telefone para contato Conte-nos mais sobre sua necessidade Conversar no WhatsApp (31) 97245-7451 falecom@sethos.com.br Compartilhar este serviço Link copiado!
 Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

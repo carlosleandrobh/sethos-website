@@ -295,6 +295,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
       form.hidden = true;
       const success = document.querySelector<HTMLElement>('#form-success')!;
       success.hidden = false;
+      document.dispatchEvent(new CustomEvent('sethos:lead')); // as ferramentas de marketing só reagem se houve consentimento
       success.focus();
     } catch (err) {
       const offline = err instanceof TypeError;

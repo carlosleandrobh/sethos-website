@@ -25,6 +25,10 @@ export const siteSchema = z.object({
       const digits = display.replace(/\D/g, '');
       return { display, tel: `+55${digits}`, whatsapp: `55${digits}` };
     }),
+  tracking: z.object({
+    metaPixelId: z.string().regex(/^(\d{10,20})?$/, 'só números (15 a 16 dígitos), ou "" para desligar'),
+    googleAdsId: z.string().regex(/^(AW-\d{6,15})?$/, 'formato AW-12345678901, ou "" para desligar'),
+  }),
   address: z.object({ locality: text, region: text.length(2, 'sigla do estado com 2 letras (ex.: MG)') }),
   whatsappMessage: text.max(300, 'máximo de 300 caracteres'),
   whatsappMessageContactPage: text.max(300, 'máximo de 300 caracteres'),
@@ -43,8 +47,12 @@ export const uiSchema = z.object({
   nav: z.object({ mainAria: text, homeAria: text, logoAlt: text, openMenu: text }),
   footer: z.object({
     logoAlt: text, followUs: text, followAria: text, quickLinks: text, quickLinksAria: text,
-    contact: text, whatsapp: text, backToTop: text,
+    contact: text, whatsapp: text, backToTop: text, cookieSettings: text,
     copyright: text.refine((t) => t.includes('{year}') && t.includes('{legalName}') && t.includes('{cnpj}'), 'precisa manter {year}, {legalName} e {cnpj}'),
+  }),
+  consent: z.object({
+    title: text, text: text.max(400, 'máximo de 400 caracteres'), accept: text.max(20), reject: text.max(20),
+    policyLink: text, currentAccepted: text, currentRejected: text, gpc: text,
   }),
   whatsappFloat: z.object({ aria: text }),
   hero: z.object({ mascotAlt: text }),
