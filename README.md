@@ -14,7 +14,8 @@ mensagens de erro. Tudo em `src/content/`.
 4. [`tasks/plan-content-editing.md`](tasks/plan-content-editing.md) e [`tasks/todo-content-editing.md`](tasks/todo-content-editing.md) — plano e tarefas da edição de conteúdo.
 5. [`docs/adr/0001-conteudo-em-arquivos.md`](docs/adr/0001-conteudo-em-arquivos.md) — por que arquivos e não painel; achados da migração.
 6. [`docs/design-notes.md`](docs/design-notes.md) — direção visual (passada com a skill frontend-design).
-7. [`docs/content-preservation.md`](docs/content-preservation.md) e [`docs/content-audit.md`](docs/content-audit.md) — como garantimos que nenhum texto do site antigo se perdeu.
+7. [`docs/seo.md`](docs/seo.md) — SEO, imagens de compartilhamento e dados estruturados.
+8. [`docs/content-preservation.md`](docs/content-preservation.md) e [`docs/content-audit.md`](docs/content-audit.md) — como garantimos que nenhum texto do site antigo se perdeu.
 
 ## Comandos
 ```

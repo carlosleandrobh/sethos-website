@@ -3,11 +3,16 @@ import { getEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { crumbsJsonLd } from '../lib/seo';
 
 const about = (await getEntry('about', 'about'))!.data;
 ---
 
-<Base title={about.seo.title} description={about.seo.description}>
+<Base
+  title={about.seo.title}
+  description={about.seo.description}
+  jsonLd={[crumbsJsonLd([{ name: about.hero.title.join(' '), path: '/quem-somos' }])]}
+>
   <PageHero {...about.hero} />
 
   <section class="py-16 md:py-24">

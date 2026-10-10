@@ -2,13 +2,18 @@
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { crumbsJsonLd } from '../lib/seo';
 import ServiceCard from '../components/ServiceCard.astro';
 
 const page = (await getEntry('servicesIndex', 'services-index'))!.data;
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<Base title={page.seo.title} description={page.seo.description}>
+<Base
+  title={page.seo.title}
+  description={page.seo.description}
+  jsonLd={[crumbsJsonLd([{ name: page.hero.title.join(' '), path: '/servicos' }])]}
+>
   <PageHero eyebrow={page.hero.eyebrow} title={page.hero.title} lead={page.hero.lead} />
 
   <section class="py-12 md:py-20">

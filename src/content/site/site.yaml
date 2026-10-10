@@ -16,6 +16,11 @@ phone:
   # Escreva o telefone UMA vez, como aparece no site. Os links de ligar e do WhatsApp (código +55) são gerados sozinhos.
   display: "(31) 97245-7451"      # formato: (DDD) 99999-9999 ou (DDD) 9999-9999
 
+# Cidade de atendimento. Vai para os dados estruturados que o Google lê (NÃO é o endereço completo).
+address:
+  locality: "Belo Horizonte"
+  region: "MG"       # sigla do estado, 2 letras
+
 # Mensagem que já vem digitada quando a pessoa clica no botão do WhatsApp.
 whatsappMessage: "Olá! Gostaria de saber mais sobre os serviços de consultoria Totvs RM RH da SETHOS."
 # Mensagem do WhatsApp usada na página de contato.

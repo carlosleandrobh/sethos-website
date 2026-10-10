@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import { site, ui } from '../lib/content';
 import { fillContactTokens } from '../lib/legal';
+import { crumbsJsonLd } from '../lib/seo';
 
 export async function getStaticPaths() {
   const pages = await getCollection('legal');
@@ -26,7 +27,11 @@ const prose = [
 ].join(' ');
 ---
 
-<Base title={`${title} - SETHOS`} description={description}>
+<Base
+  title={`${title}${ui.legal.titleSuffix}`}
+  description={description}
+  jsonLd={[crumbsJsonLd([{ name: title, path: `/${page.id}` }])]}
+>
   <div class="container-page pt-8">
     <Breadcrumb current={title} />
   </div>

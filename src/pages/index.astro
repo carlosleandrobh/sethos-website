@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import { ui } from '../lib/content';
+import { orgJsonLd, websiteJsonLd } from '../lib/seo';
 
 const home = (await getEntry('home', 'home'))!.data;
 const cardCta = (await getEntry('servicesIndex', 'services-index'))!.data.cardCta;
@@ -11,7 +12,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 const featured = services.slice(0, 4);
 ---
 
-<Base title={home.seo.title} description={home.seo.description}>
+<Base title={home.seo.title} description={home.seo.description} jsonLd={[orgJsonLd(home.seo.description), websiteJsonLd()]}>
   <Hero {...home.hero} />
 
   <section class="border-y border-line" aria-label={ui.home.highlightsAria}>

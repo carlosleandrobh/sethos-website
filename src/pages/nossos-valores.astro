@@ -2,11 +2,16 @@
 import { getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { crumbsJsonLd } from '../lib/seo';
 
 const values = (await getEntry('values', 'values'))!.data;
 ---
 
-<Base title={values.seo.title} description={values.seo.description}>
+<Base
+  title={values.seo.title}
+  description={values.seo.description}
+  jsonLd={[crumbsJsonLd([{ name: values.hero.title.join(' '), path: '/nossos-valores' }])]}
+>
   <PageHero {...values.hero} />
 
   <section class="py-16 md:py-24">

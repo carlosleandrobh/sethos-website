@@ -41,7 +41,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Files: ~6 (ContactForm, steps, validation, functions/send-contact, teste, página)
 
 ## Fase 3 — Qualidade e publicação
-- [ ] **T10 SEO, OG e redirects**
+- [x] **T10 SEO, OG e redirects** (feito: tags Open Graph/Twitter, imagem OG 1200×630 por página gerada no build (satori+resvg, Inter embutida), JSON-LD (organização, site, serviço, FAQ, trilha), sitemap com `lastmod` real do git, sufixos de título movidos para `ui.yaml`, `netlify.toml` travado por teste; 21 testes e2e de SEO; ver `docs/seo.md`. Pendente de aprovação: descrições únicas do Google para 4 páginas)
   - Acceptance: componente de `<head>` único; título/description por página; imagem OG 1200×630 por página (gerada no build); canonical; JSON-LD `Organization/LocalBusiness`; sitemap gerado com `lastmod` real; robots.txt; `_redirects`/netlify.toml com 301 de URLs antigas (inclui `/cms` → 410 ou 404, `/lovable-uploads/*` mapeados se indexados).
   - Verify: teste percorre todas as rotas validando meta/OG; lista de redirects testada.
 - [ ] **T11 Consentimento e tracking** — banner de cookies LGPD; GTM `GTM-TPK4FL5N` e Meta Pixel só após aceite; CSP sem `unsafe-eval`; headers de segurança.

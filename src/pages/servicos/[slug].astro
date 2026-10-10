@@ -5,6 +5,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import ServiceAside from '../../components/ServiceAside.astro';
 import { site, ui } from '../../lib/content';
+import { crumbsJsonLd, serviceJsonLd } from '../../lib/seo';
 
 export async function getStaticPaths() {
   const all = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -23,7 +24,17 @@ const scheduleUrl = site.schedule.serviceUrl;
 const list = 'mt-5 space-y-3 text-lg';
 ---
 
-<Base title={`${s.title} | SETHOS - Consultoria Especializada Totvs RM`} description={s.metaDescription}>
+<Base
+  title={`${s.title}${t.titleSuffix}`}
+  description={s.metaDescription}
+  jsonLd={[
+    ...serviceJsonLd({ slug: entry.id, title: s.title, description: s.shortDescription, keywords: s.keywords, faq: s.faq }),
+    crumbsJsonLd([
+      { name: ui.breadcrumb.services, path: '/servicos' },
+      { name: s.title, path: `/servicos/${entry.id}` },
+    ]),
+  ]}
+>
   <div class="container-page pt-8">
     <Breadcrumb current={s.title} trail={[{ label: ui.breadcrumb.services, href: '/servicos', title: ui.breadcrumb.allServices }]} />
   </div>

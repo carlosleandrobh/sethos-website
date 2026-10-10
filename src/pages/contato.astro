@@ -3,6 +3,7 @@ import { getEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import { crumbsJsonLd } from '../lib/seo';
 import { MAX_MESSAGE } from '../lib/contact';
 import { resolveTurnstileSiteKey } from '../lib/turnstile';
 import { site, ui, whatsappUrl } from '../lib/content';
@@ -33,7 +34,11 @@ const label = 'block text-sm font-semibold text-ink';
 const error = 'mt-1.5 text-sm font-medium text-red-700';
 ---
 
-<Base title={page.seo.title} description={page.seo.description}>
+<Base
+  title={page.seo.title}
+  description={page.seo.description}
+  jsonLd={[crumbsJsonLd([{ name: page.hero.title.join(' '), path: '/contato' }])]}
+>
   <PageHero {...page.hero} />
 
   <section class="py-12 md:py-16" aria-label={ui.contactPage.channelsAria}>

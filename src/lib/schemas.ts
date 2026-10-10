@@ -25,6 +25,7 @@ export const siteSchema = z.object({
       const digits = display.replace(/\D/g, '');
       return { display, tel: `+55${digits}`, whatsapp: `55${digits}` };
     }),
+  address: z.object({ locality: text, region: text.length(2, 'sigla do estado com 2 letras (ex.: MG)') }),
   whatsappMessage: text.max(300, 'máximo de 300 caracteres'),
   whatsappMessageContactPage: text.max(300, 'máximo de 300 caracteres'),
   schedule: z.object({ url: externalUrl, serviceUrl: externalUrl }),
@@ -53,11 +54,12 @@ export const uiSchema = z.object({
     about: text, benefits: text, features: text, faq: text, previous: text, next: text, navAria: text,
     interested: text, proposalPrefix: z.string().min(1), whatsapp: text, share: text, shareLinkedIn: text,
     shareEmail: text, copyLink: text, linkCopied: text,
+    titleSuffix: z.string().min(1),
     shareEmailBody: text.refine((t) => t.includes('{description}') && t.includes('{url}'), 'precisa manter {description} e {url}'),
     whatsappTemplate: text.refine((t) => ['{title}', '{name}', '{email}', '{phone}', '{message}'].every((k) => t.includes(k)), 'precisa manter {title}, {name}, {email}, {phone} e {message}'),
     form: z.object({ name: text, email: text, phone: text, message: text }),
   }),
-  legal: z.object({ indexAria: text, ctaTitle: text, ctaText: text, ctaPrimary: text, ctaSecondary: text }),
+  legal: z.object({ indexAria: text, ctaTitle: text, ctaText: text, ctaPrimary: text, ctaSecondary: text, titleSuffix: z.string().min(1) }),
   contactPage: z.object({ channelsAria: text, honeypotLabel: text }),
   notFound: z.object({ title: text, description: text, code: text, heading: text, text, cta: text }),
 });

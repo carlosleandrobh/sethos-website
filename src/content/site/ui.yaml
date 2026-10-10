@@ -64,6 +64,8 @@ service:
   shareEmail: "Compartilhar por email"
   copyLink: "Copiar link"
   linkCopied: "Link copiado!"
+  # Texto que vem DEPOIS do nome do serviço na aba do navegador e no Google. Mantenha o espaço e o | do começo.
+  titleSuffix: " | SETHOS - Consultoria Especializada Totvs RM"
   # E-mail aberto ao clicar em "Compartilhar por email". Mantenha {description} e {url}.
   shareEmailBody: "{description}\n\nSaiba mais: {url}"
   # Mensagem enviada ao WhatsApp pelo formulário lateral. Mantenha {title}, {name}, {email}, {phone} e {message}.
@@ -78,6 +80,8 @@ service:
 # Páginas de Política de Privacidade, Cookies e Termos.
 legal:
   indexAria: "Índice"
+  # Texto que vem DEPOIS do nome da página na aba do navegador e no Google.
+  titleSuffix: " - SETHOS"
   ctaTitle: "Precisa de ajuda com consultoria Totvs RM RH?"
   ctaText: "Entre em contato conosco para saber como podemos ajudar sua empresa."
   ctaPrimary: "Fale Conosco"

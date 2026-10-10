@@ -61,7 +61,7 @@ Regras de segurança:
 
 | Quero mudar… | Arquivo | Formato |
 |---|---|---|
-| Telefone, e-mail, WhatsApp, CNPJ, redes sociais, itens do menu, texto do rodapé, balão do WhatsApp | `src/content/site/site.yaml` | YAML |
+| Telefone, e-mail, WhatsApp, CNPJ, cidade (Google), redes sociais, itens do menu, texto do rodapé, balão do WhatsApp | `src/content/site/site.yaml` | YAML |
 | **Texto dos e-mails** do formulário (aviso que chega à SETHOS e confirmação enviada à pessoa) | `src/content/site/emails.yaml` | YAML |
 | Botões repetidos, textos para leitores de tela, página 404, rótulos das páginas de serviço, mensagem do WhatsApp dos serviços | `src/content/site/ui.yaml` | YAML |
 | **Página inicial** (topo, destaques, resumo, faixa final, título do Google) | `src/content/pages/home.yaml` | YAML |
@@ -71,6 +71,7 @@ Regras de segurança:
 | **Contato** (canais, informações, formulário, mensagens de erro e de sucesso) | `src/content/pages/contact.yaml` | YAML |
 | **Um serviço** (título, descrição, benefícios, FAQ, botão, texto "Sobre este serviço") | `src/content/services/<nome-do-servico>.md` | Markdown + YAML no topo |
 | **Política de Privacidade / Cookies / Termos de Uso** | `src/content/legal/*.md` | Markdown |
+| **Imagem de compartilhamento** (prévia no WhatsApp/LinkedIn) | gerada sozinha a partir do título da página (nada a editar) | automático |
 | Logo e mascote | `src/assets/brand/` (troque o arquivo mantendo o mesmo nome) | imagem PNG |
 | Textos de descrição das imagens (para acessibilidade) | `src/content/site/ui.yaml` | YAML |
 
