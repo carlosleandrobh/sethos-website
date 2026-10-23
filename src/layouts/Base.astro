@@ -7,6 +7,7 @@ import ConsentBanner from '../components/ConsentBanner.astro';
 import { site, ui } from '../lib/content';
 import { canonicalPath, ogSlug } from '../lib/url';
 import { toScript } from '../lib/jsonld';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -28,6 +29,7 @@ const ogImage = new URL(`/og/${ogSlug(Astro.url.pathname)}.png`, site.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" type="image/png" href="/favicon.png" />

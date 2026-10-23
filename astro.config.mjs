@@ -10,6 +10,8 @@ import { lastModified } from './scripts/lib/lastmod.mjs';
 export default defineConfig({
   site: 'https://sethos.com.br',
   trailingSlash: 'never',
+  // Baixa a página do link assim que o visitante passa o mouse/toca; a navegação parece instantânea.
+  prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   build: { format: 'file', inlineStylesheets: 'never' },
   integrations: [
     sitemap({

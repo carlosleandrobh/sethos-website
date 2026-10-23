@@ -43,7 +43,7 @@ const isActive = (href: string) =>
       <li class="ml-3"><a href={site.cta.href} class="btn btn-primary">{site.cta.label}</a></li>
     </ul>
 
-    <details class="group relative md:hidden">
+    <details id="mobile-menu" class="group relative md:hidden">
       <summary
         class="flex size-11 cursor-pointer list-none items-center justify-center rounded-control text-ink hover:bg-surface [&::-webkit-details-marker]:hidden"
         aria-label={ui.nav.openMenu}
@@ -72,3 +72,22 @@ const isActive = (href: string) =>
     </details>
   </nav>
 </header>
+
+<script>
+  // Menu mobile: fecha ao tocar fora, ao apertar Esc ou ao escolher um link.
+  const menu = document.getElementById('mobile-menu') as HTMLDetailsElement | null;
+  if (menu) {
+    const close = () => (menu.open = false);
+    document.addEventListener('click', (e) => {
+      if (!menu.open) return;
+      const target = e.target as Element;
+      if (!menu.contains(target) || target.closest('a')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        close();
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
