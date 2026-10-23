@@ -218,6 +218,7 @@ Convenções: nomes de arquivos em PascalCase (componentes) e kebab-case (conte�
 | D10 | Supabase antigo | Será **excluído** (secret key vazou no GitHub). **Exportar `site_content` ANTES de excluir.** Revogar/rotacionar também qualquer outra chave do projeto antigo (Postmark etc.). O repositório novo começa **sem histórico** do antigo. |
 | D11 | Supabase novo | **Não usado na v1** (site estático, sem banco). Só entra se você quiser guardar os contatos recebidos; nesse caso, será uma tabela só de leads, escrita pela função serverless, com chave *secret* apenas no servidor. |
 | D12 | Princípios de design | Moderno e simples: ver seção 4-A. |
+| D13 | WhatsApp em `/contato` | **Aprovado (opção A):** o botão flutuante do WhatsApp fica oculto em `/contato`, que já oferece os canais de contato. As 4 linhas do botão (balão e rótulos) estão em `legacy-content/approved-removals.json` para essa rota. |
 
 ---
 

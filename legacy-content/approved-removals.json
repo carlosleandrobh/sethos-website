@@ -37,8 +37,15 @@
     "Slide anterior ... Seção inicial": "Controles do carrossel do hero, removido em favor de um hero único + destaques (decisão do usuário 2026-10-08).",
     "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário).",
     "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível.",
-    "breadcrumb": "Rótulo ARIA das páginas legais; o novo usa 'Breadcrumb' (já aprovado/presente nos serviços)."
+    "breadcrumb": "Rótulo ARIA das páginas legais; o novo usa 'Breadcrumb' (já aprovado/presente nos serviços).",
+    "/contato: botão flutuante do WhatsApp": "Oculto em /contato, que já tem os canais de contato e o WhatsApp na própria página (decisão do usuário, opção A, D13)."
   },
+  "/contato": [
+    "💬 Como podemos ajudar?",
+    "Fale conosco pelo WhatsApp sobre Totvs RM RH!",
+    "Contato via WhatsApp",
+    "Falar no WhatsApp sobre Totvs RM RH"
+  ],
   "/": [
     "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
   ],
