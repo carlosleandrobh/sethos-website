@@ -32,7 +32,7 @@ describe('netlify.toml — segurança', () => {
     (header) => expect(toml).toContain(header),
   );
   it('libera só a chave PÚBLICA do Turnstile no secrets scanning (nunca os segredos)', () => {
-    expect(toml).toMatch(/SECRETS_SCAN_OMIT_KEYS\s*=\s*"PUBLIC_TURNSTILE_SITE_KEY"/);
+    expect(toml).toMatch(/SECRETS_SCAN_OMIT_KEYS\s*=\s*"PUBLIC_TURNSTILE_SITE_KEY,CONTACT_TO_EMAIL,CONTACT_FROM_EMAIL"/);
   });
 });
 
