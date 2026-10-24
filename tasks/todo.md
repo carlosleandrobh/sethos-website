@@ -35,7 +35,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: 9 slugs idênticos aos atuais; axe limpo; e2e.
 - [x] **T9 Páginas legais** (privacidade, cookies, termos) — texto idêntico.
   - Verify: e2e 200 + conferência de texto.
-- [x] **T8 Contato + envio** (feito: formulário simples em tela única como no site antigo; função `netlify/functions/send-contact.mts` com Turnstile, honeypot, rate limit, escape HTML, Resend; 39 testes unitários + e2e. **Falta só configurar as chaves no Netlify/Resend/Turnstile**)
+- [x] **T8 Contato + envio** (feito: formulário simples em tela única como no site antigo; função `netlify/functions/send-contact.mts` com Turnstile, honeypot, rate limit, escape HTML, Resend; 39 testes unitários + e2e. **Falta só configurar as chaves no Netlify/Resend/Turnstile**. **Correção pós-publicação (2026-10-24, commit `15be602`):** em produção o formulário não enviava nem mostrava mensagem porque a CSP bloqueava o script embutido no HTML (o mesmo valia para banner de cookies e menu mobile); `assetsInlineLimit: 0` no `astro.config.mjs` gera os scripts como arquivos em `/_astro/`; envio e confirmação ao visitante validados em produção; ver D14 no SPEC.md)
   - Acceptance: formulário multi-etapas (dados → projeto → preferência/horário), validação cliente+servidor, máscara de telefone, Turnstile, honeypot, rate-limit; função `send-contact` com HTML escapado, e-mail à SETHOS + confirmação ao visitante; botão WhatsApp com mensagem pré-preenchida.
   - Verify: testes unitários (validação, escape de `<script>`), e2e com função mockada; envio real em preview. **→ CP2**
   - Files: ~6 (ContactForm, steps, validation, functions/send-contact, teste, página)

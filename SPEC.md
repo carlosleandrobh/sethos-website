@@ -219,6 +219,7 @@ Convenções: nomes de arquivos em PascalCase (componentes) e kebab-case (conte�
 | D11 | Supabase novo | **Não usado na v1** (site estático, sem banco). Só entra se você quiser guardar os contatos recebidos; nesse caso, será uma tabela só de leads, escrita pela função serverless, com chave *secret* apenas no servidor. |
 | D12 | Princípios de design | Moderno e simples: ver seção 4-A. |
 | D13 | WhatsApp em `/contato` | **Aprovado (opção A):** o botão flutuante do WhatsApp fica oculto em `/contato`, que já oferece os canais de contato. As 4 linhas do botão (balão e rótulos) estão em `legacy-content/approved-removals.json` para essa rota. |
+| D14 | Scripts fora do HTML (CSP) | **Correção de produção (2026-10-24):** o Astro embutia scripts pequenos (formulário de contato, banner de cookies, menu mobile) no HTML e a CSP (`script-src` sem `unsafe-inline`) os bloqueava; o formulário só recarregava a página, sem enviar nem mostrar mensagem. Regra: `vite.build.assetsInlineLimit: 0` em `astro.config.mjs`, para todo script sair como arquivo em `/_astro/`. Nunca liberar `unsafe-inline` na CSP para contornar isso. |
 
 ---
 
