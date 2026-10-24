@@ -25,5 +25,6 @@ export default defineConfig({
   ],
   // Texto jurídico não pode ser "embelezado": aspas retas continuam retas, "--" não vira travessão etc.
   markdown: { processor: satteri({ features: { smartPunctuation: false } }) },
-  vite: { plugins: [tailwindcss()] },
+  // assetsInlineLimit: 0 impede o Astro de embutir scripts pequenos no HTML; a CSP (netlify.toml) bloqueia script inline.
+  vite: { plugins: [tailwindcss()], build: { assetsInlineLimit: 0 } },
 });
