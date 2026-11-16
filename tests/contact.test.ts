@@ -53,4 +53,10 @@ describe('segurança', () => {
     expect(parsed.message).toHaveLength(2000);
     expect(parsed.name).toHaveLength(120);
   });
+  it('parseContactBody: serviço de interesse só passa se tiver formato de identificador', () => {
+    expect(parseContactBody({ ...base, service: 'dashboards-rh' })!.service).toBe('dashboards-rh');
+    for (const service of ['', 'Dashboards RH', '<script>', '../x', 'a'.repeat(81), 7, null, undefined]) {
+      expect(parseContactBody({ ...base, service })!.service).toBeUndefined();
+    }
+  });
 });

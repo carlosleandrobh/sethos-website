@@ -5,7 +5,7 @@ ROBOTS:
 ---
 Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
 Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
-Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Nossa História Conheça a SETHOS Desde 2017, somos especialistas em consultoria Totvs RM com foco em Recursos Humanos.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Todos os serviços Contato Solicite um contato Início Quem Somos Serviços Todos os serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Contato Solicite um contato Nossa História Conheça a SETHOS Desde 2017, somos especialistas em consultoria Totvs RM com foco em Recursos Humanos.
 Nossa experiência e dedicação transformam processos e potencializam resultados.
 Quem Somos Fundada em 2017 por especialistas com mais de 15 anos de experiência em ERPs, a SETHOS surgiu da identificação de uma necessidade de mercado por consultoria especializada em Totvs RM com foco em Departamento Pessoal e Recursos Humanos.
 Desde então, expandimos nossa atuação para outros serviços, sempre mantendo nosso compromisso com a qualidade e com os resultados.
@@ -13,9 +13,11 @@ Nossa equipe é formada por profissionais com vasta experiência em implantaçã
 Contamos com consultores técnicos e de negócios que compreendem profundamente os desafios dos departamentos de Folha de Pagamento e Gestão de Pessoas.
 Conheça Nossos Serviços Nossa Missão Nossa missão é potencializar a transformação digital das áreas de Administração de Pessoal e Gestão de Pessoas nas empresas por meio de soluções tecnológicas e serviços personalizados, atuando como um parceiro do negócio.
 Nossa Visão Ser referência no mercado de prestação de serviços para Totvs RM RH, destacando-se pela excelência técnica, tendo a entrega dos projetos no prazo e o nível de satisfação dos clientes como medidas de desempenho.
-Nossos Diferenciais Conhecimento profundo do Totvs RM RH e seus módulos Especialização em processos de Recursos Humanos Atendimento personalizado e próximo ao cliente Metodologia ágil e flexível de implantação Suporte contínuo pós-implantação Conheça Nossos Valores e Princípios → Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
+Nossos Diferenciais Conhecimento profundo do Totvs RM RH e seus módulos Especialização em processos de Recursos Humanos Atendimento personalizado e próximo ao cliente Metodologia ágil e flexível de implantação Suporte contínuo pós-implantação Conheça Nossos Valores e Princípios → Pronto para otimizar o uso do seu ERP no RH?
+Entre em contato conosco para discutir como podemos ajudar a impulsionar o sucesso do seu RH com soluções personalizadas.
+Fale Conosco Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

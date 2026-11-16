@@ -6,6 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ServiceAside from '../../components/ServiceAside.astro';
 import { site, ui } from '../../lib/content';
 import { crumbsJsonLd, serviceJsonLd } from '../../lib/seo';
+import { contactFormHref } from '../../lib/url';
 
 export async function getStaticPaths() {
   const all = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -44,7 +45,7 @@ const list = 'mt-5 space-y-3 text-lg';
     <p class="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">{s.shortDescription}</p>
     {/* Abaixo de lg a lateral de contato só aparece depois de todo o conteúdo: estes botões a antecipam. */}
     <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:hidden" data-service-header-cta>
-      <a href={site.cta.href} class="btn btn-primary min-h-12 px-7 text-base">{site.cta.label}</a>
+      <a href={contactFormHref(entry.id)} class="btn btn-primary min-h-12 px-7 text-base">{site.cta.label}</a>
       <a href="#interessado" class="btn btn-outline min-h-12 px-7 text-base">{t.whatsapp}</a>
     </div>
   </header>
@@ -141,7 +142,7 @@ const list = 'mt-5 space-y-3 text-lg';
     </div>
 
     <div class="lg:col-span-4">
-      <ServiceAside title={s.title} proposalTopic={s.proposalTopic} shortDescription={s.shortDescription} url={url} />
+      <ServiceAside slug={entry.id} title={s.title} proposalTopic={s.proposalTopic} shortDescription={s.shortDescription} url={url} />
     </div>
   </div>
 </Base>

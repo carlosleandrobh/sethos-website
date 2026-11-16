@@ -5,8 +5,8 @@ ROBOTS:
 ---
 Pular para o conteúdo Sua privacidade Usamos cookies de marketing (Google e Meta) para medir a eficácia dos nossos anúncios.
 Eles só são ativados se você aceitar, e você pode mudar de ideia a qualquer momento.
-Política de Cookies Aceitar Recusar Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início Quem Somos Serviços Nossos Valores Contato Solicite um contato Início / Serviços / Administração de Banco de Dados SQL Server Administração de Banco de Dados SQL Server Otimização e gestão do banco de dados para garantir performance.
-Sobre este serviço Oferecemos serviços especializados de administração de bancos de dados SQL Server para o ambiente Totvs RM, garantindo desempenho, segurança e disponibilidade.
+Política de Cookies Aceitar Recusar Início Quem Somos Serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Todos os serviços Contato Solicite um contato Início Quem Somos Serviços Todos os serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Contato Solicite um contato Início / Serviços / Administração de Banco de Dados SQL Server Administração de Banco de Dados SQL Server Otimização e gestão do banco de dados para garantir performance.
+Solicite um contato Conversar no WhatsApp Sobre este serviço Oferecemos serviços especializados de administração de bancos de dados SQL Server para o ambiente Totvs RM, garantindo desempenho, segurança e disponibilidade.
 Nossos DBAs realizam monitoramento proativo, otimização de consultas, planejamento de capacidade, backups e recuperação.
 Trabalhamos com ambiente on-premise, cloud (Amazon AWS, Microsoft Azure e Google Cloud) e Totvs T-Cloud.
 Principais Benefícios Melhoria de 70% na performance Backup automatizado e seguro Monitoramento 24/7 Alta disponibilidade Otimização contínua O que está incluso Monitoramento proativo Otimização de queries Backup e recovery Planejamento de capacidade Segurança avançada Perguntas Frequentes Vocês fazem backup dos dados?
@@ -15,11 +15,11 @@ Como é feito o monitoramento?
 Utilizamos ferramentas especializadas para monitoramento 24/7 com alertas automáticos para situações críticas.
 Atendem emergências fora do horário?
 Sim, oferecemos plantão 24/7 para situações críticas que impactem a disponibilidade do sistema.
-Serviço Anterior Treinamentos sob Demanda Otimize seu banco de dados Administração especializada SQL Server para máxima performance Agendar uma Conversa Interessado neste serviço?
-Fale conosco e receba uma proposta personalizada para administração de banco de dados sql server Seu nome completo Seu melhor e-mail Telefone para contato Conte-nos mais sobre sua necessidade Conversar no WhatsApp (31) 97245-7451 falecom@sethos.com.br Compartilhar este serviço Link copiado!
+Otimize seu banco de dados Administração especializada SQL Server para máxima performance Agendar uma Conversa Serviço Anterior Treinamentos sob Demanda Interessado neste serviço?
+Fale conosco e receba uma proposta personalizada para administração de banco de dados sql server Seu nome completo Seu melhor e-mail Telefone para contato Conte-nos mais sobre sua necessidade Conversar no WhatsApp Solicite um contato (31) 97245-7451 falecom@sethos.com.br Compartilhar este serviço Link copiado!
 Especialistas em Totvs RM com foco em Departamento Pessoal e Gestão de Pessoas.
 Oferecemos soluções personalizadas para otimizar seus processos e maximizar a eficiência operacional da sua empresa.
-Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
+Siga-nos nas redes Links Rápidos Início Quem Somos Serviços Nossos Valores Contato Serviços Sustentação Outsourcing Técnico Dashboards e Relatórios Integração entre Sistemas Implantação de Sistema e Migração de Dados Desenvolvimento de Customizações Consultoria Especializada em RH Treinamentos sob Demanda Administração de Banco de Dados SQL Server Contato falecom@sethos.com.br (31) 97245-7451 WhatsApp Política de Privacidade Política de Cookies Termos de Uso Configurações de Cookies © ANO SETHOS Tecnologia da Informação Ltda.
 CNPJ: 29.298.410/0001-42.
 Todos os direitos reservados.
 A SETHOS TECNOLOGIA DA INFORMAÇÃO LTDA é uma empresa independente e não possui nenhum vínculo, direto ou indireto, com a TOTVS, suas franquias ou representantes.

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import handler from '../netlify/functions/send-contact.mts';
+import { emails, services } from './content';
 
 const ctx = { ip: '203.0.113.9' } as Parameters<typeof handler>[1];
 const valid = {
@@ -81,6 +82,18 @@ describe('send-contact', () => {
     expect(calls[0].html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
     expect(calls[0].html).not.toContain('<script>');
     expect(calls[1].to).toEqual(['maria@empresa.com.br']);
+  });
+  it('serviço de interesse: o e-mail mostra o nome do serviço; identificador desconhecido vira "não informado"', async () => {
+    const companyText = async (service: unknown) => {
+      fetchMock.mockClear();
+      expect((await handler(request({ ...valid, service }), ctx)).status).toBe(200);
+      return JSON.parse((resendCalls()[0][1] as RequestInit).body as string).text as string;
+    };
+    const label = emails.company.labels.service;
+    expect(await companyText(services[0].slug)).toContain(`${label}: ${services[0].title}`);
+    for (const unknown of ['servico-que-nao-existe', 'constructor', 'toString', '<b>x</b>', undefined]) {
+      expect(await companyText(unknown)).toContain(`${label}: ${emails.company.notInformed}`);
+    }
   });
   it('falha da confirmação não derruba o envio; falha da empresa -> 502', async () => {
     fetchMock

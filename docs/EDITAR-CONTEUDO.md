@@ -102,8 +102,18 @@ Em `site.yaml`, na lista `social:`, copie ou apague um bloco de 3 linhas
 (`label`, `icon`, `href`). Os nomes de ícones: https://icon-sets.iconify.design/simple-icons/
 
 ### Mudar o menu
-Em `site.yaml`, lista `nav:`. A ordem do arquivo é a ordem na tela. O `href` começa com `/`.
-(Para um item novo funcionar, a página precisa existir.)
+Em `site.yaml`, lista `nav:` (menu do topo) e lista `footerNav:` ("Links Rápidos" do rodapé, que pode ter
+páginas que não estão no topo). A ordem do arquivo é a ordem na tela. O `href` começa com `/`.
+(Para um item novo funcionar, a página precisa existir.) O item "Serviços" do topo ganha sozinho a lista dos serviços.
+
+### Mudar para onde levam as etiquetas do topo da home
+Em `src/content/pages/home.yaml`, em `hero: › chips:`, cada etiqueta tem um `href:` com a página que abre ao clicar
+(ex.: `/servicos/dashboards-rh`). Apague a linha `href:` para a etiqueta deixar de ser clicável.
+
+### Campo "Serviço de interesse" do formulário de contato
+A lista é montada sozinha com os serviços de `src/content/services/`. O nome do campo e o texto da primeira opção
+ficam em `src/content/pages/contact.yaml` (`form: › fields: › service:`); o nome que aparece no e-mail, em
+`src/content/site/emails.yaml` (`company: › labels: › service`).
 
 ### Editar um serviço
 Abra `src/content/services/<servico>.md`. O topo (entre `---` e `---`) tem título, benefícios, FAQ e

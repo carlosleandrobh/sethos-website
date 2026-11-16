@@ -53,7 +53,15 @@ social:
 
 # --- Menu principal e rodapé -------------------------------------------------
 # A ordem aqui é a ordem na tela. "href" é o endereço interno (começa com /).
+# Menu do topo (o item "Serviços" ganha sozinho a lista dos serviços).
 nav:
+  - { label: "Início", href: "/" }
+  - { label: "Quem Somos", href: "/quem-somos" }
+  - { label: "Serviços", href: "/servicos" }
+  - { label: "Contato", href: "/contato" }
+
+# "Links Rápidos" do rodapé (pode ter páginas que não estão no menu do topo).
+footerNav:
   - { label: "Início", href: "/" }
   - { label: "Quem Somos", href: "/quem-somos" }
   - { label: "Serviços", href: "/servicos" }

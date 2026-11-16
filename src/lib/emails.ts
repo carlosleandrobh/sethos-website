@@ -19,8 +19,8 @@ const FONT = 'font-family:Arial,sans-serif';
 // O texto vem de um arquivo editável: SEMPRE é escapado (nunca interpretado como HTML).
 const p = (value: string, extra = '') => `<p style="${FONT};font-size:15px;${extra}">${escapeHtml(value)}</p>`;
 
-/** Aviso que chega para a SETHOS. */
-export function companyEmail(t: EmailsConfig, c: ContactInput): Email {
+/** Aviso que chega para a SETHOS. `serviceTitle` é o nome do serviço de interesse, quando a pessoa escolheu um. */
+export function companyEmail(t: EmailsConfig, c: ContactInput, serviceTitle?: string): Email {
   const l = t.company.labels;
   const none = t.company.notInformed;
   const fields: [string, string][] = [
@@ -29,6 +29,7 @@ export function companyEmail(t: EmailsConfig, c: ContactInput): Email {
     [l.phone, c.phone || none],
     [l.preference, t.preferenceLabels[c.preference]],
     [l.bestTime, c.bestTime ? t.bestTimeLabels[c.bestTime] : none],
+    [l.service, serviceTitle ? singleLine(serviceTitle) : none],
   ];
   const rows = fields
     .map(

@@ -10,13 +10,14 @@ interface Props {
   subtitle: string;
   primaryCta: string;
   secondaryCta: string;
-  chips: { label: string; icon: string }[];
+  chips: { label: string; icon: string; href?: string }[];
 }
 const { eyebrow, title, subtitle, primaryCta, secondaryCta, chips } = Astro.props;
 
 // "15+ anos de experiência" vira número de credencial + legenda (o texto no conteúdo continua uma frase só).
 const [years, ...rest] = eyebrow.split(' ');
 const caption = rest.join(' ');
+const chipClass = 'inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-[0.8125rem] text-ink-soft';
 ---
 
 <section class="bg-white" aria-labelledby="hero-title">
@@ -39,9 +40,18 @@ const caption = rest.join(' ');
       <ul class="mt-10 flex flex-wrap gap-x-2 gap-y-2">
         {
           chips.map((chip) => (
-            <li class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-[0.8125rem] text-ink-soft">
-              <Icon name={`lucide:${chip.icon}`} class="size-4 text-brand-dark" aria-hidden="true" />
-              {chip.label}
+            <li>
+              {chip.href ? (
+                <a href={chip.href} class={`${chipClass} min-h-9 transition-colors hover:border-brand-dark hover:text-brand-dark`}>
+                  <Icon name={`lucide:${chip.icon}`} class="size-4 text-brand-dark" aria-hidden="true" />
+                  {chip.label}
+                </a>
+              ) : (
+                <span class={chipClass}>
+                  <Icon name={`lucide:${chip.icon}`} class="size-4 text-brand-dark" aria-hidden="true" />
+                  {chip.label}
+                </span>
+              )}
             </li>
           ))
         }

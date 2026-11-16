@@ -20,15 +20,20 @@ hero:
   primaryCta: "Solicite um contato"      # botão vermelho (leva a /contato)
   secondaryCta: "Nossos Serviços"        # botão de contorno (leva a /servicos)
   # Etiquetas de áreas abaixo dos botões. "icon" é o nome de um ícone de https://lucide.dev/icons
+  # "href" (opcional) é a página que abre ao clicar na etiqueta; sem ele, a etiqueta não é clicável.
   chips:
     - label: "Gestão de Pessoas"
       icon: "users"
+      href: "/servicos/consultoria-rh"
     - label: "Relatórios"
       icon: "chart-line"
+      href: "/servicos/dashboards-rh"
     - label: "Banco de Dados"
       icon: "database"
+      href: "/servicos/bancodados-sql"
     - label: "Configurações"
       icon: "settings"
+      href: "/servicos/customizacoes-totvs"
 
 # Três destaques logo abaixo do topo (sempre exatamente 3).
 highlights:
@@ -42,7 +47,7 @@ highlights:
     href: "/servicos/sustentacao-erp"
   - title: "Dashboards e Relatórios"
     text: "Dashboards interativos e relatórios personalizados para auxiliar na tomada de decisões"
-    cta: "Nossos Serviços"
+    cta: "Saiba Mais"
     href: "/servicos/dashboards-rh"
 
 # Resumo "Quem Somos" da home.

@@ -45,13 +45,21 @@ describe('e-mail para a SETHOS', () => {
     const l = templates.company.labels;
     const pieces = [
       templates.company.heading, templates.company.messageHeading, templates.company.notInformed,
-      l.name, l.email, l.phone, l.preference, l.bestTime,
+      l.name, l.email, l.phone, l.preference, l.bestTime, l.service,
       templates.preferenceLabels.whatsapp, templates.bestTimeLabels.morning,
     ];
     for (const piece of pieces) {
       expect(mail.html).toContain(escaped(piece));
       expect(mail.text).toContain(piece);
     }
+  });
+  it('serviço de interesse: mostra o nome do serviço (escapado) ou "não informado"', () => {
+    const l = templates.company.labels;
+    expect(mail.text).toContain(`${l.service}: ${templates.company.notInformed}`);
+    const withService = companyEmail(templates, contact, 'Dashboards & <b>Relatórios</b>');
+    expect(withService.text).toContain(`${l.service}: Dashboards & <b>Relatórios</b>`);
+    expect(withService.html).toContain('Dashboards &amp; &lt;b&gt;Relatórios&lt;/b&gt;');
+    expect(withService.html).not.toContain('<b>Relatórios</b>');
   });
   it('escapa HTML do visitante (nome e mensagem)', () => {
     expect(mail.html).not.toContain('<script>');

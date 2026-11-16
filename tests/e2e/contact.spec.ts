@@ -1,6 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
-import { contact, optionLabel } from '../content';
+import { contactFormHref } from '../../src/lib/url';
+import { contact, optionLabel, services } from '../content';
 
 // Rótulos, mensagens de erro e textos esperados vêm de src/content/pages/contact.yaml.
 const f = contact.form;
@@ -63,4 +64,47 @@ test('contato: falha do servidor mostra mensagem e mantém os dados', async ({ p
   await expect(page.locator('#form-error')).toHaveText(f.failure.generic);
   await expect(page.getByLabel(f.fields.name.label)).toHaveValue('Maria Teste');
   await expect(page.getByRole('button', { name: f.submit })).toBeEnabled();
+});
+
+test('contato: o botão do topo leva ao formulário', async ({ page }) => {
+  await page.goto('/contato');
+  await page.getByRole('main').getByRole('link', { name: f.title, exact: true }).click();
+  await expect(page).toHaveURL(/#formulario$/);
+  await expect(page.locator('#contact-form')).toBeInViewport();
+});
+
+test('contato: serviço de interesse vem escolhido pela URL e segue no envio', async ({ page }) => {
+  let payload: Record<string, unknown> | undefined;
+  await page.route('**/api/contact', async (route) => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  const service = services[2];
+  await page.goto(contactFormHref(service.slug));
+  const select = page.getByLabel(f.fields.service.label);
+  await expect(select).toHaveValue(service.slug);
+  await expect(select.locator('option')).toHaveText([f.fields.service.none, ...services.map((s) => s.title)]);
+
+  await page.getByLabel(f.fields.name.label).fill('Maria Teste');
+  await page.getByLabel(f.fields.email.label).fill('maria@empresa.com.br');
+  await page.getByLabel(f.fields.message.label).fill('Preciso de ajuda.');
+  await page.getByRole('button', { name: f.submit }).click();
+  await expect(page.locator('#form-success')).toBeVisible();
+  expect(payload).toMatchObject({ service: service.slug });
+});
+
+test('contato: sem serviço na URL (ou com um desconhecido) nada vem escolhido e nada é enviado', async ({ page }) => {
+  let payload: Record<string, unknown> | undefined;
+  await page.route('**/api/contact', async (route) => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+  });
+  await page.goto('/contato?servico=nao-existe');
+  await expect(page.getByLabel(f.fields.service.label)).toHaveValue('');
+  await page.getByLabel(f.fields.name.label).fill('Maria Teste');
+  await page.getByLabel(f.fields.email.label).fill('maria@empresa.com.br');
+  await page.getByLabel(f.fields.message.label).fill('Preciso de ajuda.');
+  await page.getByRole('button', { name: f.submit }).click();
+  await expect(page.locator('#form-success')).toBeVisible();
+  expect(payload).not.toHaveProperty('service');
 });

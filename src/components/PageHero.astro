@@ -14,5 +14,6 @@ const { eyebrow, title, lead } = Astro.props;
       {title.map((line) => <span class="block">{line}</span>)}
     </h1>
     <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">{lead}</p>
+    <slot />
   </div>
 </section>
