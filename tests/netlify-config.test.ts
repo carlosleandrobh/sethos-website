@@ -45,6 +45,7 @@ describe('netlify.toml — redirecionamentos de URLs antigas', () => {
   it('variações comuns apontam para a URL canônica com 301', () => {
     expect(rule('/index.html')).toMatchObject({ to: '/', status: 301 });
     expect(rule('/home')).toMatchObject({ to: '/', status: 301 });
+    expect(rule('/og-image.png')).toMatchObject({ to: '/og/home.png', status: 301 });
     expect(rule('/servicos/')).toMatchObject({ to: '/servicos', status: 301 });
   });
   it('nenhum redirecionamento aponta para si mesmo', () => {
