@@ -45,6 +45,8 @@ O texto atual foi mantido sem alterações, mas **descreve mais do que o site fa
   (nem no contêiner antigo). Opções: (a) adicionar o GA4 (preciso do ID `G-…`); (b) ajustar o texto jurídico.
 - **6.2 promete categorias** com controle detalhado; hoje há **uma** categoria opcional (marketing).
 - O link do rodapé e o banner **já usam o nome "Configurações de Cookies"** citado na política (6.2 e 10.1).
+- **Decidido (2026-11-16):** a política **não precisa citar** a medição de cliques em WhatsApp, telefone, e-mail e
+  agenda (eventos `Contact`/`contact`). Ela só ocorre após o "Aceitar" e está coberta pelo que o aviso já informa.
 
 ## Para quem mantém o código
 - `src/lib/consent.ts` (regras, puras e testadas), `src/lib/trackers.ts` (carregadores sem script inline),
