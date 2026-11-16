@@ -61,3 +61,14 @@ test('o primeiro serviço não exibe "anterior"', async ({ page }) => {
   await page.goto(`/servicos/${services[0].slug}`);
   await expect(page.getByRole('link', { name: new RegExp(ui.service.previous) })).toHaveCount(0);
 });
+
+test('404: h1 único, sem overflow e sem violações axe', async ({ page }) => {
+  const response = await page.goto('/pagina-que-nao-existe');
+  expect(response?.status()).toBe(404);
+  await expect(page.locator('h1')).toHaveCount(1);
+  await expect(page.locator('h1')).toHaveText(ui.notFound.code);
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+  expect(overflow).toBe(false);
+  const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  expect(results.violations, JSON.stringify(results.violations.map((v) => [v.id, v.nodes.map((n) => n.target)]))).toEqual([]);
+});

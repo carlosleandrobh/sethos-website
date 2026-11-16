@@ -48,7 +48,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: e2e confirma 0 requests de terceiros antes do aceite.
 - [x] **T5b Navegação e CTAs (D15)** (feito 2026-11-16: `CtaBand`, submenu de Serviços, serviços no rodapé, 404 com atalhos, CTAs no topo do serviço, evento `Contact`; `tests/e2e/navigation.spec.ts` + `tests/trackers.test.ts`)
 - [x] **T5c Navegação e CTAs, 2º grupo (D16)** (feito 2026-11-16: rótulo "Saiba Mais", "Nossos Valores" só no rodapé (`footerNav`), etiquetas do hero como links, campo "Serviço de interesse" (formulário + e-mail), lateral do serviço simplificada, atalho para o formulário em `/contato`; testes unitários e e2e novos)
-- [ ] **T12 Testes, acessibilidade, performance**
+- [ ] **T12 Testes, acessibilidade, performance** (parcial 2026-11-16: `npm audit fix` levou de 37 vulnerabilidades (12 altas) para 15, nenhuma alta; em produção resta 1 moderada no `satori`, usado só no build das imagens OG, cuja correção exige versão com quebra; axe agora cobre também a 404. **Falta:** Lighthouse CI mobile e as metas de LCP/CLS)
   - Acceptance: Playwright + axe em todas as rotas; Lighthouse CI mobile ≥ 95/95/95/100; LCP < 2,0 s; CLS < 0,1; `npm audit --omit=dev` sem alta/crítica. **→ CP3**
 - [ ] **T13 Docs e cutover**
   - Acceptance: README (editar texto, adicionar serviço, publicar), ADR da decisão "sem CMS"; deploy preview; checklist de DNS; envio do sitemap ao Search Console; projeto antigo mantido 30 dias.
