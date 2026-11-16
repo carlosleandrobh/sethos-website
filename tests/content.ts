@@ -11,18 +11,20 @@ export const ui = yaml<Ui>('src/content/site/ui.yaml');
 export const emails = yaml<EmailsConfig>('src/content/site/emails.yaml');
 
 export interface HomeContent {
-  hero: { title: string; primaryCta: string; secondaryCta: string };
+  hero: { title: string; primaryCta: string; secondaryCta: string; chips: { label: string; href?: string }[] };
   contact: { title: string; text: string; cta: string };
 }
 export const home = yaml<HomeContent>('src/content/pages/home.yaml');
 
 export interface ContactContent {
   form: {
+    title: string;
     fields: {
       name: { label: string };
       email: { label: string };
       phone: { label: string };
       preference: { options: { value: string; label: string }[] };
+      service: { label: string; none: string };
       message: { label: string };
     };
     submit: string;

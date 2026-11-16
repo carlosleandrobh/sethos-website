@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
+import { contactFormHref } from '../../src/lib/url';
 import { home, services, site, ui } from '../content';
 
 // Navegação e chamadas para ação. Textos esperados vêm dos arquivos de conteúdo (tests/content.ts).
@@ -88,7 +89,7 @@ test.describe('página de serviço', () => {
     test.skip(info.project.name !== 'mobile');
     await page.goto(`/servicos/${s.slug}`);
     const header = page.locator('[data-service-header-cta]');
-    await expect(header.getByRole('link', { name: site.cta.label })).toHaveAttribute('href', site.cta.href);
+    await expect(header.getByRole('link', { name: site.cta.label })).toHaveAttribute('href', contactFormHref(s.slug));
     await expect(header.getByRole('link', { name: ui.service.whatsapp })).toHaveAttribute('href', '#interessado');
     await expect(header).toBeInViewport();
   });
@@ -132,4 +133,46 @@ test('clique em canal de contato gera evento Contact só com consentimento', asy
   await page.getByRole('contentinfo').locator('[data-contact="phone"]').click();
   await page.getByRole('contentinfo').locator('[data-contact="whatsapp"]').click();
   expect(await contacts()).toEqual([{ channel: 'phone' }, { channel: 'whatsapp' }]);
+});
+
+test('home: as etiquetas do hero levam às páginas indicadas no conteúdo', async ({ page }) => {
+  await page.goto('/');
+  const hero = page.locator('section[aria-labelledby="hero-title"]');
+  for (const chip of home.hero.chips) {
+    if (chip.href) await expect(hero.getByRole('link', { name: chip.label, exact: true })).toHaveAttribute('href', chip.href);
+    else await expect(hero.getByRole('link', { name: chip.label, exact: true })).toHaveCount(0);
+  }
+});
+
+test('itens só do rodapé não aparecem no menu do topo', async ({ page }, info) => {
+  await page.goto('/');
+  if (info.project.name === 'mobile') await page.getByLabel(ui.nav.openMenu).click();
+  const top = new Set(site.nav.map((item) => item.href));
+  for (const item of site.footerNav) {
+    await expect(page.getByRole('contentinfo').getByRole('link', { name: item.label, exact: true }).first()).toHaveAttribute('href', item.href);
+    if (!top.has(item.href)) await expect(mainNav(page).getByRole('link', { name: item.label, exact: true })).toHaveCount(0);
+  }
+});
+
+test('lateral do serviço: link para o formulário com o serviço; no WhatsApp só o nome é obrigatório', async ({ page }) => {
+  await page.addInitScript(() => {
+    (window as unknown as { opened: string[] }).opened = [];
+    window.open = (u) => {
+      (window as unknown as { opened: string[] }).opened.push(String(u));
+      return null;
+    };
+  });
+  const s = services[1];
+  await page.goto(`/servicos/${s.slug}`);
+  const aside = page.getByRole('complementary');
+  await expect(aside.getByRole('link', { name: site.cta.label })).toHaveAttribute('href', contactFormHref(s.slug));
+
+  await aside.getByPlaceholder(ui.service.form.name).fill('Maria Teste');
+  await aside.getByRole('button', { name: ui.service.whatsapp }).click();
+  const url = (await page.evaluate(() => (window as unknown as { opened: string[] }).opened))[0];
+  const text = new URL(url).searchParams.get('text')!;
+  expect(text).toContain('Maria Teste');
+  expect(text).toContain(s.title);
+  // as linhas do modelo cujos campos ficaram em branco não vão na mensagem
+  expect(text.split('\n').filter((line) => /:\*?\s*$/.test(line))).toEqual([]);
 });

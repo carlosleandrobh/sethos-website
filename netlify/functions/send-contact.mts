@@ -10,6 +10,9 @@ import generated from './emails.generated.json';
 const MAX_BODY_BYTES = 10_000;
 const templates = generated.emails as EmailsConfig;
 const siteInfo = generated.site as { email: string; phone: string };
+const serviceTitles = generated.services as Record<string, string>;
+/** Nome do serviço escolhido; undefined se não escolheu ou se o identificador não existe. */
+const serviceTitle = (slug: string | undefined) => (slug && Object.hasOwn(serviceTitles, slug) ? serviceTitles[slug] : undefined);
 
 const json = (status: number, body: Record<string, unknown>) =>
   new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' } });
@@ -88,7 +91,7 @@ export default async (req: Request, context: Context): Promise<Response> => {
     from: CONTACT_FROM_EMAIL,
     to: [CONTACT_TO_EMAIL],
     reply_to: contact.email,
-    ...companyEmail(templates, contact),
+    ...companyEmail(templates, contact, serviceTitle(contact.service)),
   });
   if (!sent) return json(502, { error: 'delivery' });
 

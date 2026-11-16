@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
@@ -7,9 +7,12 @@ import { crumbsJsonLd } from '../lib/seo';
 import { MAX_MESSAGE } from '../lib/contact';
 import { resolveTurnstileSiteKey } from '../lib/turnstile';
 import { site, ui, whatsappUrl } from '../lib/content';
+import { SERVICE_PARAM } from '../lib/url';
 
 const page = (await getEntry('contact', 'contact'))!.data;
 const f = page.form;
+// Opções do campo de serviço de interesse: os serviços do site, na ordem de exibição.
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 
 // Chave pública do Turnstile: obrigatória em qualquer build do Netlify; local usa a chave de teste da Cloudflare.
 const siteKey = resolveTurnstileSiteKey(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY, process.env.NETLIFY === 'true');
@@ -39,7 +42,10 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
   description={page.seo.description}
   jsonLd={[crumbsJsonLd([{ name: page.hero.title.join(' '), path: '/contato' }])]}
 >
-  <PageHero {...page.hero} />
+  <PageHero {...page.hero}>
+    {/* Atalho para o formulário, que fica abaixo dos canais de contato. */}
+    <a href="#formulario" class="btn btn-primary mt-8 min-h-12 px-7 text-base">{f.title}</a>
+  </PageHero>
 
   <section class="py-12 md:py-16" aria-label={ui.contactPage.channelsAria}>
     <div class="container-page">
@@ -80,7 +86,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
     </div>
   </section>
 
-  <section id="formulario" class="bg-surface py-16 md:py-24">
+  <section class="bg-surface py-16 md:py-24">
     <div class="container-page grid gap-12 lg:grid-cols-12 lg:gap-16">
       <div class="lg:col-span-5">
         <h2 class="text-3xl md:text-4xl">{page.intro.title}</h2>
@@ -102,7 +108,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
         </ul>
       </div>
 
-      <div class="rounded-3xl bg-white p-6 shadow-card md:p-10 lg:col-span-7">
+      <div id="formulario" class="scroll-mt-24 rounded-3xl bg-white p-6 shadow-card md:p-10 lg:col-span-7">
         <h2 class="text-2xl md:text-3xl">{f.title}</h2>
         <p class="mt-2 text-ink-soft">{f.subtitle}</p>
 
@@ -117,6 +123,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
           data-submit={f.submit}
           data-max={MAX_MESSAGE}
           data-counter={f.fields.message.counter}
+          data-service-param={SERVICE_PARAM}
         >
           <fieldset class="space-y-5">
             <legend class="text-lg font-semibold">{f.groups.personal}</legend>
@@ -169,6 +176,13 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
 
           <fieldset class="space-y-3">
             <legend class="text-lg font-semibold">{f.groups.project}</legend>
+            <div class="pb-2">
+              <label for="service" class={label}>{f.fields.service.label}</label>
+              <select id="service" name="service" class={input}>
+                <option value="">{f.fields.service.none}</option>
+                {services.map((s) => <option value={s.id}>{s.data.title}</option>)}
+              </select>
+            </div>
             <div>
               <label for="message" class={label}>{f.fields.message.label}</label>
               <textarea id="message" name="message" rows="6" maxlength={MAX_MESSAGE} placeholder={f.fields.message.placeholder} aria-required="true" aria-describedby="err-message message-hint" class={`${input} resize-y`}></textarea>
@@ -236,6 +250,11 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
   const formError = document.querySelector<HTMLElement>('#form-error')!;
   const submit = $<HTMLButtonElement>('#submit');
 
+  // Quem chega por uma página de serviço (/contato?servico=<identificador>) já encontra o serviço escolhido.
+  const service = $<HTMLSelectElement>('#service');
+  const wanted = new URLSearchParams(location.search).get(form.dataset.serviceParam!);
+  if (wanted && [...service.options].some((o) => o.value === wanted)) service.value = wanted;
+
   const preference = () => (form.querySelector<HTMLInputElement>('input[name="preference"]:checked')?.value ?? 'email') as Preference;
 
   phone.addEventListener('input', () => (phone.value = formatPhone(phone.value)));
@@ -258,6 +277,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
       phone: String(data.get('phone') ?? ''),
       preference: preference(),
       bestTime: (data.get('bestTime') as BestTime | null) ?? undefined,
+      service: String(data.get('service') ?? '') || undefined,
       message: String(data.get('message') ?? ''),
     };
   };

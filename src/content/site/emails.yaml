@@ -25,6 +25,7 @@ company:
     phone: "Telefone"
     preference: "Preferência de contato"
     bestTime: "Melhor horário"
+    service: "Serviço de interesse"
 
 # Como as opções do formulário aparecem nos e-mails (um texto para cada código; não altere os códigos).
 preferenceLabels:

@@ -1,14 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { site, ui, whatsappUrl, fill } from '../lib/content';
+import { contactFormHref } from '../lib/url';
 
 interface Props {
   title: string;
   proposalTopic: string;
   shortDescription: string;
   url: string;
+  /** Identificador do serviço (pré-seleciona o serviço no formulário de contato). */
+  slug: string;
 }
-const { title, proposalTopic, shortDescription, url } = Astro.props;
+const { title, proposalTopic, shortDescription, url, slug } = Astro.props;
 const t = ui.service;
 const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(fill(t.shareEmailBody, { description: shortDescription, url }))}`;
@@ -34,11 +37,11 @@ const fieldClass =
       </div>
       <div>
         <label for="sf-email" class="sr-only">{t.form.email}</label>
-        <input id="sf-email" name="email" type="email" required autocomplete="email" placeholder={t.form.email} class={fieldClass} />
+        <input id="sf-email" name="email" type="email" autocomplete="email" placeholder={t.form.email} class={fieldClass} />
       </div>
       <div>
         <label for="sf-phone" class="sr-only">{t.form.phone}</label>
-        <input id="sf-phone" name="phone" type="tel" required autocomplete="tel" placeholder={t.form.phone} class={fieldClass} />
+        <input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder={t.form.phone} class={fieldClass} />
       </div>
       <div>
         <label for="sf-message" class="sr-only">{t.form.message}</label>
@@ -48,6 +51,7 @@ const fieldClass =
         <Icon name="simple-icons:whatsapp" class="size-5" aria-hidden="true" />
         {t.whatsapp}
       </button>
+      <a href={contactFormHref(slug)} class="btn btn-outline min-h-12 w-full bg-white text-base">{site.cta.label}</a>
     </form>
 
     <ul class="mt-6 space-y-2 border-t border-ink/15 pt-6 text-[0.9375rem]">
@@ -104,7 +108,15 @@ const fieldClass =
       message: String(data.get('message') ?? ''),
     };
     // O texto da mensagem vem de src/content/site/ui.yaml (service.whatsappTemplate).
-    const message = (form.dataset.template ?? '').replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? '');
+    // Linhas do modelo cujos campos ficaram todos em branco (ex.: telefone não informado) são omitidas.
+    const message = (form.dataset.template ?? '')
+      .split('\n')
+      .filter((line) => {
+        const keys = [...line.matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
+        return keys.length === 0 || keys.some((key) => (values[key] ?? '').trim() !== '');
+      })
+      .join('\n')
+      .replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? '');
     const base = (form.dataset.wa ?? '').split('?')[0];
     window.open(`${base}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
     document.dispatchEvent(new CustomEvent('sethos:contact', { detail: 'whatsapp' }));

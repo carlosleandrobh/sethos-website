@@ -94,6 +94,9 @@ form:
         - { value: "morning", label: "Manhã (8h às 12h)" }
         - { value: "afternoon", label: "Tarde (13h às 18h)" }
         - { value: "businessHours", label: "Horário comercial" }
+    service:                            # lista com os serviços do site (os nomes vêm de src/content/services/)
+      label: "Serviço de interesse"
+      none: "Não sei / outro"           # primeira opção da lista (nenhum serviço escolhido)
     message:
       label: "Conte-nos sobre suas necessidades *"
       placeholder: "Descreva seu projeto, principais desafios no RH, tamanho da empresa, principais necessidades no TOTVS RM..."

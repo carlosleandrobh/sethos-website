@@ -14,6 +14,8 @@ export interface ContactInput {
   phone: string;
   preference: Preference;
   bestTime?: BestTime;
+  /** Serviço de interesse: o identificador do serviço (nome do arquivo em src/content/services/), se escolhido. */
+  service?: string;
   message: string;
 }
 
@@ -29,6 +31,7 @@ export const ERRORS = {
 } as const;
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SERVICE_SLUG = /^[a-z0-9-]{1,80}$/;
 
 export const digits = (value: string) => value.replace(/\D/g, '');
 
@@ -82,6 +85,8 @@ export function parseContactBody(body: unknown): ContactInput | null {
     phone: singleLine(str(b.phone, 25)),
     preference,
     bestTime,
+    // Só o formato é conferido aqui; quem envia o e-mail confere se o serviço existe.
+    service: typeof b.service === 'string' && SERVICE_SLUG.test(b.service) ? b.service : undefined,
     message: str(b.message, MAX_MESSAGE).replace(/\r\n/g, '\n'),
   };
 }
