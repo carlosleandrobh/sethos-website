@@ -3,9 +3,12 @@ import { getEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { crumbsJsonLd } from '../lib/seo';
 
 const about = (await getEntry('about', 'about'))!.data;
+// Mesma chamada para contato da home (src/content/pages/home.yaml › contact).
+const cta = (await getEntry('home', 'home'))!.data.contact;
 ---
 
 <Base
@@ -61,4 +64,6 @@ const about = (await getEntry('about', 'about'))!.data;
       </p>
     </div>
   </section>
+
+  <CtaBand {...cta} />
 </Base>

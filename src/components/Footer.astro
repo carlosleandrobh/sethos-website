@@ -2,13 +2,15 @@
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import wordmark from '../assets/brand/wordmark-white.png';
+import { getCollection } from 'astro:content';
 import { site, ui, whatsappUrl, fill } from '../lib/content';
 
 const year = new Date().getFullYear();
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <footer class="mt-auto bg-footer text-footer-text">
-  <div class="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.3fr_1fr]">
     <div>
       <Image
         src={wordmark}
@@ -54,12 +56,30 @@ const year = new Date().getFullYear();
       </ul>
     </nav>
 
+    <nav aria-labelledby="footer-services">
+      <h2 id="footer-services" class="text-sm font-semibold text-white">
+        <a href="/servicos" class="hover:underline">{ui.breadcrumb.services}</a>
+      </h2>
+      <ul class="mt-4 space-y-1">
+        {
+          services.map((s) => (
+            <li>
+              <a href={`/servicos/${s.id}`} class="inline-flex min-h-9 items-center text-sm hover:text-white hover:underline">
+                {s.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
     <div>
       <h2 class="text-sm font-semibold text-white">{ui.footer.contact}</h2>
       <ul class="mt-4 space-y-3 text-sm">
         <li>
           <a
             href={`mailto:${site.email}`}
+            data-contact="email"
             class="inline-flex min-h-9 items-center gap-2 hover:text-white hover:underline"
           >
             <Icon name="lucide:mail" class="size-4 shrink-0" aria-hidden="true" />{site.email}
@@ -68,6 +88,7 @@ const year = new Date().getFullYear();
         <li>
           <a
             href={`tel:${site.phone.tel}`}
+            data-contact="phone"
             class="inline-flex min-h-9 items-center gap-2 hover:text-white hover:underline"
           >
             <Icon name="lucide:phone" class="size-4 shrink-0" aria-hidden="true" />{site.phone.display}
@@ -76,6 +97,7 @@ const year = new Date().getFullYear();
         <li>
           <a
             href={whatsappUrl()}
+            data-contact="whatsapp"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex min-h-9 items-center gap-2 hover:text-white hover:underline"

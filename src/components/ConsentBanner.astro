@@ -38,7 +38,7 @@ const c = ui.consent;
 
 <script>
   import { CONSENT_KEY, consentState, gpcEnabled, parseConsent, serializeConsent, TRACKING_COOKIE_PATTERNS } from '../lib/consent';
-  import { loadGoogleAds, loadMetaPixel, trackLead } from '../lib/trackers';
+  import { contactChannel, loadGoogleAds, loadMetaPixel, trackContact, trackLead } from '../lib/trackers';
 
   const root = document.getElementById('consent')!;
   const current = document.getElementById('consent-current')!;
@@ -103,6 +103,16 @@ const c = ui.consent;
 
   // Contato enviado: avisa as ferramentas (se estiverem ativas).
   document.addEventListener('sethos:lead', trackLead);
+
+  // Clique em WhatsApp/telefone/e-mail/agenda (links com data-contact, ou o evento sethos:contact): idem.
+  document.addEventListener('click', (event) => {
+    const channel = contactChannel((event.target as Element).closest<HTMLElement>('[data-contact]')?.dataset.contact);
+    if (channel) trackContact(channel);
+  });
+  document.addEventListener('sethos:contact', (event) => {
+    const channel = contactChannel((event as CustomEvent<string>).detail);
+    if (channel) trackContact(channel);
+  });
 
   // Estado inicial
   const state = consentState(read(), gpc);

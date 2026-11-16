@@ -5,8 +5,8 @@
 - **Aceitar** ativa duas ferramentas (IDs em `src/content/site/site.yaml → tracking`):
   | Ferramenta | ID atual | Para quê |
   |---|---|---|
-  | Meta Pixel (Facebook/Instagram) | `2270406940042061` | medir anúncios; evento `PageView` e `Lead` (contato enviado) |
-  | Google Ads (gtag) | `AW-17031992209` | remarketing/medição do Google Ads; evento `generate_lead` |
+  | Meta Pixel (Facebook/Instagram) | `2270406940042061` | medir anúncios; eventos `PageView`, `Lead` (contato enviado) e `Contact` (clique em WhatsApp, telefone, e-mail ou agenda; parâmetro `channel`) |
+  | Google Ads (gtag) | `AW-17031992209` | remarketing/medição do Google Ads; eventos `generate_lead` e `contact` (mesmo clique; parâmetro `method`) |
 - A escolha fica salva **no navegador** (`localStorage`, chave `sethos-consent`) por **12 meses**; depois a pessoa é consultada de novo.
 - **"Configurações de Cookies"** (rodapé de todas as páginas) reabre o aviso mostrando a escolha atual. Trocar para
   *Recusar* apaga os cookies de rastreamento (`_fbp`, `_fbc`, `_gcl_*`, `_ga*`…) e recarrega a página para parar as ferramentas.
@@ -19,6 +19,7 @@
 | Trocar o ID do Pixel ou do Google Ads | `site.yaml → tracking` (aceita `""` para desligar) |
 | Mudar o texto do aviso | `ui.yaml → consent` (e `footer.cookieSettings` para o link do rodapé) |
 | Forçar nova consulta a todos os visitantes | aumentar `CONSENT_VERSION` em `src/lib/consent.ts` |
+| Medir cliques em um novo link de contato | colocar `data-contact="whatsapp|phone|email|schedule"` no link (o clique só é registrado se houve consentimento) |
 | Adicionar outra ferramenta | `src/lib/trackers.ts` + liberar a origem na CSP do `netlify.toml` (o teste `tests/netlify-config.test.ts` lista as permitidas) |
 
 ## O que veio do site antigo (e o que mudou)

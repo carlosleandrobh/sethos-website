@@ -54,3 +54,18 @@ export function trackLead(): void {
   window.fbq?.('track', 'Lead');
   window.gtag?.('event', 'generate_lead');
 }
+
+/** Canais de contato fora do formulário cujos cliques são medidos. */
+export const CONTACT_CHANNELS = ['whatsapp', 'phone', 'email', 'schedule'] as const;
+export type ContactChannel = (typeof CONTACT_CHANNELS)[number];
+
+/** Canal informado em `data-contact`, ou null se não for um canal conhecido. */
+export function contactChannel(value: string | undefined): ContactChannel | null {
+  return (CONTACT_CHANNELS as readonly string[]).includes(value ?? '') ? (value as ContactChannel) : null;
+}
+
+/** Clique em WhatsApp, telefone, e-mail ou agenda: avisa as ferramentas que estiverem carregadas. */
+export function trackContact(channel: ContactChannel): void {
+  window.fbq?.('track', 'Contact', { channel });
+  window.gtag?.('event', 'contact', { method: channel });
+}

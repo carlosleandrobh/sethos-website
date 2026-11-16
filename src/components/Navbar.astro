@@ -1,13 +1,21 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import mascot from '../assets/brand/mascot.png';
 import wordmark from '../assets/brand/wordmark-tagline.png';
 import { site, ui } from '../lib/content';
 
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// No build estático o caminho pode vir como /servicos/x.html; normaliza para /servicos/x.
+const path = Astro.url.pathname.replace(/(\.html|\/)$/, '') || '/';
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`);
+
+// Submenu do item "Serviços": os serviços na ordem do campo `order`.
+const SERVICES_HREF = '/servicos';
+const services = (await getCollection('services'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((s) => ({ href: `${SERVICES_HREF}/${s.id}`, label: s.data.title }));
 ---
 
 <header
@@ -26,24 +34,66 @@ const isActive = (href: string) =>
       />
     </a>
 
-    <ul class="hidden items-center gap-1 md:flex">
+    <ul class="hidden items-center gap-1 lg:flex">
       {
-        site.nav.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              class="rounded-control px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:underline aria-[current=page]:decoration-brand aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
+        site.nav.map((item) => {
+          return item.href === SERVICES_HREF ? (
+            <li class="group relative" data-submenu>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="inline-flex items-center gap-1 rounded-control px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:underline aria-[current=page]:decoration-brand aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
+              >
+                {item.label}
+                <Icon
+                  name="lucide:chevron-down"
+                  class="size-4 transition-transform group-focus-within:rotate-180 group-hover:rotate-180 group-data-[closed]:rotate-0"
+                  aria-hidden="true"
+                />
+              </a>
+              {/* Abre ao passar o mouse ou ao focar pelo teclado; Esc fecha (script abaixo). */}
+              <div class="invisible absolute left-1/2 top-full z-10 w-[min(36rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-150 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 group-data-[closed]:invisible group-data-[closed]:opacity-0">
+                <div class="rounded-card border border-line bg-white p-3 shadow-card-hover">
+                  <ul class="grid grid-cols-2 gap-1">
+                    {services.map((sv) => (
+                      <li>
+                        <a
+                          href={sv.href}
+                          aria-current={path === sv.href ? 'page' : undefined}
+                          class="flex min-h-11 items-center rounded-control px-3 py-2 text-sm text-ink hover:bg-surface hover:text-brand-dark aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                        >
+                          {sv.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={SERVICES_HREF}
+                    class="mt-2 flex min-h-11 items-center gap-2 border-t border-line px-3 pt-2 text-sm font-semibold text-brand-dark hover:underline"
+                  >
+                    {ui.breadcrumb.allServices}
+                    <Icon name="lucide:arrow-right" class="size-4" aria-hidden="true" />
+                  </a>
+                </div>
+              </div>
+            </li>
+          ) : (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="rounded-control px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:underline aria-[current=page]:decoration-brand aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
+              >
+                {item.label}
+              </a>
+            </li>
+          );
+        })
       }
       <li class="ml-3"><a href={site.cta.href} class="btn btn-primary">{site.cta.label}</a></li>
     </ul>
 
-    <details id="mobile-menu" class="group relative md:hidden">
+    <details id="mobile-menu" class="group relative lg:hidden">
       <summary
         class="flex size-11 cursor-pointer list-none items-center justify-center rounded-control text-ink hover:bg-surface [&::-webkit-details-marker]:hidden"
         aria-label={ui.nav.openMenu}
@@ -51,20 +101,56 @@ const isActive = (href: string) =>
         <Icon name="lucide:menu" class="size-6 group-open:hidden" aria-hidden="true" />
         <Icon name="lucide:x" class="hidden size-6 group-open:block" aria-hidden="true" />
       </summary>
-      <div class="absolute right-0 top-14 w-72 rounded-card border border-line bg-white p-2 shadow-card-hover">
+      <div
+        class="absolute right-0 top-14 max-h-[calc(100dvh-5rem)] w-80 max-w-[calc(100vw-2rem)] overflow-y-auto overscroll-contain rounded-card border border-line bg-white p-2 shadow-card-hover"
+      >
         <ul class="flex flex-col">
           {
-            site.nav.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  aria-current={isActive(item.href) ? 'page' : undefined}
-                  class="flex min-h-11 items-center rounded-control px-3 text-base font-medium text-ink hover:bg-surface aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))
+            site.nav.map((item) => {
+              return item.href === SERVICES_HREF ? (
+                <li>
+                  {/* No celular, "Serviços" abre a lista dos serviços (com o link para a página de todos). */}
+                  <details class="group/sub" open={isActive(item.href) || undefined}>
+                    <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between rounded-control px-3 text-base font-medium text-ink hover:bg-surface [&::-webkit-details-marker]:hidden">
+                      {item.label}
+                      <Icon name="lucide:chevron-down" class="size-5 transition-transform group-open/sub:rotate-180" aria-hidden="true" />
+                    </summary>
+                    <ul class="mb-1 ml-3 border-l border-line pl-2">
+                      <li>
+                        <a
+                          href={SERVICES_HREF}
+                          aria-current={path === SERVICES_HREF ? 'page' : undefined}
+                          class="flex min-h-11 items-center rounded-control px-3 text-[0.9375rem] font-semibold text-brand-dark hover:bg-surface aria-[current=page]:bg-brand-tint"
+                        >
+                          {ui.breadcrumb.allServices}
+                        </a>
+                      </li>
+                      {services.map((sv) => (
+                        <li>
+                          <a
+                            href={sv.href}
+                            aria-current={path === sv.href ? 'page' : undefined}
+                            class="flex min-h-11 items-center rounded-control px-3 py-1 text-[0.9375rem] text-ink hover:bg-surface aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                          >
+                            {sv.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    class="flex min-h-11 items-center rounded-control px-3 text-base font-medium text-ink hover:bg-surface aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })
           }
         </ul>
         <a href={site.cta.href} class="btn btn-primary mt-2 w-full">{site.cta.label}</a>
@@ -88,6 +174,18 @@ const isActive = (href: string) =>
         close();
         menu.querySelector('summary')?.focus();
       }
+    });
+  }
+
+  // Submenu de Serviços (desktop): Esc o esconde sem tirar o foco (WCAG 1.4.13); volta a abrir ao sair e entrar de novo.
+  for (const item of document.querySelectorAll<HTMLElement>('[data-submenu]')) {
+    const reopen = () => delete item.dataset.closed;
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') item.dataset.closed = '';
+    });
+    item.addEventListener('mouseleave', reopen);
+    item.addEventListener('focusout', (e) => {
+      if (!item.contains(e.relatedTarget as Node | null)) reopen();
     });
   }
 </script>

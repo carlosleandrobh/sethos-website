@@ -46,6 +46,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
   - Verify: teste percorre todas as rotas validando meta/OG; lista de redirects testada.
 - [x] **T11 Consentimento e tracking** (feito: aviso próprio com Aceitar/Recusar de mesmo peso, link "Configurações de Cookies" no rodapé, GPC, validade de 12 meses; Meta Pixel `2270406940042061` e Google Ads `AW-17031992209` só após o aceite; GTM/AdOpt aposentados; CSP estrita com lista fechada de terceiros; 7 testes e2e + 26 unitários; ver `docs/privacidade-rastreamento.md`. **Pendente: decisão sobre o texto da Política de Cookies (cita Google Analytics inexistente).**) — banner de cookies LGPD; GTM `GTM-TPK4FL5N` e Meta Pixel só após aceite; CSP sem `unsafe-eval`; headers de segurança.
   - Verify: e2e confirma 0 requests de terceiros antes do aceite.
+- [x] **T5b Navegação e CTAs (D15)** (feito 2026-11-16: `CtaBand`, submenu de Serviços, serviços no rodapé, 404 com atalhos, CTAs no topo do serviço, evento `Contact`; `tests/e2e/navigation.spec.ts` + `tests/trackers.test.ts`)
 - [ ] **T12 Testes, acessibilidade, performance**
   - Acceptance: Playwright + axe em todas as rotas; Lighthouse CI mobile ≥ 95/95/95/100; LCP < 2,0 s; CLS < 0,1; `npm audit --omit=dev` sem alta/crítica. **→ CP3**
 - [ ] **T13 Docs e cutover**

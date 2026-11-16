@@ -18,5 +18,10 @@ test('menu mobile abre e mostra os itens do menu', async ({ page }, info) => {
   test.skip(info.project.name !== 'mobile');
   await page.goto('/');
   await page.getByLabel(ui.nav.openMenu).click();
-  for (const item of site.nav) await expect(page.getByRole('link', { name: item.label, exact: true }).first()).toBeVisible();
+  const menu = page.locator('#mobile-menu');
+  for (const item of site.nav) {
+    // "Serviços" é um botão que expande a lista de serviços (os demais são links).
+    const entry = item.href === '/servicos' ? menu.locator('summary', { hasText: item.label }) : menu.getByRole('link', { name: item.label, exact: true });
+    await expect(entry).toBeVisible();
+  }
 });

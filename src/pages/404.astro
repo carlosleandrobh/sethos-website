@@ -1,8 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-import { ui } from '../lib/content';
+import { site, ui } from '../lib/content';
 
 const t = ui.notFound;
+// Atalhos para as páginas mais procuradas, com os mesmos rótulos do menu (site.yaml › nav).
+const shortcuts = site.nav.filter((item) => item.href === '/servicos' || item.href === '/contato');
 ---
 
 <Base title={t.title} description={t.description} noindex>
@@ -10,6 +12,9 @@ const t = ui.notFound;
     <h1 class="text-6xl font-bold text-ink md:text-7xl">{t.code}</h1>
     <p class="mt-4 text-xl text-ink-soft">{t.heading}</p>
     <p class="mt-3 max-w-md text-ink-soft">{t.text}</p>
-    <a href="/" class="btn btn-primary mt-8">{t.cta}</a>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href="/" class="btn btn-primary min-h-12 px-7">{t.cta}</a>
+      {shortcuts.map((item) => <a href={item.href} class="btn btn-outline min-h-12 px-7">{item.label}</a>)}
+    </div>
   </section>
 </Base>

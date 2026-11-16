@@ -12,7 +12,7 @@ export const emails = yaml<EmailsConfig>('src/content/site/emails.yaml');
 
 export interface HomeContent {
   hero: { title: string; primaryCta: string; secondaryCta: string };
-  contact: { title: string };
+  contact: { title: string; text: string; cta: string };
 }
 export const home = yaml<HomeContent>('src/content/pages/home.yaml');
 

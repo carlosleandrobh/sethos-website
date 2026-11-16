@@ -3,6 +3,7 @@ import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/home/Hero.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { ui } from '../lib/content';
 import { orgJsonLd, websiteJsonLd } from '../lib/seo';
 
@@ -77,15 +78,5 @@ const featured = services.slice(0, 4);
     </div>
   </section>
 
-  <section id="contato-resumo" class="bg-brand-dark py-16 text-white md:py-20">
-    <div class="container-page grid items-center gap-8 md:grid-cols-[1fr_auto] md:gap-16">
-      <div class="max-w-2xl">
-        <h2 class="text-3xl text-white md:text-4xl">{home.contact.title}</h2>
-        <p class="mt-4 text-lg text-white/90">{home.contact.text}</p>
-      </div>
-      <a href="/contato" class="btn min-h-12 bg-white px-8 text-base text-brand-dark hover:bg-brand-tint">
-        {home.contact.cta}
-      </a>
-    </div>
-  </section>
+  <CtaBand id="contato-resumo" {...home.contact} />
 </Base>

@@ -52,12 +52,12 @@ const fieldClass =
 
     <ul class="mt-6 space-y-2 border-t border-ink/15 pt-6 text-[0.9375rem]">
       <li>
-        <a href={`tel:${site.phone.tel}`} class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+        <a href={`tel:${site.phone.tel}`} data-contact="phone" class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
           <Icon name="lucide:phone" class="size-4" aria-hidden="true" />{site.phone.display}
         </a>
       </li>
       <li>
-        <a href={`mailto:${site.email}`} class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+        <a href={`mailto:${site.email}`} data-contact="email" class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
           <Icon name="lucide:mail" class="size-4" aria-hidden="true" />{site.email}
         </a>
       </li>
@@ -107,6 +107,7 @@ const fieldClass =
     const message = (form.dataset.template ?? '').replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? '');
     const base = (form.dataset.wa ?? '').split('?')[0];
     window.open(`${base}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    document.dispatchEvent(new CustomEvent('sethos:contact', { detail: 'whatsapp' }));
   });
 
   const copy = document.querySelector<HTMLButtonElement>('[data-copy-link]');

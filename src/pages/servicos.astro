@@ -4,9 +4,12 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { crumbsJsonLd } from '../lib/seo';
 import ServiceCard from '../components/ServiceCard.astro';
+import CtaBand from '../components/CtaBand.astro';
 
 const page = (await getEntry('servicesIndex', 'services-index'))!.data;
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+// Mesma chamada para contato da home (src/content/pages/home.yaml › contact).
+const cta = (await getEntry('home', 'home'))!.data.contact;
 ---
 
 <Base
@@ -27,4 +30,6 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
       }
     </ul>
   </section>
+
+  <CtaBand {...cta} />
 </Base>

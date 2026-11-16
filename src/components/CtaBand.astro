@@ -1,0 +1,22 @@
+---
+// Faixa vermelha de chamada para contato, usada no fim das páginas institucionais.
+// O texto vem do conteúdo (hoje, o bloco `contact` de src/content/pages/home.yaml).
+interface Props {
+  title: string;
+  text: string;
+  cta: string;
+  href?: string;
+  id?: string;
+}
+const { title, text, cta, href = '/contato', id } = Astro.props;
+---
+
+<section id={id} class="bg-brand-dark py-16 text-white md:py-20" aria-labelledby="cta-band-title">
+  <div class="container-page grid items-center gap-8 md:grid-cols-[1fr_auto] md:gap-16">
+    <div class="max-w-2xl">
+      <h2 id="cta-band-title" class="text-3xl text-white md:text-4xl">{title}</h2>
+      <p class="mt-4 text-lg text-white/90">{text}</p>
+    </div>
+    <a href={href} class="btn min-h-12 bg-white px-8 text-base text-brand-dark hover:bg-brand-tint">{cta}</a>
+  </div>
+</section>
