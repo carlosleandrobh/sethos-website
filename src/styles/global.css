@@ -65,4 +65,18 @@
   }
   .btn-primary { @apply bg-brand-dark text-white hover:bg-brand-darker; }
   .btn-outline { @apply border border-brand-dark bg-white text-brand-dark hover:bg-brand-tint; }
+  /* Botão sobre fundo carvão: #E53935 só passa com texto grande (>=18,66px bold), ver tests/contrast.test.ts. */
+  .btn-on-dark { @apply bg-brand text-[1.1875rem] font-bold text-white hover:bg-brand-dark; }
+
+  /* Superfície carvão (mesma cor do rodapé) para blocos de destaque. */
+  .section-dark { @apply bg-footer text-footer-text; }
+  .section-dark :is(h1, h2, h3) { @apply text-white; }
+
+  /* Filete curto da marca acima de títulos de seção. */
+  .accent-rule { @apply block h-1 w-12 rounded-full bg-brand; }
+}
+
+/* Transição suave entre páginas (sem JS); some quando a pessoa pede menos movimento. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
 }

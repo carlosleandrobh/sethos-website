@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<footer class="mt-auto bg-footer text-footer-text">
+<footer class="mt-auto border-t border-white/10 bg-footer text-footer-text">
   <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.3fr_1fr]">
     <div>
       <Image

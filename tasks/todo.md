@@ -53,3 +53,10 @@ Legenda: [ ] pendente · Verificação entre "Verify".
 - [x] **T13 Docs e cutover** (feito 2026-11-16: README, guia de edição (criar/remover serviço, publicar) e ADR 0001 "sem CMS" já existiam; `docs/cutover.md` registra a conferência de produção (17 páginas 200, `www`/`http`/barra final em 301, `/cms` 410, sitemap, robots, canonical, OG, cabeçalhos, função do formulário) e as pendências que dependem de contas: Search Console, DNS de e-mail, PageSpeed em produção, HSTS na Cloudflare e projeto antigo até 22/11/2026. Novo 301: `/og-image.png` → `/og/home.png`)
   - Acceptance: README (editar texto, adicionar serviço, publicar), ADR da decisão "sem CMS"; deploy preview; checklist de DNS; envio do sitemap ao Search Console; projeto antigo mantido 30 dias.
   - Verify: checklist de lançamento executado; comparação preview×produção aprovada.
+
+## Fase 4 — Refinamento visual (plano aprovado em 2026-11-16, ver `docs/design-notes.md`)
+- [x] **UI-1 Fundamentos + navbar + faixa CTA** (`.btn-on-dark`, `.section-dark`, `.accent-rule`, view transitions, cabeçalho compacto, `CtaBand` carvão)
+- [ ] **UI-2 Home + lista de serviços** (faixa de credenciais — rótulos novos aguardam aprovação; linhas clicáveis com seta; grade 3×3)
+- [ ] **UI-3 Página de serviço** (lateral com 3 botões, sem cartão vermelho no meio, benefícios × inclusos lado a lado)
+- [ ] **UI-4 Contato + celular/flutuantes** (formulário mais alto, Turnstile com altura reservada, WhatsApp flutuante sem cobrir conteúdo)
+- [ ] **UI-5 Rodapé + páginas secundárias + docs**
