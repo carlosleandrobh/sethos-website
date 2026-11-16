@@ -41,3 +41,6 @@ netlify/functions/emails.generated.json
 
 # Gerado a partir de src/content/site/redirects.yaml (scripts/build-redirects.mjs)
 public/_redirects
+
+# Lighthouse CI (relatórios locais)
+.lighthouseci/

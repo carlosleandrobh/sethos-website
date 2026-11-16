@@ -24,7 +24,7 @@ const cta = (await getEntry('home', 'home'))!.data.contact;
       {
         services.map((s) => (
           <li>
-            <ServiceCard slug={s.id} title={s.data.title} description={s.data.shortDescription} icon={s.data.icon} cta={page.cardCta} />
+            <ServiceCard headingLevel={2} slug={s.id} title={s.data.title} description={s.data.shortDescription} icon={s.data.icon} cta={page.cardCta} />
           </li>
         ))
       }

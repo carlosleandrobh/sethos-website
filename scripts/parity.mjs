@@ -61,7 +61,8 @@ for (const file of pages) {
     changed++;
     continue;
   }
-  const expected = tidy(readFileSync(target, 'utf8'));
+  // O git no Windows pode gravar o snapshot com CRLF; o texto do build usa LF.
+  const expected = tidy(readFileSync(target, 'utf8').replaceAll(String.fromCharCode(13), ''));
   const actual = tidy(text);
   if (expected === actual) continue;
   changed++;

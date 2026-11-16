@@ -26,6 +26,7 @@ npm run check            # tipos (astro check)
 npm run lint
 npm test                 # unitários: esquemas, conteúdo, formulário, texto solto em componentes
 npm run test:e2e         # Playwright: 18 páginas, acessibilidade (axe), formulário
+npm run lhci             # Lighthouse CI mobile em 5 páginas (rode `npm run build` antes); metas em lighthouserc.json
 npm run cms              # PUBLICA o conteúdo: valida → resume → pergunta → commit → push na main (--dry-run, --preview, --undo)
 npm run validate         # tudo acima, na ordem — o "portão" que o cms roda antes de publicar
 npm run parity           # texto renderizado igual ao snapshot? (prova de refatoração; -- --update grava novo)

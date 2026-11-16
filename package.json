@@ -22,7 +22,8 @@
     "prebuild": "node scripts/build-emails.mjs && node scripts/build-redirects.mjs",
     "predev": "node scripts/build-emails.mjs && node scripts/build-redirects.mjs",
     "pretest": "node scripts/build-emails.mjs",
-    "cms": "node scripts/cms.mjs"
+    "cms": "node scripts/cms.mjs",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.3",
@@ -45,6 +46,7 @@
     "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.16.1",
     "@netlify/functions": "^6.0.2",
     "@playwright/test": "^1.64.0",
     "@types/node": "^26.6.4",
