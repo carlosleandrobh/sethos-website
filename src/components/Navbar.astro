@@ -23,12 +23,13 @@ const services = (await getCollection('services'))
 >
   <nav class="container-page flex h-16 items-center justify-between md:h-20" aria-label={ui.nav.mainAria}>
     <a href="/" class="flex items-center gap-3" aria-label={ui.nav.homeAria}>
-      <Image src={mascot} alt="" width={44} height={53} class="h-11 w-auto md:h-14" loading="eager" />
+      <Image src={mascot} alt="" width={44} height={53} densities={[1, 2, 3]} class="h-11 w-auto md:h-14" loading="eager" />
       <Image
         src={wordmark}
         alt={ui.nav.logoAlt}
         width={180}
         height={41}
+        densities={[1, 2]}
         class="h-8 w-auto md:h-10"
         loading="eager"
       />
