@@ -49,6 +49,12 @@
   to = "/"
   status = 301
 
+# Imagem de compartilhamento do site antigo (links já compartilhados podem apontar para ela) → imagem nova da home.
+[[redirects]]
+  from = "/og-image.png"
+  to = "/og/home.png"
+  status = 301
+
 # ---------- Cabeçalhos de segurança e cache ----------
 [[headers]]
   for = "/*"

@@ -8,7 +8,7 @@ Mapa de onde está cada texto, receitas (trocar telefone, criar/remover serviço
 mensagens de erro. Tudo em `src/content/`.
 
 ## Leia nesta ordem (quem mantém o projeto)
-1. [`SPEC.md`](SPEC.md) — objetivo, decisões (D1–D12), stack, princípios de UX, critérios de sucesso.
+1. [`SPEC.md`](SPEC.md) — objetivo, decisões (D1–D16), stack, princípios de UX, critérios de sucesso.
 2. [`SPEC-content-editing.md`](SPEC-content-editing.md) — edição e publicação por arquivos (`npm run cms`).
 3. [`tasks/plan.md`](tasks/plan.md) e [`tasks/todo.md`](tasks/todo.md) — plano e tarefas do site (T0–T13).
 4. [`tasks/plan-content-editing.md`](tasks/plan-content-editing.md) e [`tasks/todo-content-editing.md`](tasks/todo-content-editing.md) — plano e tarefas da edição de conteúdo.
@@ -16,7 +16,8 @@ mensagens de erro. Tudo em `src/content/`.
 6. [`docs/design-notes.md`](docs/design-notes.md) — direção visual (passada com a skill frontend-design).
 7. [`docs/seo.md`](docs/seo.md) — SEO, imagens de compartilhamento e dados estruturados.
 8. [`docs/privacidade-rastreamento.md`](docs/privacidade-rastreamento.md) — cookies, consentimento e ferramentas de marketing.
-9. [`docs/content-preservation.md`](docs/content-preservation.md) e [`docs/content-audit.md`](docs/content-audit.md) — como garantimos que nenhum texto do site antigo se perdeu.
+9. [`docs/cutover.md`](docs/cutover.md) — lançamento: o que foi conferido em produção, pendências (Search Console, e-mail, projeto antigo) e como voltar atrás.
+10. [`docs/content-preservation.md`](docs/content-preservation.md) e [`docs/content-audit.md`](docs/content-audit.md) — como garantimos que nenhum texto do site antigo se perdeu.
 
 ## Comandos
 ```
