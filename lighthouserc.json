@@ -1,15 +1,15 @@
 {
   "ci": {
     "collect": {
-      "startServerCommand": "npm run preview -- --port 4322",
-      "startServerReadyPattern": "4322",
+      "startServerCommand": "npm run preview -- --port 4322 --host 127.0.0.1",
+      "startServerReadyPattern": "ready in",
       "startServerReadyTimeout": 60000,
       "url": [
-        "http://localhost:4322/",
-        "http://localhost:4322/servicos",
-        "http://localhost:4322/servicos/sustentacao-erp",
-        "http://localhost:4322/quem-somos",
-        "http://localhost:4322/contato"
+        "http://127.0.0.1:4322/",
+        "http://127.0.0.1:4322/servicos",
+        "http://127.0.0.1:4322/servicos/sustentacao-erp",
+        "http://127.0.0.1:4322/quem-somos",
+        "http://127.0.0.1:4322/contato"
       ],
       "numberOfRuns": 3,
       "settings": {
