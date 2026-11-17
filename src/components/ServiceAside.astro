@@ -15,53 +15,33 @@ const { title, proposalTopic, shortDescription, url, slug } = Astro.props;
 const t = ui.service;
 const linkedin = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
 const email = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(fill(t.shareEmailBody, { description: shortDescription, url }))}`;
-const fieldClass =
-  'w-full rounded-control border border-ink/25 bg-white px-4 py-3 text-base text-ink placeholder:text-muted focus:border-brand-dark';
+// Mensagem do WhatsApp já com o nome do serviço (src/content/site/ui.yaml › service.whatsappMessage).
+const whatsapp = whatsappUrl(fill(t.whatsappMessage, { title }));
+const shareButton =
+  'flex size-11 items-center justify-center rounded-full border border-ink/20 transition-colors hover:border-brand-dark hover:text-brand-dark';
 ---
 
-<aside class="space-y-8 lg:sticky lg:top-28">
-  <section class="rounded-3xl bg-surface p-6 md:p-8" aria-labelledby="interessado">
+<aside class="space-y-8 lg:sticky lg:top-24">
+  <section class="rounded-card border border-line bg-surface p-6 md:p-8" aria-labelledby="interessado">
     <h2 id="interessado" class="text-2xl">{t.interested}</h2>
     <p class="mt-3 text-ink-soft">{t.proposalPrefix}{proposalTopic}</p>
 
-    <form
-      class="mt-6 space-y-4"
-      data-service-form
-      data-title={title}
-      data-template={t.whatsappTemplate}
-      data-wa={whatsappUrl('')}
-    >
-      <div>
-        <label for="sf-name" class="sr-only">{t.form.name}</label>
-        <input id="sf-name" name="name" type="text" required autocomplete="name" placeholder={t.form.name} class={fieldClass} />
-      </div>
-      <div>
-        <label for="sf-email" class="sr-only">{t.form.email}</label>
-        <input id="sf-email" name="email" type="email" autocomplete="email" placeholder={t.form.email} class={fieldClass} />
-      </div>
-      <div>
-        <label for="sf-phone" class="sr-only">{t.form.phone}</label>
-        <input id="sf-phone" name="phone" type="tel" autocomplete="tel" placeholder={t.form.phone} class={fieldClass} />
-      </div>
-      <div>
-        <label for="sf-message" class="sr-only">{t.form.message}</label>
-        <textarea id="sf-message" name="message" rows="4" placeholder={t.form.message} class={`${fieldClass} resize-y`}></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary w-full min-h-12 text-base">
+    <div class="mt-6 space-y-3">
+      <a href={whatsapp} target="_blank" rel="noopener noreferrer" data-contact="whatsapp" data-service-whatsapp class="btn btn-primary min-h-12 w-full text-base">
         <Icon name="simple-icons:whatsapp" class="size-5" aria-hidden="true" />
         {t.whatsapp}
-      </button>
-      <a href={contactFormHref(slug)} class="btn btn-outline min-h-12 w-full bg-white text-base">{site.cta.label}</a>
-    </form>
+      </a>
+      <a href={contactFormHref(slug)} class="btn btn-outline min-h-12 w-full text-base">{site.cta.label}</a>
+    </div>
 
-    <ul class="mt-6 space-y-2 border-t border-ink/15 pt-6 text-[0.9375rem]">
+    <ul class="mt-6 space-y-1 border-t border-ink/15 pt-5 text-[0.9375rem]">
       <li>
-        <a href={`tel:${site.phone.tel}`} data-contact="phone" class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+        <a href={`tel:${site.phone.tel}`} data-contact="phone" class="inline-flex min-h-10 items-center gap-2 hover:text-brand-dark hover:underline">
           <Icon name="lucide:phone" class="size-4" aria-hidden="true" />{site.phone.display}
         </a>
       </li>
       <li>
-        <a href={`mailto:${site.email}`} data-contact="email" class="inline-flex min-h-9 items-center gap-2 hover:text-brand-dark hover:underline">
+        <a href={`mailto:${site.email}`} data-contact="email" class="inline-flex min-h-10 items-center gap-2 hover:text-brand-dark hover:underline">
           <Icon name="lucide:mail" class="size-4" aria-hidden="true" />{site.email}
         </a>
       </li>
@@ -72,20 +52,17 @@ const fieldClass =
     <h2 id="compartilhar" class="text-base font-semibold">{t.share}</h2>
     <ul class="mt-3 flex gap-3">
       <li>
-        <a href={linkedin} target="_blank" rel="noopener noreferrer" title={t.shareLinkedIn} aria-label={t.shareLinkedIn}
-          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+        <a href={linkedin} target="_blank" rel="noopener noreferrer" title={t.shareLinkedIn} aria-label={t.shareLinkedIn} class={shareButton}>
           <Icon name="simple-icons:linkedin" class="size-5" aria-hidden="true" />
         </a>
       </li>
       <li>
-        <a href={email} title={t.shareEmail} aria-label={t.shareEmail}
-          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+        <a href={email} title={t.shareEmail} aria-label={t.shareEmail} class={shareButton}>
           <Icon name="lucide:mail" class="size-5" aria-hidden="true" />
         </a>
       </li>
       <li>
-        <button type="button" data-copy-link={url} title={t.copyLink} aria-label={t.copyLink}
-          class="flex size-11 items-center justify-center rounded-full border border-ink/20 hover:border-brand-dark hover:text-brand-dark">
+        <button type="button" data-copy-link={url} title={t.copyLink} aria-label={t.copyLink} class={shareButton}>
           <Icon name="lucide:link" class="size-5" aria-hidden="true" />
         </button>
       </li>
@@ -95,33 +72,6 @@ const fieldClass =
 </aside>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('[data-service-form]');
-  form?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const title = form.dataset.title ?? '';
-    const values: Record<string, string> = {
-      title,
-      name: String(data.get('name') ?? ''),
-      email: String(data.get('email') ?? ''),
-      phone: String(data.get('phone') ?? ''),
-      message: String(data.get('message') ?? ''),
-    };
-    // O texto da mensagem vem de src/content/site/ui.yaml (service.whatsappTemplate).
-    // Linhas do modelo cujos campos ficaram todos em branco (ex.: telefone não informado) são omitidas.
-    const message = (form.dataset.template ?? '')
-      .split('\n')
-      .filter((line) => {
-        const keys = [...line.matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
-        return keys.length === 0 || keys.some((key) => (values[key] ?? '').trim() !== '');
-      })
-      .join('\n')
-      .replace(/\{(\w+)\}/g, (_, key: string) => values[key] ?? '');
-    const base = (form.dataset.wa ?? '').split('?')[0];
-    window.open(`${base}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    document.dispatchEvent(new CustomEvent('sethos:contact', { detail: 'whatsapp' }));
-  });
-
   const copy = document.querySelector<HTMLButtonElement>('[data-copy-link]');
   const feedback = document.querySelector<HTMLElement>('[data-copy-feedback]');
   copy?.addEventListener('click', async () => {

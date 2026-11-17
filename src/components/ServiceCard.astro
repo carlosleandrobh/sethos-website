@@ -16,7 +16,7 @@ const Heading = `h${headingLevel}` as const;
 
 <!-- Card inteiro clicável: o link se estende sobre ele (after:inset-0) e o foco contorna o card todo. -->
 <article
-  class="group relative flex h-full flex-col rounded-card border border-line bg-white p-5 transition-colors duration-200 hover:border-ink/25 hover:bg-surface has-[a:focus-visible]:outline-[3px] has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand md:p-6"
+  class="card-link group flex h-full flex-col p-5 md:p-6"
 >
   <span class="flex size-11 items-center justify-center rounded-control bg-brand-tint text-brand-dark">
     <Icon name={`lucide:${icon}`} class="size-5" aria-hidden="true" />
@@ -24,7 +24,7 @@ const Heading = `h${headingLevel}` as const;
   <Heading class="mt-5 text-lg font-semibold leading-snug transition-colors group-hover:text-brand-dark">{title}</Heading>
   <p class="mt-2 text-[0.9375rem] leading-relaxed text-ink-soft">{description}</p>
   {/* Link estático: o ::after se estica sobre o card (que é relative); só a seta fica no canto. */}
-  <a href={`/servicos/${slug}`} class="text-brand-dark after:absolute after:inset-0 after:rounded-card after:content-[''] focus-visible:outline-none">
+  <a href={`/servicos/${slug}`} class="card-link-target text-brand-dark">
     <span class="sr-only">{cta} — {title}</span>
     <Icon
       name="lucide:arrow-right"

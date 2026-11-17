@@ -74,7 +74,35 @@
 
   /* Filete curto da marca acima de títulos de seção. */
   .accent-rule { @apply block h-1 w-12 rounded-full bg-brand; }
+
+  /* Classes longas e repetidas ficam aqui (e não no HTML) para a home caber em poucos pacotes no 4G lento (LCP). */
+
+  /* Link do menu principal (desktop): item ativo com filete vermelho embaixo. */
+  .nav-link {
+    @apply relative inline-flex min-h-11 items-center gap-1 rounded-control px-3 text-[0.9375rem] font-medium text-ink transition-colors hover:text-brand-dark
+      aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3
+      aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-brand;
+  }
+
+  /* Item dos menus (submenu de Serviços e menu do celular). */
+  .menu-item {
+    @apply flex min-h-11 items-center rounded-control px-3 text-ink hover:bg-surface
+      aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark;
+  }
+
+  /* Card inteiro clicável: precisa de um link com .card-link-target dentro (o ::after dele cobre o card). */
+  .card-link {
+    @apply relative rounded-card border border-line bg-white transition-colors duration-200 hover:border-ink/25 hover:bg-surface
+      has-[a:focus-visible]:outline-[3px] has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand;
+  }
+  .card-link-target { @apply after:absolute after:inset-0 after:rounded-card after:content-[''] focus-visible:outline-none; }
+
+  /* Título das listas recolhíveis do rodapé (só recolhem no celular). */
+  .footer-summary {
+    @apply flex min-h-11 cursor-pointer list-none items-center justify-between text-white md:pointer-events-none md:min-h-0 [&::-webkit-details-marker]:hidden;
+  }
 }
+
 
 /* Transição suave entre páginas (sem JS); some quando a pessoa pede menos movimento. */
 @media (prefers-reduced-motion: no-preference) {

@@ -39,7 +39,8 @@
     "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível.",
     "breadcrumb": "Rótulo ARIA das páginas legais; o novo usa 'Breadcrumb' (já aprovado/presente nos serviços).",
     "/contato: botão flutuante do WhatsApp": "Oculto em /contato, que já tem os canais de contato e o WhatsApp na própria página (decisão do usuário, opção A, D13).",
-    "destaques da home": "Os 3 destaques repetiam 'Quem Somos' e serviços que aparecem logo abaixo; trocados pela faixa de números (aprovado pelo usuário em 2026-11-17, refinamento visual UI-2)."
+    "destaques da home": "Os 3 destaques repetiam 'Quem Somos' e serviços que aparecem logo abaixo; trocados pela faixa de números (aprovado pelo usuário em 2026-11-17, refinamento visual UI-2).",
+    "formulário lateral do serviço": "O formulário pedia e-mail e telefone, mas só abria o WhatsApp; trocado por botões (WhatsApp com o nome do serviço, Solicite um contato) aprovado pelo usuário em 2026-11-16 (UI-3). O formulário completo continua em /contato."
   },
   "/contato": [
     "💬 Como podemos ajudar?",
@@ -60,6 +61,58 @@
     "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
   ],
   "/servicos/integracao-sistemas": [
-    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
+    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados.",
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/bancodados-sql": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/consultoria-rh": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/customizacoes-totvs": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/dashboards-rh": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/implantacao-totvs": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/outsourcing-rh": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/sustentacao-erp": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
+  ],
+  "/servicos/treinamentos-totvs": [
+    "Seu nome completo",
+    "Seu melhor e-mail",
+    "Telefone para contato",
+    "Conte-nos mais sobre sua necessidade"
   ]
 }
