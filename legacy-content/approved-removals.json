@@ -38,7 +38,8 @@
     "confíavel": "Erro de digitação corrigido para 'confiável' (aprovado pelo usuário).",
     "Logo SETHOS - Robô / Ir para a página …": "Rótulos de acessibilidade redundantes: o mascote agora é decorativo (alt vazio, o link já tem aria-label) e os links do rodapé usam o próprio texto visível.",
     "breadcrumb": "Rótulo ARIA das páginas legais; o novo usa 'Breadcrumb' (já aprovado/presente nos serviços).",
-    "/contato: botão flutuante do WhatsApp": "Oculto em /contato, que já tem os canais de contato e o WhatsApp na própria página (decisão do usuário, opção A, D13)."
+    "/contato: botão flutuante do WhatsApp": "Oculto em /contato, que já tem os canais de contato e o WhatsApp na própria página (decisão do usuário, opção A, D13).",
+    "destaques da home": "Os 3 destaques repetiam 'Quem Somos' e serviços que aparecem logo abaixo; trocados pela faixa de números (aprovado pelo usuário em 2026-11-17, refinamento visual UI-2)."
   },
   "/contato": [
     "💬 Como podemos ajudar?",
@@ -47,7 +48,13 @@
     "Falar no WhatsApp sobre Totvs RM RH"
   ],
   "/": [
-    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."
+    "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados.",
+    "Experiência que Faz a Diferença",
+    "Mais de 15 anos transformando a gestão de RH das empresas",
+    "Sustentação Totvs RM RH",
+    "Foque no negócio e deixe a administração do sistema com a gente",
+    "Dashboards interativos e relatórios personalizados para auxiliar na tomada de decisões",
+    "Saiba Mais"
   ],
   "/servicos": [
     "Integração do Totvs RM RH com outros sistemas para fluxo contínuo e confíavel de dados."

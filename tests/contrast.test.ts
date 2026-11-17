@@ -36,6 +36,8 @@ describe('contraste WCAG AA', () => {
     [WHITE, 'footer', 4.5],
     ['brand', WHITE, 3], // #E53935: só texto grande (>=24px ou >=18,66px bold) e elementos gráficos
     [WHITE, 'whatsapp', 3], // ícone
+    [WHITE, 'brand', 3], // .btn-on-dark: texto grande e bold
+    ['brand', 'footer', 3], // .btn-on-dark e filete sobre carvão (elemento gráfico)
   ])('%s sobre %s >= %s:1', (fg, bg, min) => {
     expect(ratio(hex(fg as string), hex(bg as string))).toBeGreaterThanOrEqual(min as number);
   });

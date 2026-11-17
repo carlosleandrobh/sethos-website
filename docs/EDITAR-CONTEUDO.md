@@ -64,7 +64,7 @@ Regras de segurança:
 | Telefone, e-mail, WhatsApp, CNPJ, cidade (Google), redes sociais, itens do menu, texto do rodapé, balão do WhatsApp | `src/content/site/site.yaml` | YAML |
 | **Texto dos e-mails** do formulário (aviso que chega à SETHOS e confirmação enviada à pessoa) | `src/content/site/emails.yaml` | YAML |
 | Botões repetidos, textos para leitores de tela, página 404, rótulos das páginas de serviço, mensagem do WhatsApp dos serviços | `src/content/site/ui.yaml` | YAML |
-| **Página inicial** (topo, destaques, resumo, faixa final, título do Google) | `src/content/pages/home.yaml` | YAML |
+| **Página inicial** (topo, faixa de números, resumo, faixa final, título do Google) | `src/content/pages/home.yaml` | YAML |
 | **Quem Somos** | `src/content/pages/about.yaml` | YAML |
 | **Nossos Valores** | `src/content/pages/values.yaml` | YAML |
 | Topo da página **Serviços** (lista) | `src/content/pages/services-index.yaml` | YAML |
@@ -190,7 +190,7 @@ Prefira PNG com fundo transparente. O texto alternativo fica em `ui.yaml`.
 | Descrição curta de um serviço | até 200 caracteres |
 | Endereços internos (`href`) | começam com `/`, só minúsculas, números e hífen |
 | Endereços externos | começam com `https://` |
-| Itens fixos | home: 3 destaques e 4 etiquetas; contato: 4 canais e 3 informações |
+| Itens fixos | home: 4 etiquetas e a faixa de números (3 itens fixos); contato: 4 canais e 3 informações |
 
 ---
 

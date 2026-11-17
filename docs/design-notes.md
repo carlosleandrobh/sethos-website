@@ -14,3 +14,11 @@ Palavra do título em vermelho · pílula de rótulo acima do título · chips f
 
 ## Regras para as próximas páginas
 Reaproveitar `ServiceCard` (linha com filete), botões `.btn-primary/.btn-outline`, títulos `h2` grandes à esquerda, CTA final em faixa cheia `bg-brand-dark`.
+
+## Revisão 2026-11-16: "carvão + vermelho pontual"
+Avaliação completa e plano em 5 PRs aprovados pelo usuário (faixa CTA carvão, lateral do serviço com 3 botões, faixa de credenciais na home).
+- **Superfícies:** branco, `surface` e carvão `#1F1F23` (`.section-dark`). Vermelho cheio deixa de ser superfície; fica em botões, links, filete (`.accent-rule`) e acentos grandes.
+- **Botão sobre carvão:** `.btn-on-dark` usa `#E53935` com texto ≥ 19 px bold (contraste de texto grande, coberto em `tests/contrast.test.ts`).
+- **Raios:** só `rounded-control` (10 px) e `rounded-card` (16 px).
+- **Navegação:** logotipo sem o subtítulo ilegível, links em `ink`, item ativo com filete vermelho de 2 px, cabeçalho compacto ao rolar.
+- **Movimento:** transição nativa entre páginas (`@view-transition`), só sem `prefers-reduced-motion`.

@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import mascot from '../assets/brand/mascot.png';
-import wordmark from '../assets/brand/wordmark-tagline.png';
+import wordmark from '../assets/brand/wordmark.png';
 import { site, ui } from '../lib/content';
 
 // No build estático o caminho pode vir como /servicos/x.html; normaliza para /servicos/x.
@@ -19,18 +19,22 @@ const services = (await getCollection('services'))
 ---
 
 <header
-  class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85"
+  id="site-header"
+  class="group/header sticky top-0 z-50 border-b border-transparent bg-white/95 backdrop-blur transition-colors duration-200 supports-[backdrop-filter]:bg-white/85 data-[scrolled]:border-line"
 >
-  <nav class="container-page flex h-16 items-center justify-between md:h-20" aria-label={ui.nav.mainAria}>
+  <nav
+    class="container-page flex h-16 items-center justify-between transition-[height] duration-200 md:h-20 md:group-data-[scrolled]/header:h-16"
+    aria-label={ui.nav.mainAria}
+  >
     <a href="/" class="flex items-center gap-3" aria-label={ui.nav.homeAria}>
-      <Image src={mascot} alt="" width={44} height={53} densities={[1, 2, 3]} class="h-11 w-auto md:h-14" loading="eager" />
+      <Image src={mascot} alt="" width={44} height={53} densities={[1, 2, 3]} class="h-10 w-auto transition-[height] duration-200 md:h-12 md:group-data-[scrolled]/header:h-10" loading="eager" />
       <Image
         src={wordmark}
         alt={ui.nav.logoAlt}
-        width={180}
-        height={41}
-        densities={[1, 2]}
-        class="h-8 w-auto md:h-10"
+        width={160}
+        height={22}
+        densities={[1, 2, 3]}
+        class="h-5 w-auto md:h-6"
         loading="eager"
       />
     </a>
@@ -43,7 +47,7 @@ const services = (await getCollection('services'))
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                class="inline-flex items-center gap-1 rounded-control px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:underline aria-[current=page]:decoration-brand aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
+                class="relative inline-flex min-h-11 items-center gap-1 rounded-control px-3 text-[0.9375rem] font-medium text-ink transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-brand"
               >
                 {item.label}
                 <Icon
@@ -83,7 +87,7 @@ const services = (await getCollection('services'))
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                class="rounded-control px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:underline aria-[current=page]:decoration-brand aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
+                class="relative inline-flex min-h-11 items-center rounded-control px-3 text-[0.9375rem] font-medium text-ink transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-brand"
               >
                 {item.label}
               </a>
@@ -161,6 +165,27 @@ const services = (await getCollection('services'))
 </header>
 
 <script>
+  // Cabeçalho mais compacto (e com filete) depois que a página rola.
+  const header = document.getElementById('site-header');
+  if (header) {
+    let ticking = false;
+    const update = () => {
+      header.toggleAttribute('data-scrolled', window.scrollY > 8);
+      ticking = false;
+    };
+    update();
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true },
+    );
+  }
+
   // Menu mobile: fecha ao tocar fora, ao apertar Esc ou ao escolher um link.
   const menu = document.getElementById('mobile-menu') as HTMLDetailsElement | null;
   if (menu) {
