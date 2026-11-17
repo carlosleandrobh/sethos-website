@@ -57,8 +57,29 @@ test.describe('submenu de Serviços', () => {
   });
 });
 
+// No celular, "Links rápidos" e "Serviços" do rodapé começam recolhidos: abre os dois antes de procurar os links.
+const openFooterGroups = async (page: Page) => {
+  const groups = page.locator('footer [data-footer-group]');
+  for (let i = 0; i < (await groups.count()); i++) {
+    const group = groups.nth(i);
+    if ((await group.getAttribute('open')) === null) await group.locator('summary').click();
+    await expect(group).toHaveAttribute('open', '');
+  }
+};
+
+test('rodapé: listas recolhidas só no celular', async ({ page }, info) => {
+  await page.goto('/');
+  const groups = page.locator('footer [data-footer-group]');
+  await expect(groups).toHaveCount(2);
+  for (const group of await groups.all()) {
+    if (info.project.name === 'mobile') await expect(group).not.toHaveAttribute('open', '');
+    else await expect(group).toHaveAttribute('open', '');
+  }
+});
+
 test('rodapé lista todos os serviços', async ({ page }) => {
   await page.goto('/');
+  await openFooterGroups(page);
   const footer = page.getByRole('contentinfo');
   for (const s of services) {
     await expect(footer.getByRole('link', { name: s.title, exact: true })).toHaveAttribute('href', `/servicos/${s.slug}`);
@@ -146,6 +167,7 @@ test('home: as etiquetas do hero levam às páginas indicadas no conteúdo', asy
 
 test('itens só do rodapé não aparecem no menu do topo', async ({ page }, info) => {
   await page.goto('/');
+  await openFooterGroups(page);
   if (info.project.name === 'mobile') await page.getByLabel(ui.nav.openMenu).click();
   const top = new Set(site.nav.map((item) => item.href));
   for (const item of site.footerNav) {
