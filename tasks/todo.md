@@ -56,7 +56,7 @@ Legenda: [ ] pendente · Verificação entre "Verify".
 
 ## Fase 4 — Refinamento visual (plano aprovado em 2026-11-16, ver `docs/design-notes.md`)
 - [x] **UI-1 Fundamentos + navbar + faixa CTA** (`.btn-on-dark`, `.section-dark`, `.accent-rule`, view transitions, cabeçalho compacto, `CtaBand` carvão)
-- [ ] **UI-2 Home + lista de serviços** (faixa de credenciais — rótulos novos aguardam aprovação; linhas clicáveis com seta; grade 3×3)
+- [x] **UI-2 Home + lista de serviços** (faixa de números "2017 · onde nossa história começa", "9 · serviços especializados" (contado da coleção), "BH · Atendimento em todo o Brasil", aprovada em 2026-11-17; o "15+" fica só no cartão do mascote; os 3 destaques saíram e estão em `approved-removals.json`; cards de serviço inteiros clicáveis com seta; grade 3×3 em `/servicos`)
 - [ ] **UI-3 Página de serviço** (lateral com 3 botões, sem cartão vermelho no meio, benefícios × inclusos lado a lado)
 - [ ] **UI-4 Contato + celular/flutuantes** (formulário mais alto, Turnstile com altura reservada, WhatsApp flutuante sem cobrir conteúdo)
 - [ ] **UI-5 Rodapé + páginas secundárias + docs**

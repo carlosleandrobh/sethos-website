@@ -58,10 +58,10 @@ const chipClass = 'inline-flex items-center gap-1.5 rounded-full border border-l
       </ul>
     </div>
 
-    <div class="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
-      <div class="relative aspect-[5/6] rounded-[2rem] bg-footer sm:aspect-[6/5] lg:aspect-[5/6]">
+    <div class="relative mx-auto w-full max-w-lg lg:col-span-5 lg:max-w-none">
+      <div class="relative mt-6 aspect-[4/3] rounded-card bg-footer sm:aspect-[6/5] lg:mt-0 lg:aspect-[5/6]">
         <div class="absolute bottom-6 left-6 z-10 text-white md:bottom-8 md:left-8">
-          <p class="text-5xl font-extrabold leading-none tracking-tight md:text-6xl">{years}</p>
+          <p class="text-5xl font-extrabold leading-none tracking-tight text-brand md:text-6xl">{years}</p>
           <p class="mt-2 text-sm text-white/80 md:text-base">{caption}</p>
         </div>
         <Image
@@ -70,7 +70,7 @@ const chipClass = 'inline-flex items-center gap-1.5 rounded-full border border-l
           width={420}
           loading="eager"
           fetchpriority="high"
-          class="absolute -top-8 right-3 h-[80%] w-auto drop-shadow-2xl sm:-top-10 md:right-6 lg:-top-10 lg:right-5"
+          class="absolute -top-8 right-3 h-[95%] w-auto drop-shadow-2xl sm:-top-10 sm:h-[80%] md:right-6 lg:-top-10 lg:right-5"
         />
       </div>
     </div>
