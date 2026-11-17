@@ -90,7 +90,7 @@ test.describe('página de serviço', () => {
     await page.goto(`/servicos/${s.slug}`);
     const header = page.locator('[data-service-header-cta]');
     await expect(header.getByRole('link', { name: site.cta.label })).toHaveAttribute('href', contactFormHref(s.slug));
-    await expect(header.getByRole('link', { name: ui.service.whatsapp })).toHaveAttribute('href', '#interessado');
+    await expect(header.getByRole('link', { name: ui.service.whatsapp })).toHaveAttribute('href', new RegExp(`wa\\.me/${site.phone.whatsapp}`));
     await expect(header).toBeInViewport();
   });
 
@@ -154,25 +154,14 @@ test('itens só do rodapé não aparecem no menu do topo', async ({ page }, info
   }
 });
 
-test('lateral do serviço: link para o formulário com o serviço; no WhatsApp só o nome é obrigatório', async ({ page }) => {
-  await page.addInitScript(() => {
-    (window as unknown as { opened: string[] }).opened = [];
-    window.open = (u) => {
-      (window as unknown as { opened: string[] }).opened.push(String(u));
-      return null;
-    };
-  });
+test('lateral do serviço: link para o formulário com o serviço e WhatsApp com o nome do serviço', async ({ page }) => {
   const s = services[1];
   await page.goto(`/servicos/${s.slug}`);
   const aside = page.getByRole('complementary');
   await expect(aside.getByRole('link', { name: site.cta.label })).toHaveAttribute('href', contactFormHref(s.slug));
-
-  await aside.getByPlaceholder(ui.service.form.name).fill('Maria Teste');
-  await aside.getByRole('button', { name: ui.service.whatsapp }).click();
-  const url = (await page.evaluate(() => (window as unknown as { opened: string[] }).opened))[0];
-  const text = new URL(url).searchParams.get('text')!;
-  expect(text).toContain('Maria Teste');
-  expect(text).toContain(s.title);
-  // as linhas do modelo cujos campos ficaram em branco não vão na mensagem
-  expect(text.split('\n').filter((line) => /:\*?\s*$/.test(line))).toEqual([]);
+  const href = await aside.getByRole('link', { name: ui.service.whatsapp }).getAttribute('href');
+  expect(href).toContain(`wa.me/${site.phone.whatsapp}`);
+  expect(new URL(href!).searchParams.get('text')).toContain(s.title);
+  // sem formulário na lateral: as ações são só links
+  await expect(aside.locator('form')).toHaveCount(0);
 });

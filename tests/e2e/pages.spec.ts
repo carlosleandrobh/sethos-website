@@ -32,15 +32,8 @@ for (const route of routes) {
 const middle = services[Math.min(1, services.length - 1)];
 const index = services.indexOf(middle);
 
-test('serviço: FAQ abre, navegação anterior/próximo e formulário lateral gera link do WhatsApp', async ({ page }) => {
+test('serviço: FAQ abre, navegação anterior/próximo e WhatsApp com o nome do serviço', async ({ page }) => {
   test.skip(services.length < 3, 'precisa de pelo menos 3 serviços');
-  await page.addInitScript(() => {
-    (window as unknown as { opened: string[] }).opened = [];
-    window.open = (u) => {
-      (window as unknown as { opened: string[] }).opened.push(String(u));
-      return null;
-    };
-  });
   await page.goto(`/servicos/${middle.slug}`);
   const first = page.locator('main details').first();
   await first.locator('summary').click();
@@ -48,13 +41,9 @@ test('serviço: FAQ abre, navegação anterior/próximo e formulário lateral ge
   await expect(page.getByRole('link', { name: new RegExp(ui.service.previous) })).toHaveAttribute('href', `/servicos/${services[index - 1].slug}`);
   await expect(page.getByRole('link', { name: new RegExp(ui.service.next) })).toHaveAttribute('href', `/servicos/${services[index + 1].slug}`);
 
-  await page.getByPlaceholder(ui.service.form.name).fill('Maria Teste');
-  await page.getByPlaceholder(ui.service.form.email).fill('maria@empresa.com.br');
-  await page.getByPlaceholder(ui.service.form.phone).fill('31999999999');
-  await page.getByRole('button', { name: ui.service.whatsapp }).click();
-  const url = (await page.evaluate(() => (window as unknown as { opened: string[] }).opened))[0];
-  expect(url).toContain(`wa.me/${site.phone.whatsapp}`);
-  expect(decodeURIComponent(url)).toContain('Maria Teste');
+  const href = await page.locator('[data-service-whatsapp]').getAttribute('href');
+  expect(href).toContain(`wa.me/${site.phone.whatsapp}`);
+  expect(new URL(href!).searchParams.get('text')).toContain(middle.title);
 });
 
 test('o primeiro serviço não exibe "anterior"', async ({ page }) => {
