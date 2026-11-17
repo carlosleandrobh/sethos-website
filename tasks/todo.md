@@ -58,5 +58,5 @@ Legenda: [ ] pendente · Verificação entre "Verify".
 - [x] **UI-1 Fundamentos + navbar + faixa CTA** (`.btn-on-dark`, `.section-dark`, `.accent-rule`, view transitions, cabeçalho compacto, `CtaBand` carvão)
 - [x] **UI-2 Home + lista de serviços** (faixa de números "2017 · onde nossa história começa", "9 · serviços especializados" (contado da coleção), "BH · Atendimento em todo o Brasil", aprovada em 2026-11-17; o "15+" fica só no cartão do mascote; os 3 destaques saíram e estão em `approved-removals.json`; cards de serviço inteiros clicáveis com seta; grade 3×3 em `/servicos`)
 - [x] **UI-3 Página de serviço** (lateral sem formulário: WhatsApp já com o nome do serviço (`ui.yaml › service.whatsappMessage`) + Solicite um contato; o "Agendar uma Conversa" fica no cartão final, agora carvão e ainda antes da navegação anterior/próximo; ícone do serviço no topo; benefícios × inclusos lado a lado; anterior/próximo como cards)
-- [ ] **UI-4 Contato + celular/flutuantes** (formulário mais alto, Turnstile com altura reservada, WhatsApp flutuante sem cobrir conteúdo)
+- [x] **UI-4 Contato + celular/flutuantes** (formulário logo após o topo, canais depois e em cards clicáveis; Turnstile com altura reservada; WhatsApp flutuante some enquanto o rodapé está visível e respeita a área segura do celular)
 - [ ] **UI-5 Rodapé + páginas secundárias + docs**
