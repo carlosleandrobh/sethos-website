@@ -35,20 +35,18 @@ hero:
       icon: "settings"
       href: "/servicos/customizacoes-totvs"
 
-# Três destaques logo abaixo do topo (sempre exatamente 3).
-highlights:
-  - title: "Experiência que Faz a Diferença"
-    text: "Mais de 15 anos transformando a gestão de RH das empresas"
-    cta: "Conheça Nossa História"
-    href: "/quem-somos"                  # endereço interno: sempre começa com /
-  - title: "Sustentação Totvs RM RH"
-    text: "Foque no negócio e deixe a administração do sistema com a gente"
-    cta: "Saiba Mais"
-    href: "/servicos/sustentacao-erp"
-  - title: "Dashboards e Relatórios"
-    text: "Dashboards interativos e relatórios personalizados para auxiliar na tomada de decisões"
-    cta: "Saiba Mais"
-    href: "/servicos/dashboards-rh"
+# Faixa de credenciais logo abaixo do topo (números grandes + legenda curta).
+# O "15+ anos de experiência" já aparece no cartão do mascote (campo hero.eyebrow).
+credentials:
+  founded:
+    value: "2017"
+    label: "onde nossa história começa"
+  services:
+    # o número de serviços é contado sozinho a partir da pasta src/content/services
+    label: "serviços especializados"
+  coverage:
+    value: "BH"
+    label: "Atendimento em todo o Brasil"
 
 # Resumo "Quem Somos" da home.
 about:

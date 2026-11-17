@@ -57,7 +57,7 @@ export const uiSchema = z.object({
   }),
   whatsappFloat: z.object({ aria: text }),
   hero: z.object({ mascotAlt: text }),
-  home: z.object({ highlightsAria: text, allServicesAria: text }),
+  home: z.object({ credentialsAria: text, allServicesAria: text }),
   breadcrumb: z.object({ label: text, home: text, services: text, allServices: text }),
   service: z.object({
     about: text, benefits: text, features: text, faq: text, previous: text, next: text, navAria: text,
@@ -106,7 +106,11 @@ export const homeSchema = z.object({
     secondaryCta: button,
     chips: z.array(z.object({ label: text.max(30, 'máximo de 30 caracteres'), icon: iconName, href: internalPath.optional() })).length(4, 'precisa ter exatamente 4 etiquetas'),
   }),
-  highlights: z.array(titledText.extend({ cta: button, href: internalPath })).length(3, 'precisa ter exatamente 3 destaques'),
+  credentials: z.object({
+    founded: z.object({ value: text.max(12, 'máximo de 12 caracteres'), label: text.max(40, 'máximo de 40 caracteres') }),
+    services: z.object({ label: text.max(40, 'máximo de 40 caracteres') }),
+    coverage: z.object({ value: text.max(12, 'máximo de 12 caracteres'), label: text.max(40, 'máximo de 40 caracteres') }),
+  }),
   about: z.object({ title, text: paragraph, cta: button }),
   services: z.object({ title, subtitle: lead, cta: button }),
   contact: z.object({ title, text: lead, cta: button }),
