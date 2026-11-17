@@ -196,7 +196,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
       <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {
           page.channels.map((c) => (
-            <li class="group relative rounded-card border border-line p-5 transition-colors hover:border-ink/25 hover:bg-surface has-[a:focus-visible]:outline-[3px] has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
+            <li class="card-link group p-5">
               <Icon name={channelIcon[c.id]} class="size-6 text-brand-dark" aria-hidden="true" />
               <h2 class="mt-3 text-lg">{c.title}</h2>
               <p class="mt-1 text-sm text-ink-soft">{c.note}</p>
@@ -205,7 +205,7 @@ const error = 'mt-1.5 text-sm font-medium text-red-700';
                 data-contact={c.id}
                 target={c.id === 'whatsapp' || c.id === 'schedule' ? '_blank' : undefined}
                 rel={c.id === 'whatsapp' || c.id === 'schedule' ? 'noopener noreferrer' : undefined}
-                class="mt-3 inline-block break-all font-semibold text-brand-dark underline decoration-brand/40 decoration-2 underline-offset-4 after:absolute after:inset-0 after:rounded-card after:content-[''] focus-visible:outline-none group-hover:decoration-brand"
+                class="mt-3 inline-block break-all font-semibold text-brand-dark underline decoration-brand/40 decoration-2 underline-offset-4 card-link-target group-hover:decoration-brand"
               >
                 {c.value ?? (c.id === 'email' ? site.email : site.phone.display)}
               </a>

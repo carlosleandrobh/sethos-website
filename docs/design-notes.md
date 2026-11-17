@@ -32,3 +32,4 @@ Avaliação completa e plano em 5 PRs aprovados pelo usuário (faixa CTA carvão
 - **Rodapé:** "Links rápidos" e "Serviços" recolhíveis no celular (abertos sem JS e no desktop).
 - **Títulos de seção:** `.accent-rule` (filete curto `#E53935`) acima do `h2`; `PageHero` com filete antes do rótulo.
 - **Cuidado:** dentro de `.section-dark` e do rodapé, todo título precisa de cor explícita (`text-white`), senão herda `ink` do `@layer base`; links usam branco com sublinhado `brand`, nunca `brand-dark` (contraste).
+- **Peso do HTML (LCP):** classes longas que se repetem ficam em `global.css` (`.nav-link`, `.menu-item`, `.card-link`/`.card-link-target`, `.footer-summary`). No Lighthouse mobile local (HTTP/1.1, sem compressão) a home tem de caber em ~43 KB de HTML; acima disso o *slow start* do TCP soma um RTT (~150 ms) ao FCP e ao LCP. Medido em 2026-11-17: home 40 KB, LCP 2,04 s (igual ao `main`).

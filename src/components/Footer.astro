@@ -43,7 +43,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 
     <nav aria-label={ui.footer.quickLinksAria} class="border-t border-white/10 pt-4 md:border-0 md:pt-0">
       <details open data-footer-group class="group">
-        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm font-semibold text-white md:pointer-events-none md:min-h-0 [&::-webkit-details-marker]:hidden">
+        <summary class="footer-summary">
           <h2 class="text-sm font-semibold text-white">{ui.footer.quickLinks}</h2>
           <Icon name="lucide:chevron-down" class="size-4 transition-transform group-open:rotate-180 md:hidden" aria-hidden="true" />
         </summary>
@@ -63,7 +63,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 
     <nav aria-labelledby="footer-services" class="border-t border-white/10 pt-4 md:border-0 md:pt-0">
       <details open data-footer-group class="group">
-        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm font-semibold text-white md:pointer-events-none md:min-h-0 [&::-webkit-details-marker]:hidden">
+        <summary class="footer-summary">
           <h2 id="footer-services" class="text-sm font-semibold text-white">{ui.breadcrumb.services}</h2>
           <Icon name="lucide:chevron-down" class="size-4 transition-transform group-open:rotate-180 md:hidden" aria-hidden="true" />
         </summary>

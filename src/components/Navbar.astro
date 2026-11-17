@@ -47,7 +47,7 @@ const services = (await getCollection('services'))
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                class="relative inline-flex min-h-11 items-center gap-1 rounded-control px-3 text-[0.9375rem] font-medium text-ink transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-brand"
+                class="nav-link"
               >
                 {item.label}
                 <Icon
@@ -65,7 +65,7 @@ const services = (await getCollection('services'))
                         <a
                           href={sv.href}
                           aria-current={path === sv.href ? 'page' : undefined}
-                          class="flex min-h-11 items-center rounded-control px-3 py-2 text-sm text-ink hover:bg-surface hover:text-brand-dark aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                          class="menu-item py-2 text-sm hover:text-brand-dark"
                         >
                           {sv.label}
                         </a>
@@ -87,7 +87,7 @@ const services = (await getCollection('services'))
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
-                class="relative inline-flex min-h-11 items-center rounded-control px-3 text-[0.9375rem] font-medium text-ink transition-colors hover:text-brand-dark aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1 aria-[current=page]:after:h-0.5 aria-[current=page]:after:rounded-full aria-[current=page]:after:bg-brand"
+                class="nav-link"
               >
                 {item.label}
               </a>
@@ -135,7 +135,7 @@ const services = (await getCollection('services'))
                           <a
                             href={sv.href}
                             aria-current={path === sv.href ? 'page' : undefined}
-                            class="flex min-h-11 items-center rounded-control px-3 py-1 text-[0.9375rem] text-ink hover:bg-surface aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                            class="menu-item py-1 text-[0.9375rem]"
                           >
                             {sv.label}
                           </a>
@@ -149,7 +149,7 @@ const services = (await getCollection('services'))
                   <a
                     href={item.href}
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    class="flex min-h-11 items-center rounded-control px-3 text-base font-medium text-ink hover:bg-surface aria-[current=page]:bg-brand-tint aria-[current=page]:font-semibold aria-[current=page]:text-brand-dark"
+                    class="menu-item text-base font-medium"
                   >
                     {item.label}
                   </a>
