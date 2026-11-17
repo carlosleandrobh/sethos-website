@@ -10,7 +10,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
 ---
 
 <footer class="mt-auto border-t border-white/10 bg-footer text-footer-text">
-  <div class="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_1.3fr_1fr]">
+  <div class="container-page grid gap-6 py-14 md:grid-cols-2 md:gap-10 lg:grid-cols-[1.3fr_0.8fr_1.3fr_1fr]">
     <div>
       <Image
         src={wordmark}
@@ -41,9 +41,13 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
       </ul>
     </div>
 
-    <nav aria-label={ui.footer.quickLinksAria}>
-      <h2 class="text-sm font-semibold text-white">{ui.footer.quickLinks}</h2>
-      <ul class="mt-4 space-y-1">
+    <nav aria-label={ui.footer.quickLinksAria} class="border-t border-white/10 pt-4 md:border-0 md:pt-0">
+      <details open data-footer-group class="group">
+        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm font-semibold text-white md:pointer-events-none md:min-h-0 [&::-webkit-details-marker]:hidden">
+          <h2 class="text-sm font-semibold text-white">{ui.footer.quickLinks}</h2>
+          <Icon name="lucide:chevron-down" class="size-4 transition-transform group-open:rotate-180 md:hidden" aria-hidden="true" />
+        </summary>
+      <ul class="mt-2 space-y-1 md:mt-4">
         {
           site.footerNav.map((item) => (
             <li>
@@ -54,13 +58,19 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
           ))
         }
       </ul>
+      </details>
     </nav>
 
-    <nav aria-labelledby="footer-services">
-      <h2 id="footer-services" class="text-sm font-semibold text-white">
-        <a href="/servicos" class="hover:underline">{ui.breadcrumb.services}</a>
-      </h2>
-      <ul class="mt-4 space-y-1">
+    <nav aria-labelledby="footer-services" class="border-t border-white/10 pt-4 md:border-0 md:pt-0">
+      <details open data-footer-group class="group">
+        <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between text-sm font-semibold text-white md:pointer-events-none md:min-h-0 [&::-webkit-details-marker]:hidden">
+          <h2 id="footer-services" class="text-sm font-semibold text-white">{ui.breadcrumb.services}</h2>
+          <Icon name="lucide:chevron-down" class="size-4 transition-transform group-open:rotate-180 md:hidden" aria-hidden="true" />
+        </summary>
+      <ul class="mt-2 space-y-1 md:mt-4">
+        <li>
+          <a href="/servicos" class="inline-flex min-h-9 items-center text-sm font-semibold text-white hover:underline">{ui.breadcrumb.allServices}</a>
+        </li>
         {
           services.map((s) => (
             <li>
@@ -71,6 +81,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
           ))
         }
       </ul>
+      </details>
     </nav>
 
     <div>
@@ -128,7 +139,7 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
         </li>
       </ul>
       <p>{fill(ui.footer.copyright, { year, legalName: site.legalName, cnpj: site.cnpj })}</p>
-      <p class="max-w-3xl">{site.footer.disclaimer}</p>
+      <p class="max-w-2xl text-footer-text/80">{site.footer.disclaimer}</p>
       <a
         href="#topo"
         aria-label={ui.footer.backToTop}
@@ -139,3 +150,12 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
     </div>
   </div>
 </footer>
+
+<script>
+  // No celular as listas do rodapé começam fechadas (sem JS, e no desktop, ficam abertas).
+  const mobile = window.matchMedia('(max-width: 767px)');
+  const groups = document.querySelectorAll<HTMLDetailsElement>('[data-footer-group]');
+  const sync = () => groups.forEach((g) => (g.open = !mobile.matches));
+  sync();
+  mobile.addEventListener('change', sync);
+</script>
