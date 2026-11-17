@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import mascot from '../../assets/brand/mascot-hero.png';
 import { ui } from '../../lib/content';
@@ -64,8 +64,11 @@ const chipClass = 'inline-flex items-center gap-1.5 rounded-full border border-l
           <p class="text-5xl font-extrabold leading-none tracking-tight text-brand md:text-6xl">{years}</p>
           <p class="mt-2 text-sm text-white/80 md:text-base">{caption}</p>
         </div>
-        <Image
+        {/* AVIF (~30% menor que WebP) com WebP de reserva: o mascote é o LCP da home no celular. */}
+        <Picture
           src={mascot}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
           alt={ui.hero.mascotAlt}
           width={420}
           loading="eager"
